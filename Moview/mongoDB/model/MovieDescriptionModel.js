@@ -1,0 +1,19 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var movieDescriptionSchema = new Schema({
+    id: {type: Schema.Types.ObjectId, required: true, ref: 'MovieDescription'},
+    casts: [String],
+    directors: [String],
+    categories: [String],
+    gallery: [String],
+    reviewRating: String,
+    trailers: [String],
+    storyline: String,
+    runtime: String,
+    releaseDate: String
+}, {
+    collation: 'MovieDescription'
+});
+
+module.exports = mongoose.model('MovieDescription', movieDescriptionSchema);
