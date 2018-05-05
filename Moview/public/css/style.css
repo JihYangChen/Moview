@@ -1,5 +1,6 @@
+@charset "UTF-8";
 @font-face {
-  font-family: 'icomoon';
+  font-family: "icomoon";
   src: url("../fonts/icomoon/icomoon.eot?srf3rx");
   src: url("../fonts/icomoon/icomoon.eot?srf3rx#iefix") format("embedded-opentype"), url("../fonts/icomoon/icomoon.ttf?srf3rx") format("truetype"), url("../fonts/icomoon/icomoon.woff?srf3rx") format("woff"), url("../fonts/icomoon/icomoon.svg?srf3rx#icomoon") format("svg");
   font-weight: normal;
@@ -77,17 +78,17 @@ figure {
 .fh5co-cover,
 .fh5co-hero {
   position: relative;
-  height: 800px;
+  height: 500px;
 }
 @media screen and (max-width: 768px) {
   .fh5co-cover,
-  .fh5co-hero {
-    height: 700px;
+.fh5co-hero {
+    height: 400px;
   }
 }
 .fh5co-cover.fh5co-hero-2,
 .fh5co-hero.fh5co-hero-2 {
-  height: 600px;
+  height: 350px;
 }
 .fh5co-cover.fh5co-hero-2 .fh5co-overlay,
 .fh5co-hero.fh5co-hero-2 .fh5co-overlay {
@@ -124,7 +125,7 @@ figure {
 }
 .fh5co-cover .btn {
   padding: 1em 2em;
-  opacity: .9;
+  opacity: 0.9;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   -ms-border-radius: 30px;
@@ -263,7 +264,7 @@ figure {
 }
 
 .sf-arrows .sf-with-ul:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   right: 1em;
@@ -323,7 +324,7 @@ figure {
 }
 #fh5co-logo a:after {
   position: absolute;
-  content: '';
+  content: "";
   top: -5px;
   left: -9px;
   background: #DA1212;
@@ -355,13 +356,12 @@ figure {
   display: block;
   float: right;
 }
-
 #fh5co-primary-menu > li > ul li.active > a {
   color: #4CB648 !important;
 }
 #fh5co-primary-menu > li > .sf-with-ul:after {
   border: none !important;
-  font-family: 'icomoon';
+  font-family: "icomoon";
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -376,7 +376,7 @@ figure {
   margin-right: -5px;
   top: 50%;
   margin-top: -7px;
-  content: "\e922";
+  content: "";
   color: rgba(255, 255, 255, 0.5);
 }
 #fh5co-primary-menu > li > ul li {
@@ -384,7 +384,7 @@ figure {
 }
 #fh5co-primary-menu > li > ul li > .sf-with-ul:after {
   border: none !important;
-  font-family: 'icomoon';
+  font-family: "icomoon";
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -399,7 +399,7 @@ figure {
   margin-right: 10px;
   top: 20px;
   font-size: 16px;
-  content: "\e924";
+  content: "";
   color: rgba(0, 0, 0, 0.5);
 }
 
@@ -427,7 +427,7 @@ figure {
   left: 20px;
   width: 0;
   height: 0;
-  content: '';
+  content: "";
 }
 
 #fh5co-primary-menu .fh5co-sub-menu:after {
@@ -439,7 +439,7 @@ figure {
   border-right: 8px solid transparent;
   border-bottom: 8px solid #fff;
   border-left: 8px solid transparent;
-  content: '';
+  content: "";
 }
 
 #fh5co-primary-menu .fh5co-sub-menu .fh5co-sub-menu:before {
@@ -487,10 +487,10 @@ figure {
 }
 @media screen and (max-width: 768px) {
   #fh5co-programs-section,
-  #fh5co-schedule-section,
-  #fh5co-team-section,
-  #fh5co-blog-section,
-  #fh5co-contact {
+#fh5co-schedule-section,
+#fh5co-team-section,
+#fh5co-blog-section,
+#fh5co-contact {
     padding: 4em 0;
   }
 }
@@ -622,7 +622,7 @@ figure {
   right: 0;
   bottom: 0;
   background: black;
-  opacity: .2;
+  opacity: 0.2;
 }
 
 @media screen and (max-width: 768px) {
@@ -751,10 +751,13 @@ figure {
 
 .team-section-grid {
   position: relative;
-  background-size: cover;
-  height: 450px;
+  background-size: contain;
+  background-position: center top;
+  height: 390px;
+  background-repeat: no-repeat;
   margin-bottom: 30px;
   overflow: hidden;
+  cursor: pointer;
 }
 .team-section-grid .overlay-section {
   position: absolute;
@@ -824,7 +827,7 @@ figure {
 }
 #fh5co-contact .contact-info li i {
   position: absolute;
-  top: .3em;
+  top: 0.3em;
   left: 0;
   font-size: 22px;
   color: rgba(0, 0, 0, 0.2);
@@ -851,7 +854,7 @@ figure {
 #fh5co-contact .form-control:focus, #fh5co-contact .form-control:active {
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
-#fh5co-contact input[type="text"] {
+#fh5co-contact input[type=text] {
   height: 50px;
 }
 #fh5co-contact .form-group {
@@ -1015,35 +1018,35 @@ figure {
 #footer .contact-info li a {
   color: rgba(255, 255, 255, 0.6);
 }
-#footer .contact-form .form-group input[type="name"],
-#footer .contact-form .form-group input[type="text"],
-#footer .contact-form .form-group input[type="email"],
+#footer .contact-form .form-group input[type=name],
+#footer .contact-form .form-group input[type=text],
+#footer .contact-form .form-group input[type=email],
 #footer .contact-form .form-group textarea {
   font-size: 16px;
 }
-#footer .contact-form .form-group input[type="name"]::-webkit-input-placeholder,
-#footer .contact-form .form-group input[type="text"]::-webkit-input-placeholder,
-#footer .contact-form .form-group input[type="email"]::-webkit-input-placeholder,
+#footer .contact-form .form-group input[type=name]::-webkit-input-placeholder,
+#footer .contact-form .form-group input[type=text]::-webkit-input-placeholder,
+#footer .contact-form .form-group input[type=email]::-webkit-input-placeholder,
 #footer .contact-form .form-group textarea::-webkit-input-placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
-#footer .contact-form .form-group input[type="name"]:-moz-placeholder,
-#footer .contact-form .form-group input[type="text"]:-moz-placeholder,
-#footer .contact-form .form-group input[type="email"]:-moz-placeholder,
+#footer .contact-form .form-group input[type=name]:-moz-placeholder,
+#footer .contact-form .form-group input[type=text]:-moz-placeholder,
+#footer .contact-form .form-group input[type=email]:-moz-placeholder,
 #footer .contact-form .form-group textarea:-moz-placeholder {
   /* Firefox 18- */
   color: rgba(255, 255, 255, 0.5);
 }
-#footer .contact-form .form-group input[type="name"]::-moz-placeholder,
-#footer .contact-form .form-group input[type="text"]::-moz-placeholder,
-#footer .contact-form .form-group input[type="email"]::-moz-placeholder,
+#footer .contact-form .form-group input[type=name]::-moz-placeholder,
+#footer .contact-form .form-group input[type=text]::-moz-placeholder,
+#footer .contact-form .form-group input[type=email]::-moz-placeholder,
 #footer .contact-form .form-group textarea::-moz-placeholder {
   /* Firefox 19+ */
   color: rgba(255, 255, 255, 0.5);
 }
-#footer .contact-form .form-group input[type="name"]:-ms-input-placeholder,
-#footer .contact-form .form-group input[type="text"]:-ms-input-placeholder,
-#footer .contact-form .form-group input[type="email"]:-ms-input-placeholder,
+#footer .contact-form .form-group input[type=name]:-ms-input-placeholder,
+#footer .contact-form .form-group input[type=text]:-ms-input-placeholder,
+#footer .contact-form .form-group input[type=email]:-ms-input-placeholder,
 #footer .contact-form .form-group textarea:-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
@@ -1210,14 +1213,14 @@ figure {
   width: 30px;
   height: 2px;
   color: #fff;
-  font: bold 14px/.4 Helvetica;
+  font: bold 14px/0.4 Helvetica;
   text-transform: uppercase;
   text-indent: -55px;
   background: #fff;
-  transition: all .2s ease-out;
+  transition: all 0.2s ease-out;
 }
 .fh5co-nav-toggle i::before, .fh5co-nav-toggle i::after {
-  content: '';
+  content: "";
   width: 30px;
   height: 2px;
   background: #fff;
@@ -1231,7 +1234,7 @@ figure {
   position: relative;
   color: #000;
   background: #000;
-  transition: all .2s ease-out;
+  transition: all 0.2s ease-out;
 }
 .fh5co-nav-toggle.dark i::before, .fh5co-nav-toggle.dark i::after {
   background: #000;
@@ -1385,4 +1388,4 @@ figure {
   background: url(../images/hourglass.svg) center no-repeat #222222;
 }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=../css/style.css.map */

@@ -174,13 +174,13 @@ figure {
 .fh5co-cover,
 .fh5co-hero {
 	position: relative;
-	height: 800px;
+	height: 500px;
 	// font-weight: 300;
 	@media screen and (max-width :$screen-sm) {
-		height: 700px;
+		height: 400px;
 	}
 	&.fh5co-hero-2{
-		height: 600px;
+		height: 350px;
 
 		.fh5co-overlay{
 			position: absolute !important;
@@ -829,10 +829,14 @@ figure {
 // Team Section
 .team-section-grid{
 	position: relative;
-	background-size: cover;
-	height: 450px;
+	background-size: contain;
+	background-position:center top;
+	height: 390px;
+	background-repeat: no-repeat;
 	margin-bottom: 30px;
 	overflow: hidden;
+	cursor: pointer;
+	
 	.overlay-section{
 		position: absolute;
 		top: 0;
