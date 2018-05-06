@@ -9,3 +9,65 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.movie-title {
+    font-weight: 900;
+}
+
+.movieImgDiv {
+    text-align: center;
+}
+
+.movieInfo img {
+    height: 500px;
+    border: 0.5px solid grey;
+}
+
+.movieInfo hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    border-width: 1px;
+}
+
+.reviewRatingArea {
+    float: right;
+    margin-right: 50px;
+    font-size: 30px;
+}
+
+.infoArea table {
+    margin-left: 20px;
+    width: 100%;
+    font-size: 18px;
+}
+
+.infoArea td:first-child {
+    width: 15%;
+    font-weight: 400;
+    color: rgb(32, 28, 28);
+}
+
+.infoAreaTitle {
+    font-size: 30px;
+    font-weight: 400;
+    color: black;
+}
+
+.storylineArea {
+    margin-top: 20px;
+}
+
+.storylineArea p {
+    margin-left: 20px;
+    font-size: 18px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+}
+
+.seeDetailBtn {
+    margin-right: 20px;
+    float: right;
+}

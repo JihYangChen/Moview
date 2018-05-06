@@ -4,7 +4,7 @@ $grid-gutter-width: 40px !default;
 $border-radius-base:  4px !default;
 $padding-base-vertical: 14px !default;
 
-$brand-primary: #4CB648 !default;
+$brand-primary: rgb(36, 148, 234) !default;
 $brand-secondary: #DA1212 !default; 
 
 $brand-white: #fff;
@@ -129,8 +129,9 @@ a {
 	color: $brand-primary;
 	@include transition(.5s);
 	&:hover{
-		text-decoration: none !important;
+		cursor: pointer;
 		color: $brand-primary !important;
+		text-decoration: underline;
 	}
 }
 p, ul, ol {
