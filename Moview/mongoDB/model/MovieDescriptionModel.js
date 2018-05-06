@@ -12,7 +12,8 @@ var movieDescriptionSchema = new Schema({
     trailers: [String],
     storyline: String,
     runtime: String,
-    releaseDate: String
+    releaseDate: String,
+    inTheater: Boolean
 }, {
     collection: 'MovieDescription'
 });

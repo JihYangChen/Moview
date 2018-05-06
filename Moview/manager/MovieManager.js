@@ -24,6 +24,18 @@ class MovieManager {
         console.log('finish to load movies from database');
     }
 
+    getInTheaterMovies = () => {
+        return this.movieList.filter(movie => {
+            return movie.movieDescription.inTheater == true;
+        });
+    }
+
+    getComingSoonMovies = () => {
+        return this.movieList.filter(movie => {
+            return movie.movieDescription.inTheater == false;
+        });
+    }
+
     getMovieById = (movieId) => {
         let movie = this.movieList.filter(movie => {
             return movie.id == movieId;

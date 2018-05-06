@@ -56,7 +56,8 @@ describe('Get movies', function () {
                 gallery: [ 'https://gallery' ],
                 trailers: [ 'https://trailers' ],
                 storyline: 'good story.',
-                releaseDate: '1000000000' 
+                releaseDate: '1000000000',
+                inTheater: true
             }
         }
         var mockMovieManager = sinon.mock(movieManager)
@@ -80,6 +81,7 @@ describe('Get movies', function () {
             expect(result.movieDescription.trailers[0]).to.equal('https://trailers');
             expect(result.movieDescription.storyline).to.equal('good story.');
             expect(result.movieDescription.releaseDate).to.equal('1000000000');
+            expect(result.movieDescription.inTheater).to.be.true;
             done();
         })
 
