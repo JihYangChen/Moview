@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var movieDescriptionSchema = new Schema({
-    id: {type: Schema.Types.ObjectId, required: true, ref: 'MovieDescription'},
+    coverUrl: String,
     casts: [String],
     directors: [String],
     categories: [String],
@@ -13,7 +13,7 @@ var movieDescriptionSchema = new Schema({
     runtime: String,
     releaseDate: String
 }, {
-    collation: 'MovieDescription'
+    collection: 'MovieDescription'
 });
 
 module.exports = mongoose.model('MovieDescription', movieDescriptionSchema);
