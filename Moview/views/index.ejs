@@ -7,7 +7,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Fitness &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
+	<title>Moview</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
@@ -54,6 +54,11 @@
 
 	<link rel="stylesheet" href="css/style.css">
 
+	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -66,55 +71,52 @@
 	<body>
 		<div id="fh5co-wrapper">
 		<div id="fh5co-page">
-		<div id="fh5co-header">
-			<header id="fh5co-header-section">
-				<div class="container">
-					<div class="nav-header">
-						<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-						<h1 id="fh5co-logo"><a href="index.html">Fit<span>ness</span></a></h1>
-						<!-- START #fh5co-menu-wrap -->
-						<nav id="fh5co-menu-wrap" role="navigation">
-							<ul class="sf-menu" id="fh5co-primary-menu">
-								<li class="active">
-									<a href="index.html">Home</a>
-								</li>
-								<li>
-									<a href="classes.html" class="fh5co-sub-ddown">Classes</a>
-									 <ul class="fh5co-sub-menu">
-									 	<li><a href="left-sidebar.html">Web Development</a></li>
-									 	<li><a href="right-sidebar.html">Branding &amp; Identity</a></li>
-										<li>
-											<a href="#" class="fh5co-sub-ddown">Free HTML5</a>
-											<ul class="fh5co-sub-menu">
-												<li><a href="http://freehtml5.co/preview/?item=build-free-html5-bootstrap-template" target="_blank">Build</a></li>
-												<li><a href="http://freehtml5.co/preview/?item=work-free-html5-template-bootstrap" target="_blank">Work</a></li>
-												<li><a href="http://freehtml5.co/preview/?item=light-free-html5-template-bootstrap" target="_blank">Light</a></li>
-												<li><a href="http://freehtml5.co/preview/?item=relic-free-html5-template-using-bootstrap" target="_blank">Relic</a></li>
-												<li><a href="http://freehtml5.co/preview/?item=display-free-html5-template-using-bootstrap" target="_blank">Display</a></li>
-												<li><a href="http://freehtml5.co/preview/?item=sprint-free-html5-template-bootstrap" target="_blank">Sprint</a></li>
-											</ul>
-										</li>
-										<li><a href="#">UI Animation</a></li>
-										<li><a href="#">Copywriting</a></li>
-										<li><a href="#">Photography</a></li> 
-									</ul>
-								</li>
-								<li>
-									<a href="schedule.html">Schedule</a>
-								</li>
-								<li><a href="trainer.html">Trainers</a></li>
-								<li><a href="about.html">About</a></li>
-								<li><a href="contact.html">Contact</a></li>
-							</ul>
-						</nav>
+		<% include menuHeader %>
+		<!-- end:fh5co-header -->
+
+		<div id="moviePosterCarousel">
+			<div class="row">
+				<div class="col-md-12">
+					<div id="myCarousel" class="carousel slide" data-ride="carousel">
+						<!-- Indicators -->
+						<ol class="carousel-indicators">
+						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+						<li data-target="#myCarousel" data-slide-to="1"></li>
+						<li data-target="#myCarousel" data-slide-to="2"></li>
+						</ol>
+					
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+						<div class="item active">
+							<img src="images/deadpool2.jpg">
+						</div>
+					
+						<div class="item">
+							<img src="images/quietPlace.jpg">
+						</div>
+						
+						<div class="item">
+							<img src="images/avengers.jpg">
+						</div>
+						</div>
+					
+						<!-- Left and right controls -->
+						<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left"></span>
+						<span class="sr-only">Previous</span>
+						</a>
+						<a class="right carousel-control" href="#myCarousel" data-slide="next">
+						<span class="glyphicon glyphicon-chevron-right"></span>
+						<span class="sr-only">Next</span>
+						</a>
 					</div>
 				</div>
-			</header>		
+			</div>
 		</div>
-		<!-- end:fh5co-header -->
-		<div class="fh5co-hero">
-			<div class="fh5co-overlay"></div>
-			<div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/deadpool2.jpg);">
+
+		<!-- <div class="fh5co-hero"> -->
+			<!-- <div class="fh5co-overlay"></div> -->
+			<!-- <div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/deadpool2.jpg);"> -->
 				<!-- <div class="desc animate-box">
 					<div class="container">
 						<div class="row">
@@ -126,10 +128,11 @@
 						</div>
 					</div>
 				</div> -->
-			</div>
-		</div>
+			<!-- </div> -->
+		<!-- </div> -->
 		<!-- end:fh5co-hero -->
 		
+
 		<div id="fh5co-team-section" class="fh5co-lightgray-section">
 			<div class="container">
 				<div class="row">
@@ -279,7 +282,160 @@
 					
 				</div>
 			</div>
+		
 		</div>
+		
+		<div id="fh5co-team-section" >
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<div class="heading-section text-center animate-box">
+							<h2>Coming Soon...</h2>
+							<p> Good things are worth being waited for.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row text-center">
+					<div class="col-md-3 col-sm-6">
+						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMjI0MDMzNTQ0M15BMl5BanBnXkFtZTgwMTM5NzM3NDM@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+							<div class="overlay-section">
+								<div class="desc">
+									<h3>A Quiet Place</h3>
+									<span>90 min</span>
+									<p>6 April 2018</p>
+									<p class="fh5co-social-icons">
+										<a href="#"><i class="icon-twitter-with-circle"></i></a>
+										<a href="#"><i class="icon-facebook-with-circle"></i></a>
+										<a href="#"><i class="icon-instagram-with-circle"></i></a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-sm-6">
+						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BY2JiYTNmZTctYTQ1OC00YjU4LWEwMjYtZjkwY2Y5MDI0OTU3XkEyXkFqcGdeQXVyNTI4MzE4MDU@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+							<div class="overlay-section">
+								<div class="desc">
+									<h3>Ready Player One</h3>
+									<span>140 min</span>
+									<p>29 March 2018</p>
+									<p class="fh5co-social-icons">
+										<a href="#"><i class="icon-twitter-with-circle"></i></a>
+										<a href="#"><i class="icon-facebook-with-circle"></i></a>
+										<a href="#"><i class="icon-instagram-with-circle"></i></a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-sm-6">
+						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMjE0ODIzNjkzMl5BMl5BanBnXkFtZTgwODQ3MzU4NDM@._V1_SY1000_SX632_AL_.jpg);">
+							<div class="overlay-section">
+								<div class="desc">
+									<h3>Blockers</h3>
+									<span>102 min</span>
+									<p>6 April 2018</p>
+									<p class="fh5co-social-icons">
+										<a href="#"><i class="icon-twitter-with-circle"></i></a>
+										<a href="#"><i class="icon-facebook-with-circle"></i></a>
+										<a href="#"><i class="icon-instagram-with-circle"></i></a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-sm-6">
+						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+							<div class="overlay-section">
+								<div class="desc">
+									<h3>Black Panther</h3>
+									<span>134 min</span>
+									<p>16 February 2018</p>
+									<p class="fh5co-social-icons">
+										<a href="#"><i class="icon-twitter-with-circle"></i></a>
+										<a href="#"><i class="icon-facebook-with-circle"></i></a>
+										<a href="#"><i class="icon-instagram-with-circle"></i></a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-sm-6">
+						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+							<div class="overlay-section">
+								<div class="desc">
+									<h3>Black Panther</h3>
+									<span>134 min</span>
+									<p>16 February 2018</p>
+									<p class="fh5co-social-icons">
+										<a href="#"><i class="icon-twitter-with-circle"></i></a>
+										<a href="#"><i class="icon-facebook-with-circle"></i></a>
+										<a href="#"><i class="icon-instagram-with-circle"></i></a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-sm-6">
+						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+							<div class="overlay-section">
+								<div class="desc">
+									<h3>Black Panther</h3>
+									<span>134 min</span>
+									<p>16 February 2018</p>
+									<p class="fh5co-social-icons">
+										<a href="#"><i class="icon-twitter-with-circle"></i></a>
+										<a href="#"><i class="icon-facebook-with-circle"></i></a>
+										<a href="#"><i class="icon-instagram-with-circle"></i></a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-sm-6">
+						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+							<div class="overlay-section">
+								<div class="desc">
+									<h3>Black Panther</h3>
+									<span>134 min</span>
+									<p>16 February 2018</p>
+									<p class="fh5co-social-icons">
+										<a href="#"><i class="icon-twitter-with-circle"></i></a>
+										<a href="#"><i class="icon-facebook-with-circle"></i></a>
+										<a href="#"><i class="icon-instagram-with-circle"></i></a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-sm-6">
+						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+							<div class="overlay-section">
+								<div class="desc">
+									<h3>Black Panther</h3>
+									<span>134 min</span>
+									<p>16 February 2018</p>
+									<p class="fh5co-social-icons">
+										<a href="#"><i class="icon-twitter-with-circle"></i></a>
+										<a href="#"><i class="icon-facebook-with-circle"></i></a>
+										<a href="#"><i class="icon-instagram-with-circle"></i></a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
 		<div class="fh5co-parallax" style="background-image: url(images/cinemaPopcorn.jpg);" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<div class="container">
@@ -295,7 +451,8 @@
 					</div>
 				</div>
 			</div>
-		</div><!-- end: fh5co-parallax -->
+		</div>
+		<!-- end: fh5co-parallax -->
 		<div id="fh5co-pricing-section" class="fh5co-pricing fh5co-lightgray-section">
 			<div class="container">
 				<div class="row">
@@ -461,60 +618,7 @@
 			</div>
 		</div>
 		<!-- fh5co-blog-section -->
-		<footer>
-			<div id="footer">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-4 animate-box">
-							<h3 class="section-title">About Us</h3>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics.</p>
-						</div>
-
-						<div class="col-md-4 animate-box">
-							<h3 class="section-title">Our Address</h3>
-							<ul class="contact-info">
-								<li><i class="icon-map-marker"></i>198 West 21th Street, Suite 721 New York NY 10016</li>
-								<li><i class="icon-phone"></i>+ 1235 2355 98</li>
-								<li><i class="icon-envelope"></i><a href="#">info@yoursite.com</a></li>
-								<li><i class="icon-globe2"></i><a href="#">www.yoursite.com</a></li>
-							</ul>
-						</div>
-						<div class="col-md-4 animate-box">
-							<h3 class="section-title">Drop us a line</h3>
-							<form class="contact-form">
-								<div class="form-group">
-									<label for="name" class="sr-only">Name</label>
-									<input type="name" class="form-control" id="name" placeholder="Name">
-								</div>
-								<div class="form-group">
-									<label for="email" class="sr-only">Email</label>
-									<input type="email" class="form-control" id="email" placeholder="Email">
-								</div>
-								<div class="form-group">
-									<label for="message" class="sr-only">Message</label>
-									<textarea class="form-control" id="message" rows="7" placeholder="Message"></textarea>
-								</div>
-								<div class="form-group">
-									<input type="submit" id="btn-submit" class="btn btn-send-message btn-md" value="Send Message">
-								</div>
-							</form>
-						</div>
-					</div>
-					<div class="row copy-right">
-						<div class="col-md-6 col-md-offset-3 text-center">
-							<p class="fh5co-social-icons">
-								<a href="#"><i class="icon-twitter2"></i></a>
-								<a href="#"><i class="icon-facebook2"></i></a>
-								<a href="#"><i class="icon-instagram"></i></a>
-								<a href="#"><i class="icon-dribbble2"></i></a>
-								<a href="#"><i class="icon-youtube"></i></a>
-							</p>
-							<p>Copyright 2016 Free Html5 <a href="#">Fitness</a>. All Rights Reserved. <br>Made with <i class="icon-heart3"></i> by <a href="http://freehtml5.co/" target="_blank">Freehtml5.co</a> / Demo Images: <a href="https://unsplash.com/" target="_blank">Unsplash</a></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
+		<% include footer %>
 	
 
 	</div>

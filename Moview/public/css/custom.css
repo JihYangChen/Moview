@@ -1,0 +1,11 @@
+#moviePosterCarousel {
+    margin-top: 66px;
+    height: 500px;
+}
+
+#moviePosterCarousel img {
+    height: 500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
