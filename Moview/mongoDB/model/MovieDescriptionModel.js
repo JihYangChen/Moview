@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var movieDescriptionSchema = new Schema({
     coverUrl: String,
+    posterUrl: String,
     casts: [String],
     directors: [String],
     categories: [String],

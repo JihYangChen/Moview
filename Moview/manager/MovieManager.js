@@ -10,23 +10,25 @@ class MovieManager {
     
     init = () => {
         this.movieList = [];
-        this.generateMovieList()
+        this.generateMovieList();
     }
 
-    generateMovieList = () => {
-        console.log('success get Movie List');
+    generateMovieList = async () => {
+        const movieObjects = await MovieModel.find();
+        for (var movieObject of movieObjects) {
+            const populatedMovieObject = await MovieModel.findById(movieObject._id)
+                                                         .populate('movieDescription')
+                                                         .exec();
+            this.movieList.push(new Movie(populatedMovieObject));
+        }
+        console.log('finish to load movies from database');
     }
 
-    getMovieById = async (movieId) => {
-        // await MovieModel.find({name: 'DeadPool 2'}, (err, result) => {
-        //     if (result) {
-        //         console.log("success ->", result);
-        //     }
-        // });
-        let movieObject = await MovieModel.findById(movieId)
-                                          .populate('movieDescription')
-                                          .exec();
-        return new Movie(movieObject);
+    getMovieById = (movieId) => {
+        let movie = this.movieList.filter(movie => {
+            return movie.id == movieId;
+        });
+        return movie.length > 0 ? movie[0] : null;
     }
 }
 

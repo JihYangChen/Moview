@@ -4,12 +4,16 @@ class MovieController {
         this.moviewManager = moviewManager;
     }
 
-    getInTheaterMovies() {
+    getInTheaterMovies = () => {
 
     }
 
-    getComingSoonMovies() {
+    getComingSoonMovies = () => {
 
+    }
+
+    showMovieInfo = movieId => {
+        return this.moviewManager.getMovieById(movieId);
     }
 }
 

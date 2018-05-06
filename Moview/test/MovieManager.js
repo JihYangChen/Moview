@@ -47,6 +47,7 @@ describe('Get movies', function () {
             { 
                 _id: 'descriptionId003',
                 coverUrl: 'http://coverUrl',
+                posterUrl: 'http://posterUrl',
                 casts: [ 
                     'Ryan Reynolds'
                 ],
@@ -70,6 +71,7 @@ describe('Get movies', function () {
             expect(result.name).to.equal('DeadPool 2');
             expect(result.movieDescription._id).to.equal('descriptionId003');
             expect(result.movieDescription.coverUrl).to.equal('http://coverUrl');
+            expect(result.movieDescription.posterUrl).to.equal('http://posterUrl');
             expect(result.movieDescription.casts[0]).to.equal('Ryan Reynolds');
             expect(result.movieDescription.categories[0]).to.equal('Action');
             expect(result.movieDescription.categories[1]).to.equal('Adventure');

@@ -6,6 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+// managers
+var MovieManager = require('./manager/MovieManager');
+var movieManager;
+
 var index = require('./routes/index');
 
 var app = express();
@@ -14,14 +18,18 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+var init = () => {
+  movieManager = new MovieManager();  
+}
+
 mongoose.connect('mongodb://moviewuser:moviewpassword@ds113200.mlab.com:13200/moview');
 // mongoose.set('debug', true)
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connextion error:'));
-db.once('open', function() {
+db.once('open', () => {
   console.log('MongoDB Connected!')
+  init();
 });
-
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -31,7 +39,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/', (req, res, next) => {
+  req.movieManager = movieManager;
+  next();
+}, index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
