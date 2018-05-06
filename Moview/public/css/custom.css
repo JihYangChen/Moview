@@ -20,7 +20,8 @@
 
 .movieInfo img {
     height: 500px;
-    border: 0.5px solid grey;
+    box-shadow: 5px 10px 18px #888888;
+    border-radius: 5%;
 }
 
 .movieInfo hr {
@@ -70,4 +71,20 @@
 .seeDetailBtn {
     margin-right: 20px;
     float: right;
+}
+
+.carouselImgDiv {
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+.carouselImgDiv img {
+    cursor: pointer;
+    box-shadow: 5px 10px 18px #888888;
+}
+
+.owl-stage {
+    display: flex;
+    align-items: center;
 }
