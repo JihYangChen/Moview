@@ -1,9 +1,12 @@
+var MovieDescription = require('./MovieDescription');
+
 class Movie {
     
-    constructor(id, name, movieDescription) {
-        this.id = id;
-        this.name = name;
-        this.movieDescription = movieDescription
+    // props = {id, name, movieDescription}
+    constructor(movieObject) {
+        for (var prop in movieObject) {
+            this[prop] = prop == 'movieDescription' ? new MovieDescription(movieObject[prop]) : movieObject[prop]
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var MovieModel = require('../mongoDB/model/MovieModel');
+var Movie = require('../entity/Movie');
 
 class MovieManager {
 
@@ -17,9 +18,15 @@ class MovieManager {
     }
 
     getMovieById = async (movieId) => {
-        return await MovieModel.findById(movieId)
-                               .populate('movieDescription')
-                               .exec();
+        // await MovieModel.find({name: 'DeadPool 2'}, (err, result) => {
+        //     if (result) {
+        //         console.log("success ->", result);
+        //     }
+        // });
+        let movieObject = await MovieModel.findById(movieId)
+                                          .populate('movieDescription')
+                                          .exec();
+        return new Movie(movieObject);
     }
 }
 
