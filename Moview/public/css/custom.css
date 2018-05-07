@@ -93,3 +93,88 @@
     width: 100%;
     text-align: center;
 }
+
+.cinemaShowing {
+    border-radius: 5%;
+    text-align: left;
+    display: flex;
+}
+
+.showingIcon {
+    display: flex;
+    align-items: center;
+	justify-content: center;
+}
+
+.showingTimes {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.topStageBar {
+    margin-top: 0px;
+    height: 100px;
+}
+
+.topStageBar .container {
+    position: relative;
+    margin-top: -50px;
+}
+
+.movieSummary {
+    text-align: center;
+}
+
+.movieSummary img {
+    height: 300px;
+    box-shadow: 5px 10px 18px #888888;
+    border-radius: 5%;
+}
+
+.movieSummary #movieName {
+    color: black;
+    margin-top: 20px;
+    font-weight: 400;
+    font-size: 25px;
+}
+
+.ticketAmount table {
+    margin-top: 15px;
+    width: 90%;
+    text-align: center;
+    color: black;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.ticketAmount table tr {
+    border-top: 0.2px solid rgb(199, 198, 198);
+    border-bottom: 0.2px solid rgb(199, 198, 198);
+    height: 80px;
+}
+
+.ticketAmount table tr:first-child {
+    border-top: none;
+}
+
+.ticketAmount table tr:last-child {
+    border-bottom: none;
+}
+
+.ticketAmount table select {
+    width: 50%;
+}
+
+.ticketAmount button {
+    margin-right: 15px;
+    width: 150px;
+    float:right;
+}
+
+#subTotal {
+    padding-right: 15px;
+    color: black;
+    margin-top: 30px;
+    width: 100%;
+    text-align: right;
+}

@@ -10,4 +10,8 @@ router.get('/movieDetail', function(req, res, next) {
   res.render('movieDetail');
 });
 
+router.get('/tickets', function(req, res, next) {
+  res.render('tickets');
+});
+
 module.exports = router;

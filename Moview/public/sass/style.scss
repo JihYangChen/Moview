@@ -5,6 +5,7 @@ $border-radius-base:  4px !default;
 $padding-base-vertical: 14px !default;
 
 $brand-primary: rgb(36, 148, 234) !default;
+$link-color: rgb(36, 148, 234) !default;
 $brand-secondary: #DA1212 !default; 
 
 $brand-white: #fff;
@@ -126,11 +127,11 @@ body {
 	}
 }
 a {
-	color: $brand-primary;
+	color: $link-color;
 	@include transition(.5s);
 	&:hover{
 		cursor: pointer;
-		color: $brand-primary !important;
+		color: $link-color !important;
 		text-decoration: underline;
 	}
 }
