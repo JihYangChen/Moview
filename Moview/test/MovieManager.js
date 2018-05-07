@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 require('sinon-mongoose');
 var expect = require('chai').expect;
 var Movie = require('../entity/Movie');
+var MovieDescription = require('../entity/MovieDescription');
 var MovieModel = require('../mongoDB/model/MovieModel');
 var MovieManager = require('../manager/MovieManager');
     
@@ -11,6 +12,38 @@ let movieManager = new MovieManager();
 var expectResult;
 
 describe('Movie entity', () => {
+    it('should create description correctly', () => {
+        var descriptionObject = { 
+            _id: 'descriptionId001',
+            coverUrl: 'http://coverUrl',
+            posterUrl: 'http://posterUrl',
+            casts: [ 
+                'Ryan Reynolds'
+            ],
+            directors: [ 'David Leitch' ],
+            categories: [ 'Action', 'Adventure', 'Comedy' ],
+            gallery: [ 'https://gallery' ],
+            trailers: [ 'https://trailers' ],
+            storyline: 'good story.',
+            releaseDate: '1000000000',
+            inTheater: true
+        };
+        let movieDescription = new MovieDescription(descriptionObject);
+        expect(movieDescription._id).to.equal('descriptionId001');
+        expect(movieDescription.coverUrl).to.equal('http://coverUrl');
+        expect(movieDescription.posterUrl).to.equal('http://posterUrl');
+        expect(movieDescription.casts[0]).to.equal('Ryan Reynolds');
+        expect(movieDescription.directors[0]).to.equal('David Leitch');
+        expect(movieDescription.categories[0]).to.equal('Action');
+        expect(movieDescription.categories[1]).to.equal('Adventure');
+        expect(movieDescription.categories[2]).to.equal('Comedy');
+        expect(movieDescription.gallery[0]).to.equal('https://gallery');
+        expect(movieDescription.trailers[0]).to.equal('https://trailers');
+        expect(movieDescription.storyline).to.equal('good story.');
+        expect(movieDescription.releaseDate).to.equal('1000000000');
+        expect(movieDescription.inTheater).to.be.true;
+    });
+
     it('should create movie correctly', () => {
         var movieObject = {
             _id: 'id001',
@@ -36,18 +69,6 @@ describe('Movie entity', () => {
         expect(movie._id).to.equal('id001');
         expect(movie.name).to.equal('DeadPool 2');
         expect(movie.movieDescription._id).to.equal('descriptionId001');
-        expect(movie.movieDescription.coverUrl).to.equal('http://coverUrl');
-        expect(movie.movieDescription.posterUrl).to.equal('http://posterUrl');
-        expect(movie.movieDescription.casts[0]).to.equal('Ryan Reynolds');
-        expect(movie.movieDescription.directors[0]).to.equal('David Leitch');
-        expect(movie.movieDescription.categories[0]).to.equal('Action');
-        expect(movie.movieDescription.categories[1]).to.equal('Adventure');
-        expect(movie.movieDescription.categories[2]).to.equal('Comedy');
-        expect(movie.movieDescription.gallery[0]).to.equal('https://gallery');
-        expect(movie.movieDescription.trailers[0]).to.equal('https://trailers');
-        expect(movie.movieDescription.storyline).to.equal('good story.');
-        expect(movie.movieDescription.releaseDate).to.equal('1000000000');
-        expect(movie.movieDescription.inTheater).to.be.true;
     });
 })
 
