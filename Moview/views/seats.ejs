@@ -84,7 +84,7 @@
 			<div class="container">
 				<div class="row"> 
 						<div class="row bs-wizard" style="border-bottom:0;">
-							<div class="col-xs-3 bs-wizard-step active">
+							<div class="col-xs-3 bs-wizard-step complete">
 								<div class="text-center bs-wizard-stepnum">Step 1</div>
 								<div class="progress"><div class="progress-bar"></div></div>
 								<a href="#" class="bs-wizard-dot"></a>
@@ -121,69 +121,157 @@
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
 						<div class="heading-section text-center animate-box">
-							<h2>Buy Tickets</h2>
+							<h2>Select Seats</h2>
 						</div>
 					</div>
 				</div>
 				<form action="#">
 					<div class="row">
-						<div class="col-md-2 animate-box movieSummary"></div>
-						<div class="col-md-4 animate-box movieSummary">
-							<img src="https://ia.media-imdb.com/images/M/MV5BNzczMjUwMzk0M15BMl5BanBnXkFtZTgwNjY4OTQ3NDM@._V1_SY1000_SX675_AL_.jpg">
-							<div id="movieName">Deadpool 2</div>
-							<div>Regal Hudson Valley Mall 12</div>
-							<div>Thu. May 17 at 7:00 PM</div>
-						</div>
-						<div class="col-md-6 animate-box ticketAmount">
+						<div class="col-md-12 animate-box" id="seatingMap">
+							<div id="screen"><h2>SCREEN</h2></div>
 							<table>
 								<tr>
-									<td>Adult</td>
-									<td>$12.99</td>
-									<td>
-										<select class="form-control">
-											<option>0</option>
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
-									</td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
 								</tr>
 								<tr>
-									<td>Senior</td>
-									<td>$11.49</td>
-									<td>
-										<select class="form-control">
-											<option>0</option>
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
-									</td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
 								</tr>
 								<tr>
-								<td>Child</td>
-									<td>$9.99</td>
-									<td>
-										<select class="form-control">
-											<option>0</option>
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
-									</td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+								</tr>
+								<tr>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+								</tr>
+								<tr>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+								</tr>
+								<tr>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+								</tr>
+								<tr>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+								</tr>
+								<tr>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
+									<td><img src="../images/seat-nonSelect.png"></td>
 								</tr>
 							</table>
-							<div id="subTotal">
-								<div>Subtotal</div>
-								<div><h2>$25.43</h2></div>
+							<div id="seatsInfo">
+								<div>Seats</div>
+								<div><h2>A14, A15</h2></div>
 							</div>
-							<button type="submit" class="btn btn-primary">Next</button>
+							<button type="submit" class="btn btn-primary nextButton">Next</button>
 						</div>
 					</div>
 				</form>
@@ -238,6 +326,17 @@
 			lazyLoad:true,
 			center:true
 		})
+
+		$("#seatingMap img").click(function(){
+			var currentImg = $(this).attr("src");
+			var nonSelected = "../images/seat-nonSelect.png"
+			var selectedImg = "../images/seat-selected.png";
+			
+			if (currentImg === nonSelected)
+				$(this).attr("src", selectedImg);
+			else
+				$(this).attr("src", nonSelected);
+		});
 	</script>
 
 

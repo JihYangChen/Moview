@@ -14,4 +14,8 @@ router.get('/tickets', function(req, res, next) {
   res.render('tickets');
 });
 
+router.get('/seats', function(req, res, next) {
+  res.render('seats');
+});
+
 module.exports = router;
