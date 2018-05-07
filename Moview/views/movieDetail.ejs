@@ -148,22 +148,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="owl-carousel owl-theme carouselImgsDiv">
-					
-						<!-- <div class="item" style="width:250px"><h4>111234567894564645646564645654645645646546</h4></div>
-						<div class="item" style="width:100px"><h4>2</h4></div>
-						<div class="item" style="width:500px"><h4>3</h4></div>
-						<div class="item" style="width:100px"><h4>4</h4></div>
-						<div class="item" style="width:50px"><h4>6</h4></div>
-						<div class="item" style="width:250px"><h4>7</h4></div>
-						<div class="item" style="width:120px"><h4>8</h4></div>
-						<div class="item" style="width:420px"><h4>9</h4></div>
-						<div class="item" style="width:120px"><h4>10</h4></div>
-						<div class="item" style="width:300px"><h4>11</h4></div>
-						<div class="item" style="width:450px"><h4>12</h4></div>
-						<div class="item" style="width:220px"><h4>13</h4></div>
-						<div class="item" style="width:150px"><h4>14</h4></div>
-						<div class="item" style="width:600px"><h4>15</h4></div> -->
+				<div class="owl-carousel owl-theme imgsCarouselDiv">
 					<div class="item carouselImgDiv">
 						<img src="https://ia.media-imdb.com/images/M/MV5BNmRiYzhmNWMtYzc1OC00OThmLThiYzQtZDYyNjNjZjBlNjgyXkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SY1000_SX1500_AL_.jpg">
 					</div>
@@ -194,16 +179,29 @@
 					<div class="item carouselImgDiv">
 						<img src="https://ia.media-imdb.com/images/M/MV5BZjI3NTNkMmYtMTZkYS00YzEzLTk0MGItYmNmNmRlMjAwM2FiXkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SY1000_SX1500_AL_.jpg">
 					</div>
-					<!-- <div class="item carouselImgDiv" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BNmRiYzhmNWMtYzc1OC00OThmLThiYzQtZDYyNjNjZjBlNjgyXkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SY1000_SX1500_AL_.jpg)">
+				</div>
+			</div>
+		</div>
+
+		<div id="fh5co-team-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<div class="heading-section text-center animate-box">
+							<h2>Trailers</h2>
+						</div>
 					</div>
-					<div class="item carouselImgDiv" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BZjI3NTNkMmYtMTZkYS00YzEzLTk0MGItYmNmNmRlMjAwM2FiXkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SY1000_SX1500_AL_.jpg)">
+				</div>
+				<div class="owl-carousel owl-theme videosCarouselDiv">
+					<div class="item videoDiv">
+						<iframe src="https://www.imdb.com/videoembed/vi1315682329" width="70%" height="450px" allowfullscreen ></iframe>
 					</div>
-					<div class="item carouselImgDiv" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMzRjNjFhMzQtZTdmYi00NGYyLTlkMTctZTU4YjA4ODRjMjgyXkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SX1777_CR0,0,1777,736_AL_.jpg)">
+					<div class="item videoDiv">
+						<iframe src="https://www.imdb.com/videoembed/vi2755901465" width="70%" height="450px" allowfullscreen ></iframe>
 					</div>
-					<div class="item carouselImgDiv" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BNmRiYzhmNWMtYzc1OC00OThmLThiYzQtZDYyNjNjZjBlNjgyXkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SY1000_SX1500_AL_.jpg)">
+					<div class="item videoDiv">
+						<iframe src="https://www.imdb.com/videoembed/vi2265036825" width="70%" height="450px" allowfullscreen ></iframe>
 					</div>
-					<div class="item carouselImgDiv" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BOGNiMjYwYzMtMTE5Ni00MGZkLTk0ZTQtMDA4NTNiNTVjMTRiXkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SY1000_SX1500_AL_.jpg)">
-					</div> -->
 				</div>
 			</div>
 		</div>
@@ -243,11 +241,19 @@
 	<script src="owlcarousel/owl.carousel.min.js"></script>
 
 	<script>
-		$('.owl-carousel').owlCarousel({
+		$('.imgsCarouselDiv').owlCarousel({
 			margin:10,
 			loop:true,
 			items: 4,
 			autoplay: true
+		})
+
+		$('.videosCarouselDiv').owlCarousel({
+			margin:10,
+			items:1,
+			loop:true,
+			lazyLoad:true,
+			center:true
 		})
 	</script>
 

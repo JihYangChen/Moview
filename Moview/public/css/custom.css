@@ -73,13 +73,13 @@
     float: right;
 }
 
-.carouselImgDiv {
+.imgsCarouselDiv {
     background-size: contain;
     background-repeat: no-repeat;
     vertical-align: middle;
 }
 
-.carouselImgDiv img {
+.imgsCarouselDiv img {
     cursor: pointer;
     box-shadow: 5px 10px 18px #888888;
 }
@@ -87,4 +87,9 @@
 .owl-stage {
     display: flex;
     align-items: center;
+}
+
+.videoDiv {
+    width: 100%;
+    text-align: center;
 }
