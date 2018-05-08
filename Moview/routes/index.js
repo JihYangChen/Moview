@@ -22,4 +22,8 @@ router.get('/confirmOrder', function(req, res, next) {
   res.render('confirmOrder');
 });
 
+router.get('/payment', function(req, res, next) {
+  res.render('payment');
+});
+
 module.exports = router;
