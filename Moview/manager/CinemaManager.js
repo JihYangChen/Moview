@@ -23,7 +23,18 @@ class CinemaManager {
                                                                     path: 'movieDescription'
                                                                 }
                                                              })
-                                                             .populate('hall')
+                                                             .populate({
+                                                                 path: 'hall',
+                                                                 populate: {
+                                                                     path: 'seatList'
+                                                                 }
+                                                             })
+                                                             .populate({
+                                                                 path: 'showingSeatList',
+                                                                 populate: {
+                                                                     path: 'seat'
+                                                                 }
+                                                             })
                                                              .exec();
             this.showingList.push(new Showing(populatedShowingObject));
         }

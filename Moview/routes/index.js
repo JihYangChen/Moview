@@ -15,7 +15,8 @@ router.get('/', async function(req, res, next) {
   // let result = movieController.getMovieInfo("5aed48e6f36d2837eae61fcf");
   // let result = movieController.getIndexMovies();
   let result = cinemaManager.getShowingById('5af11bf5f36d2837eae7806c');
-  console.log("good -> ", result.hall.getSeats());
+  // let seat = result.hall.getSeats()[0];
+  console.log("good -> ", result.getShowingSeatBySeatName('A1').seat.getName());
   res.render('index', { title: 'Express' });
 });
 
