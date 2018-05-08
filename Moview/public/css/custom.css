@@ -209,3 +209,78 @@
 #seatingMap button {
     margin-top: 32px;
 }
+
+#tickets {
+    padding: 0px;
+}
+
+.ticket {
+    padding: 15px 20px;
+    border: 0.5px solid rgb(199, 198, 198);
+    border-radius: 10px;
+    margin-top: 15px;
+    box-shadow: 2px 1px 6px #888888;
+}
+
+.ticket:first-of-type {
+    margin-top: 0px;
+}
+
+.ticket:hover {
+    box-shadow: 3px 2px 20px #888888;
+}
+
+.ticket .ticketUpperArea {
+    width: 100%;
+    display: inline-block;
+}
+
+.ticket .movieName {
+    font-weight: 400;
+    color: black;
+    font-size: 20px;
+    float: left;
+}
+
+.ticket .category {
+    margin-top: 2px;
+    float: right;
+    font-size: 20px;
+}
+
+.ticket .cinema {
+    margin-top: -10px;
+    font-weight: 400;
+    color: black;
+    font-size:15px;
+}
+
+.ticket .ticketBottomArea div {
+    margin-top: 10px;
+    text-align: center;
+    display: inline-block;
+}
+
+.ticket .ticketBottomArea span {
+    font-weight: 400;
+    display: block;
+    color: black;
+    font-size: 15px;
+}
+
+.ticket .ticketBottomArea span:first-child {
+    color: rgb(114, 111, 111);
+    font-size: 13px;
+}
+
+.ticket .time {
+    margin-left: 90px;
+}
+
+.ticket .seat {
+    margin-left: 90px;
+}
+
+.ticket .price {
+    margin-left: 90px;
+}

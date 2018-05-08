@@ -18,4 +18,8 @@ router.get('/seats', function(req, res, next) {
   res.render('seats');
 });
 
+router.get('/confirmOrder', function(req, res, next) {
+  res.render('confirmOrder');
+});
+
 module.exports = router;
