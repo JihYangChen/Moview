@@ -1,3 +1,5 @@
+var DateUtil = require('../util/DateUtil');
+
 class MovieDescription {
 
     // props = {id, coverUrl, posterUrl, casts, directors, categories, gallery, reviewRating, trailers, storyline, runtime, releaseDate, inTheater}
@@ -7,12 +9,30 @@ class MovieDescription {
         }
     }
 
-    getDisplayInfo = () => {
+    getIndexDisplayInfo = () => {
         return {
             coverUrl: this.coverUrl,
+            posterUrl: this.posterUrl,
             runtime: this.runtime,
-            releaseDate: this.releaseDate
+            releaseDate: this.getReleaseDate()
         }
+    }
+
+    getDetailMovieInfo = () => {
+        return {
+            coverUrl: this.coverUrl,
+            directors: this.directors,
+            casts: this.casts,
+            runtime: this.runtime,
+            releaseDate: this.getReleaseDate(),
+            categories: this.categories,
+            storyline: this.storyline
+        }
+    }
+
+    // May 08,2018
+    getReleaseDate = () => {
+        return DateUtil.occidentDateFormattedString(this.releaseDate);
     }
 }
 

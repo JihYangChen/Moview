@@ -9,8 +9,14 @@ class Movie {
         }
     }
 
-    getDisplayInfo = () => {
-        var info = this.movieDescription.getDisplayInfo();
+    getIndexDisplayInfo = () => {
+        var info = this.movieDescription.getIndexDisplayInfo();
+        info.movieName = this.name;
+        return info;
+    }
+
+    getDetailMovieInfo = () => {
+        var info = this.movieDescription.getDetailMovieInfo();
         info.movieName = this.name;
         return info;
     }

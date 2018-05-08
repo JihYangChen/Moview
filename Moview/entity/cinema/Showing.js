@@ -20,12 +20,32 @@ class Showing {
         }
     }
 
+    // Tue. May 08
     getDate = () => {
         return DateUtil.dateFormattedString(this.time);
     }
 
+    // 05/08
+    getSimpleDate = () => {
+        return DateUtil.simpleDateString(this.time);
+    }
+
+    // 13:20
     getSpecificTime = () => {
         return DateUtil.specificTimeFormattedString(this.time);
+    }
+
+    // Tue. May 08 at 13:20
+    getTime = () => {
+        return this.getDate() + " at " + this.getSpecificTime();
+    }
+
+    getBookingProcessDisplayInfo = () => {
+        return {
+            time: this.getTime(),
+            movieName: this.movie.name,
+            coverUrl: this.movie.coverUrl
+        }
     }
 
     getMovieName = () => {
