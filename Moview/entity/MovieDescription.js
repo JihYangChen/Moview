@@ -6,6 +6,14 @@ class MovieDescription {
             this[prop] = movieDescription[prop]
         }
     }
+
+    getDisplayInfo = () => {
+        return {
+            coverUrl: this.coverUrl,
+            runtime: this.runtime,
+            releaseDate: this.releaseDate
+        }
+    }
 }
 
 module.exports = MovieDescription;

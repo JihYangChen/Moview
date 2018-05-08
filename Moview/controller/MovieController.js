@@ -8,7 +8,7 @@ class MovieController {
         return [this.moviewManager.getInTheaterMovies(), this.moviewManager.getComingSoonMovies()];
     }
 
-    showMovieInfo = movieId => {
+    getMovieInfo = movieId => {
         return this.moviewManager.getMovieById(movieId);
     }
 }

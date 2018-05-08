@@ -8,6 +8,12 @@ class Movie {
             this[prop] = prop == 'movieDescription' ? new MovieDescription(movieObject[prop]) : movieObject[prop]
         }
     }
+
+    getDisplayInfo = () => {
+        var info = this.movieDescription.getDisplayInfo();
+        info.movieName = this.name;
+        return info;
+    }
 }
 
 module.exports = Movie;
