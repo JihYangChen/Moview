@@ -26,4 +26,8 @@ router.get('/payment', function(req, res, next) {
   res.render('payment');
 });
 
+router.get('/paySuccess', function(req, res, next) {
+  res.render('paySuccess');
+});
+
 module.exports = router;

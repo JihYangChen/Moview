@@ -197,6 +197,11 @@
     cursor: pointer;
     width: 100%;
 }
+
+#seatingMap img:hover {
+    -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));
+    filter: drop-shadow(1px 2px 2px #b4b1b1)
+}
   
 #seatsInfo {
     margin-left: 30px;
@@ -283,4 +288,32 @@
 
 .ticket .price {
     margin-left: 90px;
+}
+
+#statusIcon {
+    text-align: center;
+    
+    padding-top: 0px;
+}
+
+#statusIcon i {
+    color: rgb(78, 207, 95);
+    font-size: 100px;
+}
+
+#orderMessage span:first-of-type {
+    font-weight: 300;
+    color: rgb(114, 111, 111);
+    font-size: 20px;
+}
+
+#orderMessage span {
+    display: block;
+    font-weight: 400;
+    color: black;
+    font-size: 30px;
+}
+
+#successTickets {
+    margin-top: 50px;
 }
