@@ -12,12 +12,12 @@ router.get('/', async function(req, res, next) {
   // for test purpose.
   // DeadPool = 5aed48e6f36d2837eae61fcf, Avengers: Infinity war = 5aeec50bf36d2837eae67e72
 
-  let result = movieController.getMovieInfo("5aed48e6f36d2837eae61fcf");
-  // let result = movieController.getIndexMovies();
+  // let result = movieController.getMovieInfo("5aed48e6f36d2837eae61fcf");
+  let result = movieController.getIndexMovies();
   // let result = cinemaManager.getShowingById('5af11bf5f36d2837eae7806c');
   // let result = bookingController.selectShowing('5af11bf5f36d2837eae7806c');
-  console.log("good -> ", result.getDetailMovieInfo());
-  res.render('index', { title: 'Express' });
+  console.log("good -> ", result);
+  res.render('index', {inTheaterMovies: result[0], comingSoonMovies: result[1]});
 });
 
 router.get('/movieDetail', function(req, res, next) {
