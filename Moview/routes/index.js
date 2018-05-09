@@ -20,4 +20,28 @@ router.get('/', async function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/movieDetail', function(req, res, next) {
+  res.render('movieDetail');
+});
+
+router.get('/tickets', function(req, res, next) {
+  res.render('tickets');
+});
+
+router.get('/seats', function(req, res, next) {
+  res.render('seats');
+});
+
+router.get('/confirmOrder', function(req, res, next) {
+  res.render('confirmOrder');
+});
+
+router.get('/payment', function(req, res, next) {
+  res.render('payment');
+});
+
+router.get('/paySuccess', function(req, res, next) {
+  res.render('paySuccess');
+});
+
 module.exports = router;
