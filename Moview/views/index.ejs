@@ -128,7 +128,11 @@
 								<div class="overlay-section">
 									<div class="desc">
 										<h3><%= inTheaterMovie.name %></h3>
-										<span><%= inTheaterMovie.runtime %> min</span>
+										<% if (typeof inTheaterMovie.runtime != "undefined") { %>
+											<span><%= inTheaterMovie.runtime %> min</span>
+										<% } else { %>
+											<span></span>
+										<% } %>
 										<p><%= inTheaterMovie.releaseDate %></p>
 										<p class="fh5co-social-icons">
 											<a href="#"><i class="icon-twitter-with-circle"></i></a>
@@ -162,7 +166,11 @@
 								<div class="overlay-section">
 									<div class="desc">
 										<h3><%= comingSoonMovie.name %></h3>
-										<span><%= comingSoonMovie.runtime %> min</span>
+										<% if (typeof comingSoonMovie.runtime != "undefined") { %>
+											<span><%= comingSoonMovie.runtime %> min</span>
+										<% } else { %>
+											<span></span>
+										<% } %>
 										<p><%= comingSoonMovie.releaseDate %></p>
 										<p class="fh5co-social-icons">
 											<a href="#"><i class="icon-twitter-with-circle"></i></a>

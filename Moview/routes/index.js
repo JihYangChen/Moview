@@ -20,8 +20,12 @@ router.get('/', async function(req, res, next) {
   res.render('index', {inTheaterMovies: result[0], comingSoonMovies: result[1]});
 });
 
-router.get('/movieDetail', function(req, res, next) {
-  res.render('movieDetail');
+router.get('/movieDetail/:movieId', async function(req, res, next) {
+  let movieController = new MovieController(await req.movieManager);
+  let result = movieController.getMovieInfo(req.params.movieId);
+
+  console.log(result)
+  res.render('movieDetail', {movie: result});
 });
 
 router.get('/tickets', function(req, res, next) {

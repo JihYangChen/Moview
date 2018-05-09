@@ -26,6 +26,9 @@ class MovieDescription {
             runtime: this.runtime,
             releaseDate: this.getReleaseDate(),
             categories: this.categories,
+            reviewRating: this.reviewRating,
+            gallery: this.gallery,
+            trailers: this.trailers,
             storyline: this.storyline
         }
     }

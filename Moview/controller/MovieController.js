@@ -9,7 +9,7 @@ class MovieController {
     }
 
     getMovieInfo = movieId => {
-        return this.moviewManager.getMovieById(movieId);
+        return this.moviewManager.getMovieById(movieId).getDetailMovieInfo();
     }
 }
 
