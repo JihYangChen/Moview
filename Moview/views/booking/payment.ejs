@@ -148,7 +148,7 @@
 										<div class="row">
 											<div class="col-xs-12">
 												<label for="cardNumber">TOTAL PRICE</label>
-												<span id="total">$25.33</span>         
+												<span id="total">$<%= subtotal %></span>         
 											</div>
 										</div>
 										<div class="row">
@@ -217,7 +217,7 @@
 										</div>
 										<div class="row">
 											<div class="col-xs-12">
-												<button type="button" class="subscribe btn btn-primary btn-lg btn-block">Pay</button>
+												<button type="button" class="subscribe btn btn-primary btn-lg btn-block nextButton">Pay</button>
 											</div>
 										</div>
 										<div class="row" style="display:none;">
@@ -266,17 +266,8 @@
 	<script src="../../js/main.js"></script>
 
 	<script>
-		$("#seatingMap img").click(function(){
-			var currentImg = $(this).attr("src");
-			
-			var nonSelectedImg = "../images/seat-nonSelect.png"
-			var nonOccupiedImg = "../images/seat-nonOccupied.png"
-			var selectedImg = "../images/seat-selected.png";
-			
-			if (currentImg === nonOccupiedImg)
-				$(this).attr("src", selectedImg);
-			else
-				$(this).attr("src", nonOccupiedImg);
+		$(".nextButton").click(function() {
+			document.location.href = "/booking/paySuccess";
 		});
 	</script>
 

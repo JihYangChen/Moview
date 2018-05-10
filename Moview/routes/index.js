@@ -20,7 +20,7 @@ router.get('/movieDetail/:movieId', async function(req, res, next) {
 });
 
 router.get('/booking/tickets/:showingId', async function(req, res, next) {
-  let bookingController = new BookingController(await req.cinemaManager);
+  let bookingController = new BookingController(await req.cinemaManager, await req.orderManager);
   let result = bookingController.selectShowing('5af11bf5f36d2837eae7806c');
   // let result = bookingController.selectShowing(req.params.showingId);
 
@@ -33,81 +33,61 @@ router.get('/booking/tickets/:showingId', async function(req, res, next) {
   //   Senior: "0",
   //   Child: "1",
   //  });
+  //                                                       showingId
   // let reault = bookingController.determineBookingInfo('5af11bf5f36d2837eae7806c', {
   //                                                                                   Adult: "2",
   //                                                                                   Senior: "1",
   //                                                                                   Child: "1",
   //                                                                                 });
-  console.log("good -> ", bookingController.selectSeats('5af45d79ef5d0b5d6b78781b', ["A1", "A2", "A3", "A4"]));
+  //                                                          orderId
+  // console.log("good -> ", bookingController.selectSeats('5af45d79ef5d0b5d6b78781b', ["A1", "A2", "A3", "A4"]));
 
   res.render('booking/tickets', {movie: result});
 });
 
 router.post('/booking/setTicketsAmount', async function(req, res, next) {
+  let bookingController = new BookingController(await req.cinemaManager, await req.orderManager);
   req.session.order = req.body;
   req.session.order.totalTicketsAmount = parseInt(req.body.adultAmount) + parseInt(req.body.seniorAmount) + parseInt(req.body.childAmount);
+  let result = await bookingController.determineBookingInfo('5af11bf5f36d2837eae7806c', {
+                                                                                    Adult: req.body.adultAmount,
+                                                                                    Senior: req.body.seniorAmount,
+                                                                                    Child: req.body.childAmount
+                                                                                  });
+  req.session.order.id = result.orderId;
+  req.session.order.isNotOccupiedSeats = result.seats;
+
   res.send('OK');
 });
 
 router.get('/booking/seats', async function(req, res, next) {
   let seatInfo = {
-    isNotOccupiedSeats : 
-                        [
-                          { row: "A", column: "5" },
-                          { row: "A", column: "6" },
-                          { row: "A", column: "7" },
-                          { row: "A", column: "8" },
-                          { row: "J", column: "10" },
-                          { row: "J", column: "9" },
-                          { row: "J", column: "4" },
-                          { row: "J", column: "7" }
-                        ], 
+    isNotOccupiedSeats : req.session.order.isNotOccupiedSeats,
     totalTicketsAmount : req.session.order.totalTicketsAmount
   };
   res.render('booking/seats', seatInfo);
 });
 
 router.post('/booking/selectSeats', async function(req, res, next) {
-  console.log('selectedSeats ->' + JSON.stringify(req.body));
-  // req.session.order = req.body;
-  // req.session.order.totalTicketsAmount = parseInt(req.body.adultAmount) + parseInt(req.body.seniorAmount) + parseInt(req.body.childAmount);
+  let bookingController = new BookingController(await req.cinemaManager, await req.orderManager);
+  let result = bookingController.selectSeats(req.session.order.id, req.body.selectedSeats)
+  req.session.order.tickets = result.ticketList;
+  
   res.send('OK');
 });
 
 router.get('/booking/confirmOrder', function(req, res, next) {
-  let tickets = [
-    {
-      date: "Thu. May 17",
-      time: "7:00PM",
-      seat: "A14", 
-      price: "$12.99",
-      ticketCategory: "Adult"
-    }, 
-    {
-      date: "Thu. May 17",
-      time: "7:00PM",
-      seat: "A15", 
-      price: "$11.49",
-      ticketCategory: "Senior"
-    }, 
-    {
-      date: "Thu. May 17",
-      time: "7:00PM",
-      seat: "A16", 
-      price: "$9.99",
-      ticketCategory: "Child"
-    }
-  ]
-  console.log('JSON -> ' + JSON.stringify({tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, subtotal: req.session.order.subtotal}));
+  let tickets = req.session.order.tickets;
   res.render('booking/confirmOrder', {tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, subtotal: req.session.order.subtotal});
 });
 
 router.get('/booking/payment', function(req, res, next) {
-  res.render('booking/payment');
+  res.render('booking/payment', {subtotal: req.session.order.subtotal});
 });
 
 router.get('/booking/paySuccess', function(req, res, next) {
-  res.render('booking/paySuccess');
+  let tickets = req.session.order.tickets;
+  res.render('booking/paySuccess', {tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, orderId: req.session.order.id});
 });
 
 module.exports = router;

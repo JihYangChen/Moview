@@ -5,7 +5,13 @@ class MovieController {
     }
 
     getIndexMovies = () => {
-        return [this.moviewManager.getInTheaterMovies().map(movie => movie.getIndexDisplayInfo()), this.moviewManager.getComingSoonMovies().map(movie => movie.getIndexDisplayInfo())];
+        let inTheaterMoviesDisplayInfos = this.moviewManager.getInTheaterMovies().map(movie => {
+            return movie.getIndexDisplayInfo();
+        })
+        let comingSoonMoviesDisplayInfos = this.moviewManager.getComingSoonMovies().map(movie => {
+            return movie.getIndexDisplayInfo();
+        })
+        return [inTheaterMoviesDisplayInfos, comingSoonMoviesDisplayInfos];
     }
 
     getMovieInfo = movieId => {

@@ -136,116 +136,52 @@
 					</div>
 					<div class="col-md-6 animate-box" id="orderMessage">
 						<span>Your Order No.</span>
-						<span>45132547863</span>
+						<span><%= orderId %></span>
 					</div>
 				</div>
 				<div class="row" id="successTickets">
 					<div id="tickets" class="col-md-6 col-md-offset-3">
-						<div class="ticket">
-							<div class="ticketUpperArea">
-								<div class="movieName">Deadpool 2</div>
-								<div class="category">Adult</div>
-							</div>
-
-							<div class="cinema">
-								Regal Hudson Valley Mall 12
-							</div>
-
-							<div class="ticketBottomArea">
-								<div class="date">
-									<span>Date</span>
-									<span>Thu. May 17</span>
+						<% for (ticket of tickets) { %>
+							<div class="ticket">
+								<div class="ticketUpperArea">
+									<div class="movieName"><%= movieBriefInfo.name %></div>
+									<div class="category"><%= ticket.ticketCategory %></div>
 								</div>
 
-								<div class="time">
-									<span>Time</span>
-									<span>7:00 PM</span>
+								<div class="cinema">
+									<%= movieBriefInfo.cinema %>
 								</div>
 
-								<div class="seat">
-									<span>Seat</span>
-									<span>A14</span>
-								</div>
-								
-								<div class="price">
-									<span>Price</span>
-									<span>$12.99</span>
-								</div>
-							</div>
-							
-						</div>
-						<div class="ticket">
-							<div class="ticketUpperArea">
-								<div class="movieName">Deadpool 2</div>
-								<div class="category">Senior</div>
-							</div>
+								<div class="ticketBottomArea">
+									<div class="date">
+										<span>Date</span>
+										<span><%= ticket.date %></span>
+									</div>
 
-							<div class="cinema">
-								Regal Hudson Valley Mall 12
-							</div>
+									<div class="time">
+										<span>Time</span>
+										<span><%= ticket.time %></span>
+									</div>
 
-							<div class="ticketBottomArea">
-								<div class="date">
-									<span>Date</span>
-									<span>Thu. May 17</span>
-								</div>
-
-								<div class="time">
-									<span>Time</span>
-									<span>7:00 PM</span>
-								</div>
-
-								<div class="seat">
-									<span>Seat</span>
-									<span>A15</span>
+									<div class="seat">
+										<span>Seat</span>
+										<span><%= ticket.seat %></span>
+									</div>
+									
+									<div class="price">
+										<span>Price</span>
+										<span><%= ticket.price %></span>
+									</div>
 								</div>
 								
-								<div class="price">
-									<span>Price</span>
-									<span>$11.49</span>
-								</div>
 							</div>
-							
-						</div>
-						<div class="ticket">
-							<div class="ticketUpperArea">
-								<div class="movieName">Deadpool 2</div>
-								<div class="category">Child</div>
-							</div>
-
-							<div class="cinema">
-								Regal Hudson Valley Mall 12
-							</div>
-
-							<div class="ticketBottomArea">
-								<div class="date">
-									<span>Date</span>
-									<span>Thu. May 17</span>
-								</div>
-
-								<div class="time">
-									<span>Time</span>
-									<span>7:00 PM</span>
-								</div>
-
-								<div class="seat">
-									<span>Seat</span>
-									<span>A16</span>
-								</div>
-								
-								<div class="price">
-									<span>Price</span>
-									<span>$9.99</span>
-								</div>
-							</div>
-							
-						</div>
+						<% } %>
 					</div>
 				</div>
 
 				<div class="row" id="successTickets">
 					<div class="col-xs-2 col-md-offset-5">
-						<button class="subscribe btn btn-success btn-lg btn-block" type="button">Done</button>
+						<button class="subscribe btn btn-success btn-lg btn-block nextButton" type="button">Done</button>
 					</div>
 				</div>
 				
@@ -283,17 +219,8 @@
 	<script src="../../js/main.js"></script>
 
 	<script>
-		$("#seatingMap img").click(function(){
-			var currentImg = $(this).attr("src");
-			
-			var nonSelectedImg = "../images/seat-nonSelect.png"
-			var nonOccupiedImg = "../images/seat-nonOccupied.png"
-			var selectedImg = "../images/seat-selected.png";
-			
-			if (currentImg === nonOccupiedImg)
-				$(this).attr("src", selectedImg);
-			else
-				$(this).attr("src", nonOccupiedImg);
+		$(".nextButton").click(function() {
+			document.location.href = "/";
 		});
 	</script>
 

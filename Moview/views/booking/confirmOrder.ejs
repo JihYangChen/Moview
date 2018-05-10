@@ -243,7 +243,7 @@
 							</div>
 							<div id="subTotal">
 								<div>Subtotal</div>
-								<div><h2><%= subtotal %></h2></div>
+								<div><h2>$<%= subtotal %></h2></div>
 							</div>
 							<button type="button" class="btn btn-primary nextButton">Next</button>
 						</div>
@@ -281,6 +281,12 @@
 
 	<!-- Main JS (Do not remove) -->
 	<script src="../../js/main.js"></script>
+
+	<script>
+		$(".nextButton").click(function() {
+			document.location.href = "/booking/payment";
+		});
+	</script>
 
 	</body>
 </html>
