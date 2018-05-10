@@ -20,6 +20,13 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// session
+var session = require('express-session');
+app.set('trust proxy', 1);
+app.use( session({
+  secret : 'a4f5Df'
+}) );
+
 var init = () => {
   movieManager = new MovieManager();  
   cinemaManager = new CinemaManager();
