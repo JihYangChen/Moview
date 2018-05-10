@@ -44,32 +44,28 @@
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700,900' rel='stylesheet' type='text/css'>
 	
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="../../css/animate.css">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="../../css/icomoon.css">
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="../../css/bootstrap.css">
 	<!-- Superfish -->
-	<link rel="stylesheet" href="css/superfish.css">
+	<link rel="stylesheet" href="../../css/superfish.css">
 
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="../../css/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-	<!-- owlcarousel -->
-	<link rel="stylesheet" href="owlcarousel/assets/owl.carousel.min.css">
-	<link rel="stylesheet" href="owlcarousel/assets/owl.theme.default.min.css">
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!-- bs-wizard -->
-	<link rel="stylesheet" href="css/bs-wizard.css">
+	<link rel="stylesheet" href="../../css/bs-wizard.css">
 
-	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="../../css/custom.css">
 
 	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="../../js/modernizr-2.6.2.min.js"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
+	<script src="../../js/respond.min.js"></script>
 	<![endif]-->
 
 
@@ -77,7 +73,7 @@
 	<body>
 		<div id="fh5co-wrapper">
 		<div id="fh5co-page">
-		<% include menuHeader %>
+		<% include ../menuHeader %>
 		<!-- end:fh5co-header -->
 		
 		<div id="fh5co-contact" class="fh5co-lightgray-section topStageBar" >
@@ -137,7 +133,25 @@
 						<div class="col-md-12 animate-box" id="seatingMap">
 							<div id="screen"><h2>SCREEN</h2></div>
 							<table>
-								<tr>
+								<% 
+									function isOccupied(seat) { 
+										let result = isNotOccupiedSeats.filter(isNotOccupiedSeat => (isNotOccupiedSeat.row == seat.row && isNotOccupiedSeat.column == seat.column));
+										return result.length == 0
+									} 
+								%>
+								
+								<% for (let row='A'.charCodeAt(0); row<='J'.charCodeAt(0); row++) { %>
+									<tr>
+										<% for (let column=1; column<=20; column++) { %>
+											<% if (isOccupied({row: String.fromCharCode(row), column: column})) { %>
+												<td class="occupied" row="<%= String.fromCharCode(row)%>" column="<%= column%>"><img src="../images/seat-occupied.png"></td>
+											<% } else { %>
+												<td class="nonOccupied" row="<%= String.fromCharCode(row)%>" column="<%= column%>"><img src="../images/seat-nonOccupied.png"></td>
+											<% } %>
+										<% } %>
+									</tr>
+								<% } %>
+								<!-- <tr>
 									<td><img src="../images/seat-occupied.png"></td>
 									<td><img src="../images/seat-occupied.png"></td>
 									<td><img src="../images/seat-occupied.png"></td>
@@ -357,14 +371,14 @@
 									<td><img src="../images/seat-nonOccupied.png"></td>
 									<td><img src="../images/seat-occupied.png"></td>
 									<td><img src="../images/seat-occupied.png"></td>
-								</tr>
+								</tr> -->
 								
 							</table>
 							<div id="seatsInfo">
 								<div>Seats</div>
-								<div><h2>A14, A15</h2></div>
+								<div><h2>-</h2></div>
 							</div>
-							<button type="submit" class="btn btn-primary nextButton">Next</button>
+							<button type="button" class="btn btn-primary nextButton" disabled>Next</button>
 						</div>
 					</div>
 				</form>
@@ -372,7 +386,7 @@
 		</div>
 		<!-- END fh5co-contact -->
 
-		<% include footer %>
+		<% include ../footer %>
 	
 
 	</div>
@@ -382,56 +396,90 @@
 	<!-- END fh5co-wrapper -->
 
 	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
+	<script src="../../js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="../../js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="../../js/bootstrap.min.js"></script>
 	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="../../js/jquery.waypoints.min.js"></script>
 	<!-- Stellar -->
-	<script src="js/jquery.stellar.min.js"></script>
+	<script src="../../js/jquery.stellar.min.js"></script>
 	<!-- Superfish -->
-	<script src="js/hoverIntent.js"></script>
-	<script src="js/superfish.js"></script>
+	<script src="../../js/hoverIntent.js"></script>
+	<script src="../../js/superfish.js"></script>
 	<!-- Google Map -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
-	<script src="js/google_map.js"></script>
+	<script src="../../js/google_map.js"></script>
 
 	<!-- Main JS (Do not remove) -->
-	<script src="js/main.js"></script>
-
-	<!-- owlcarousel -->
-	<script src="owlcarousel/owl.carousel.min.js"></script>
+	<script src="../../js/main.js"></script>
 
 	<script>
-		$('.imgsCarouselDiv').owlCarousel({
-			margin:10,
-			loop:true,
-			items: 4,
-			autoplay: true
-		})
+		let selectedSeats = [];
+		let ticketsAmount = <%= totalTicketsAmount %>;
 
-		$('.videosCarouselDiv').owlCarousel({
-			margin:10,
-			items:1,
-			loop:true,
-			lazyLoad:true,
-			center:true
-		})
+		$("#seatingMap .nonOccupied img").click(function() {
+			let currentImg = $(this).attr("src");
 
-		$("#seatingMap img").click(function(){
-			var currentImg = $(this).attr("src");
+			let nonOccupiedImg = "../images/seat-nonOccupied.png"
+			let selectedImg = "../images/seat-selected.png";
+
+			let selectedSeat = $(this).parent().attr("row") + $(this).parent().attr("column");
 			
-			var nonSelectedImg = "../images/seat-nonSelect.png"
-			var nonOccupiedImg = "../images/seat-nonOccupied.png"
-			var selectedImg = "../images/seat-selected.png";
-			
-			if (currentImg === nonOccupiedImg)
-				$(this).attr("src", selectedImg);
-			else
+			if (currentImg === nonOccupiedImg) {
+				if (selectedSeats.length < ticketsAmount) {
+					$(this).attr("src", selectedImg);
+					selectedSeats.push(selectedSeat);
+					selectedSeats.sort();
+				}
+				else
+					alert('You should not select more than ' + ticketsAmount + ' seats!');
+			}
+			else {
 				$(this).attr("src", nonOccupiedImg);
+				selectedSeats = selectedSeats.filter(seat => seat != selectedSeat)
+			}
+			updateSeats();
+			updateNextButton();
 		});
+
+		function updateSeats() {
+			let seatStr = "";
+			
+			if (selectedSeats.length == 0)
+				seatStr = '-';
+			else {
+				for (seat of selectedSeats)
+					seatStr += seat + ', ';
+				seatStr = seatStr.slice(0, seatStr.length-2);
+			}
+
+			$("#seatsInfo h2").text(seatStr);
+		}
+
+		function updateNextButton() {
+			if (selectedSeats.length < ticketsAmount)
+				$(".nextButton").prop('disabled', true);
+			else
+				$(".nextButton").prop('disabled', false);
+		}
+
+		$(".nextButton").click(function() {
+			$.ajax({
+				method: "POST",
+				contentType:"application/json; charset=utf-8",
+				url: "/booking/selectSeats",
+				data: JSON.stringify(
+					{ 
+						selectedSeats: selectedSeats
+					}
+				)
+			}).done(function (msg) {
+				document.location.href = "/booking/confirmOrder";
+			});
+		});
+
 	</script>
 
 

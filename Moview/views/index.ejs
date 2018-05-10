@@ -111,25 +111,6 @@
 			</div>
 		</div>
 
-		<!-- <div class="fh5co-hero"> -->
-			<!-- <div class="fh5co-overlay"></div> -->
-			<!-- <div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/deadpool2.jpg);"> -->
-				<!-- <div class="desc animate-box">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-7">
-								<h2>Fitness &amp; Health <br>is a <b>Mentality</b></h2>
-								<p><span>Created with <i class="icon-heart3"></i> by the fine folks at <a href="http://freehtml5.co" class="fh5co-site-name">FreeHTML5.co</a></span></p>
-								<span><a class="btn btn-primary" href="#">Start Your Journey</a></span>
-							</div>
-						</div>
-					</div>
-				</div> -->
-			<!-- </div> -->
-		<!-- </div> -->
-		<!-- end:fh5co-hero -->
-		
-
 		<div id="fh5co-team-section" class="fh5co-lightgray-section">
 			<div class="container">
 				<div class="row">
@@ -141,142 +122,28 @@
 					</div>
 				</div>
 				<div class="row text-center">
-					<div class="col-md-3 col-sm-6">
-						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMjI0MDMzNTQ0M15BMl5BanBnXkFtZTgwMTM5NzM3NDM@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
-							<div class="overlay-section">
-								<div class="desc">
-									<h3>A Quiet Place</h3>
-									<span>90 min</span>
-									<p>6 April 2018</p>
-									<p class="fh5co-social-icons">
-										<a href="#"><i class="icon-twitter-with-circle"></i></a>
-										<a href="#"><i class="icon-facebook-with-circle"></i></a>
-										<a href="#"><i class="icon-instagram-with-circle"></i></a>
-									</p>
+					<% for (inTheaterMovie of inTheaterMovies) { %>
+						<div class="col-md-3 col-sm-6">
+							<div class="team-section-grid animate-box" onclick="redirect('./movieDetail/<%= inTheaterMovie._id %>')" style="background-image: url(<%= inTheaterMovie.coverUrl %>);">
+								<div class="overlay-section">
+									<div class="desc">
+										<h3><%= inTheaterMovie.name %></h3>
+										<% if (typeof inTheaterMovie.runtime != "undefined") { %>
+											<span><%= inTheaterMovie.runtime %> min</span>
+										<% } else { %>
+											<span></span>
+										<% } %>
+										<p><%= inTheaterMovie.releaseDate %></p>
+										<p class="fh5co-social-icons">
+											<a href="#"><i class="icon-twitter-with-circle"></i></a>
+											<a href="#"><i class="icon-facebook-with-circle"></i></a>
+											<a href="#"><i class="icon-instagram-with-circle"></i></a>
+										</p>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-
-					<div class="col-md-3 col-sm-6">
-						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BY2JiYTNmZTctYTQ1OC00YjU4LWEwMjYtZjkwY2Y5MDI0OTU3XkEyXkFqcGdeQXVyNTI4MzE4MDU@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
-							<div class="overlay-section">
-								<div class="desc">
-									<h3>Ready Player One</h3>
-									<span>140 min</span>
-									<p>29 March 2018</p>
-									<p class="fh5co-social-icons">
-										<a href="#"><i class="icon-twitter-with-circle"></i></a>
-										<a href="#"><i class="icon-facebook-with-circle"></i></a>
-										<a href="#"><i class="icon-instagram-with-circle"></i></a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-3 col-sm-6">
-						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMjE0ODIzNjkzMl5BMl5BanBnXkFtZTgwODQ3MzU4NDM@._V1_SY1000_SX632_AL_.jpg);">
-							<div class="overlay-section">
-								<div class="desc">
-									<h3>Blockers</h3>
-									<span>102 min</span>
-									<p>6 April 2018</p>
-									<p class="fh5co-social-icons">
-										<a href="#"><i class="icon-twitter-with-circle"></i></a>
-										<a href="#"><i class="icon-facebook-with-circle"></i></a>
-										<a href="#"><i class="icon-instagram-with-circle"></i></a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-3 col-sm-6">
-						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
-							<div class="overlay-section">
-								<div class="desc">
-									<h3>Black Panther</h3>
-									<span>134 min</span>
-									<p>16 February 2018</p>
-									<p class="fh5co-social-icons">
-										<a href="#"><i class="icon-twitter-with-circle"></i></a>
-										<a href="#"><i class="icon-facebook-with-circle"></i></a>
-										<a href="#"><i class="icon-instagram-with-circle"></i></a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-3 col-sm-6">
-						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
-							<div class="overlay-section">
-								<div class="desc">
-									<h3>Black Panther</h3>
-									<span>134 min</span>
-									<p>16 February 2018</p>
-									<p class="fh5co-social-icons">
-										<a href="#"><i class="icon-twitter-with-circle"></i></a>
-										<a href="#"><i class="icon-facebook-with-circle"></i></a>
-										<a href="#"><i class="icon-instagram-with-circle"></i></a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-3 col-sm-6">
-						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
-							<div class="overlay-section">
-								<div class="desc">
-									<h3>Black Panther</h3>
-									<span>134 min</span>
-									<p>16 February 2018</p>
-									<p class="fh5co-social-icons">
-										<a href="#"><i class="icon-twitter-with-circle"></i></a>
-										<a href="#"><i class="icon-facebook-with-circle"></i></a>
-										<a href="#"><i class="icon-instagram-with-circle"></i></a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-3 col-sm-6">
-						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
-							<div class="overlay-section">
-								<div class="desc">
-									<h3>Black Panther</h3>
-									<span>134 min</span>
-									<p>16 February 2018</p>
-									<p class="fh5co-social-icons">
-										<a href="#"><i class="icon-twitter-with-circle"></i></a>
-										<a href="#"><i class="icon-facebook-with-circle"></i></a>
-										<a href="#"><i class="icon-instagram-with-circle"></i></a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-3 col-sm-6">
-						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
-							<div class="overlay-section">
-								<div class="desc">
-									<h3>Black Panther</h3>
-									<span>134 min</span>
-									<p>16 February 2018</p>
-									<p class="fh5co-social-icons">
-										<a href="#"><i class="icon-twitter-with-circle"></i></a>
-										<a href="#"><i class="icon-facebook-with-circle"></i></a>
-										<a href="#"><i class="icon-instagram-with-circle"></i></a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					
+					<% } %>
 				</div>
 			</div>
 		
@@ -293,141 +160,28 @@
 					</div>
 				</div>
 				<div class="row text-center">
-					<div class="col-md-3 col-sm-6">
-						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMjI0MDMzNTQ0M15BMl5BanBnXkFtZTgwMTM5NzM3NDM@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
-							<div class="overlay-section">
-								<div class="desc">
-									<h3>A Quiet Place</h3>
-									<span>90 min</span>
-									<p>6 April 2018</p>
-									<p class="fh5co-social-icons">
-										<a href="#"><i class="icon-twitter-with-circle"></i></a>
-										<a href="#"><i class="icon-facebook-with-circle"></i></a>
-										<a href="#"><i class="icon-instagram-with-circle"></i></a>
-									</p>
+					<% for (comingSoonMovie of comingSoonMovies) { %>
+						<div class="col-md-3 col-sm-6">
+							<div class="team-section-grid animate-box" onclick="redirect('./movieDetail/<%= comingSoonMovie._id %>')" style="background-image: url(<%= comingSoonMovie.coverUrl %>);">
+								<div class="overlay-section">
+									<div class="desc">
+										<h3><%= comingSoonMovie.name %></h3>
+										<% if (typeof comingSoonMovie.runtime != "undefined") { %>
+											<span><%= comingSoonMovie.runtime %> min</span>
+										<% } else { %>
+											<span></span>
+										<% } %>
+										<p><%= comingSoonMovie.releaseDate %></p>
+										<p class="fh5co-social-icons">
+											<a href="#"><i class="icon-twitter-with-circle"></i></a>
+											<a href="#"><i class="icon-facebook-with-circle"></i></a>
+											<a href="#"><i class="icon-instagram-with-circle"></i></a>
+										</p>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-
-					<div class="col-md-3 col-sm-6">
-						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BY2JiYTNmZTctYTQ1OC00YjU4LWEwMjYtZjkwY2Y5MDI0OTU3XkEyXkFqcGdeQXVyNTI4MzE4MDU@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
-							<div class="overlay-section">
-								<div class="desc">
-									<h3>Ready Player One</h3>
-									<span>140 min</span>
-									<p>29 March 2018</p>
-									<p class="fh5co-social-icons">
-										<a href="#"><i class="icon-twitter-with-circle"></i></a>
-										<a href="#"><i class="icon-facebook-with-circle"></i></a>
-										<a href="#"><i class="icon-instagram-with-circle"></i></a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-3 col-sm-6">
-						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMjE0ODIzNjkzMl5BMl5BanBnXkFtZTgwODQ3MzU4NDM@._V1_SY1000_SX632_AL_.jpg);">
-							<div class="overlay-section">
-								<div class="desc">
-									<h3>Blockers</h3>
-									<span>102 min</span>
-									<p>6 April 2018</p>
-									<p class="fh5co-social-icons">
-										<a href="#"><i class="icon-twitter-with-circle"></i></a>
-										<a href="#"><i class="icon-facebook-with-circle"></i></a>
-										<a href="#"><i class="icon-instagram-with-circle"></i></a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-3 col-sm-6">
-						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
-							<div class="overlay-section">
-								<div class="desc">
-									<h3>Black Panther</h3>
-									<span>134 min</span>
-									<p>16 February 2018</p>
-									<p class="fh5co-social-icons">
-										<a href="#"><i class="icon-twitter-with-circle"></i></a>
-										<a href="#"><i class="icon-facebook-with-circle"></i></a>
-										<a href="#"><i class="icon-instagram-with-circle"></i></a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-3 col-sm-6">
-						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
-							<div class="overlay-section">
-								<div class="desc">
-									<h3>Black Panther</h3>
-									<span>134 min</span>
-									<p>16 February 2018</p>
-									<p class="fh5co-social-icons">
-										<a href="#"><i class="icon-twitter-with-circle"></i></a>
-										<a href="#"><i class="icon-facebook-with-circle"></i></a>
-										<a href="#"><i class="icon-instagram-with-circle"></i></a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-3 col-sm-6">
-						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
-							<div class="overlay-section">
-								<div class="desc">
-									<h3>Black Panther</h3>
-									<span>134 min</span>
-									<p>16 February 2018</p>
-									<p class="fh5co-social-icons">
-										<a href="#"><i class="icon-twitter-with-circle"></i></a>
-										<a href="#"><i class="icon-facebook-with-circle"></i></a>
-										<a href="#"><i class="icon-instagram-with-circle"></i></a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-3 col-sm-6">
-						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
-							<div class="overlay-section">
-								<div class="desc">
-									<h3>Black Panther</h3>
-									<span>134 min</span>
-									<p>16 February 2018</p>
-									<p class="fh5co-social-icons">
-										<a href="#"><i class="icon-twitter-with-circle"></i></a>
-										<a href="#"><i class="icon-facebook-with-circle"></i></a>
-										<a href="#"><i class="icon-instagram-with-circle"></i></a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-3 col-sm-6">
-						<div class="team-section-grid animate-box" onclick="redirect(222)" style="background-image: url(https://ia.media-imdb.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
-							<div class="overlay-section">
-								<div class="desc">
-									<h3>Black Panther</h3>
-									<span>134 min</span>
-									<p>16 February 2018</p>
-									<p class="fh5co-social-icons">
-										<a href="#"><i class="icon-twitter-with-circle"></i></a>
-										<a href="#"><i class="icon-facebook-with-circle"></i></a>
-										<a href="#"><i class="icon-instagram-with-circle"></i></a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
+					<% } %>
 					
 				</div>
 			</div>
@@ -450,171 +204,7 @@
 			</div>
 		</div>
 		<!-- end: fh5co-parallax -->
-		<div id="fh5co-pricing-section" class="fh5co-pricing fh5co-lightgray-section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2">
-						<div class="heading-section text-center animate-box">
-							<h2>Pricing Plan</h2>
-							<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="pricing">
-					<div class="col-md-3 animate-box">
-						<div class="price-box animate-box">
-							<h2 class="pricing-plan">Starter</h2>
-							<div class="price"><sup class="currency">$</sup>9<small>/month</small></div>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-							<ul class="classes">
-								<li>15 Cardio Classes</li>
-								<li class="color">10 Swimming Lesson</li>
-								<li>10 Yoga Classes</li>
-								<li class="color">20 Aerobics</li>
-								<li>10 Zumba Classes</li>
-								<li class="color">5 Massage</li>
-								<li>10 Body Building</li>
-							</ul>
-							<a href="#" class="btn btn-default">Select Plan</a>
-						</div>
-					</div>
-
-					<div class="col-md-3 animate-box">
-						<div class="price-box animate-box">
-							<h2 class="pricing-plan">Basic</h2>
-							<div class="price"><sup class="currency">$</sup>27<small>/month</small></div>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-							<ul class="classes">
-								<li>15 Cardio Classes</li>
-								<li class="color">10 Swimming Lesson</li>
-								<li>10 Yoga Classes</li>
-								<li class="color">20 Aerobics</li>
-								<li>10 Zumba Classes</li>
-								<li class="color">5 Massage</li>
-								<li>10 Body Building</li>
-							</ul>
-							<a href="#" class="btn btn-default">Select Plan</a>
-						</div>
-					</div>
-
-					<div class="col-md-3 animate-box">
-						<div class="price-box animate-box popular">
-							<h2 class="pricing-plan pricing-plan-offer">Pro <span>Best Offer</span></h2>
-							<div class="price"><sup class="currency">$</sup>74<small>/month</small></div>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-							<ul class="classes">
-								<li>15 Cardio Classes</li>
-								<li class="color">10 Swimming Lesson</li>
-								<li>10 Yoga Classes</li>
-								<li class="color">20 Aerobics</li>
-								<li>10 Zumba Classes</li>
-								<li class="color">5 Massage</li>
-								<li>10 Body Building</li>
-							</ul>
-							<a href="#" class="btn btn-select-plan btn-sm">Select Plan</a>
-						</div>
-					</div>
-
-					<div class="col-md-3 animate-box">
-						<div class="price-box animate-box">
-							<h2 class="pricing-plan">Unlimited</h2>
-							<div class="price"><sup class="currency">$</sup>140<small>/month</small></div>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-							<ul class="classes">
-								<li>15 Cardio Classes</li>
-								<li class="color">10 Swimming Lesson</li>
-								<li>10 Yoga Classes</li>
-								<li class="color">20 Aerobics</li>
-								<li>10 Zumba Classes</li>
-								<li class="color">5 Massage</li>
-								<li>10 Body Building</li>
-							</ul>
-							<a href="#" class="btn btn-default">Select Plan</a>
-						</div>
-					</div>
-				</div>
-				</div>
-			</div>
-		</div>
 		
-		<div id="fh5co-blog-section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="col-md-12">
-							<div class="heading-section animate-box">
-								<h2>Recent from Blog</h2>
-							</div>
-						</div>
-						<div class="col-md-12 col-md-offset-0">
-							<div class="fh5co-blog animate-box">
-								<div class="inner-post">
-									<a href="#"><img class="img-responsive" src="images/blog-1.jpg" alt=""></a>
-								</div>
-								<div class="desc">
-									<h3><a href=""#>Starting new session of body building this summer</a></h3>
-									<span class="posted_by">Posted by: Admin</span>
-									<span class="comment"><a href="">21<i class="icon-bubble22"></i></a></span>
-									<p>Far far away, behind the word mountains</p>
-									<a href="#" class="btn btn-default">Read More</a>
-								</div> 
-							</div>
-						</div>
-						<div class="col-md-12 col-md-offset-0">
-							<div class="fh5co-blog animate-box">
-								<div class="inner-post">
-									<a href="#"><img class="img-responsive" src="images/blog-1.jpg" alt=""></a>
-								</div>
-								<div class="desc">
-									<h3><a href=""#>Starting new session of body building this summer</a></h3>
-									<span class="posted_by">Posted by: Admin</span>
-									<span class="comment"><a href="">21<i class="icon-bubble22"></i></a></span>
-									<p>Far far away, behind the word mountains</p>
-									<a href="#" class="btn btn-default">Read More</a>
-								</div> 
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="col-md-12">
-							<div class="heading-section animate-box">
-								<h2>Upcoming Events</h2>
-							</div>
-						</div>
-						<div class="col-md-12 col-md-offset-0">
-							<div class="fh5co-blog animate-box">
-								<div class="meta-date text-center">
-									<p><span class="date">14</span><span>June</span><span>2016</span></p>
-								</div>
-								<div class="desc desc2">
-									<h3><a href=""#>Starting new session of body building this summer</a></h3>
-									<span class="posted_by">Posted by: Admin</span>
-									<span class="comment"><a href="">21<i class="icon-bubble22"></i></a></span>
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-									<a href="#" class="btn btn-default">Read More</a>
-								</div> 
-							</div>
-						</div>
-						<div class="col-md-12 col-md-offset-0">
-							<div class="fh5co-blog animate-box">
-								<div class="meta-date text-center">
-									<p><span class="date">13</span><span>June</span><span>2016</span></p>
-								</div>
-								<div class="desc desc2">
-									<h3><a href=""#>Starting new session of body building this summer</a></h3>
-									<span class="posted_by">Posted by: Admin</span>
-									<span class="comment"><a href="">21<i class="icon-bubble22"></i></a></span>
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-									<a href="#" class="btn btn-default">Read More</a>
-								</div> 
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- fh5co-blog-section -->
 		<% include footer %>
 	
 
@@ -647,6 +237,7 @@
 		function redirect(url) {
 			location.href=(url);
 		}
+		
 	</script>
 
 	</body>

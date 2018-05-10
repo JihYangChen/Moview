@@ -11,13 +11,15 @@ class Movie {
 
     getIndexDisplayInfo = () => {
         var info = this.movieDescription.getIndexDisplayInfo();
-        info.movieName = this.name;
+        info._id = this._id;
+        info.name = this.name;
         return info;
     }
 
     getDetailMovieInfo = () => {
         var info = this.movieDescription.getDetailMovieInfo();
-        info.movieName = this.name;
+        info._id = this._id;
+        info.name = this.name;
         return info;
     }
 }
