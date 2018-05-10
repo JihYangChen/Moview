@@ -132,47 +132,49 @@
 					<div class="row">
 						<div class="col-md-2 animate-box movieSummary"></div>
 						<div class="col-md-4 animate-box movieSummary">
-							<img src="https://ia.media-imdb.com/images/M/MV5BNzczMjUwMzk0M15BMl5BanBnXkFtZTgwNjY4OTQ3NDM@._V1_SY1000_SX675_AL_.jpg">
-							<div id="movieName">Deadpool 2</div>
-							<div>Regal Hudson Valley Mall 12</div>
-							<div>Thu. May 17 at 7:00 PM</div>
+							<img src="<%= movieBriefInfo.coverUrl %>">
+							<div id="movieName"><%= movieBriefInfo.name %></div>
+							<div><%= movieBriefInfo.cinema %></div>
+							<div><%= movieBriefInfo.time %></div>
 						</div>
 						<div class="col-md-6 animate-box">
 							<div id="tickets">
-								<div class="ticket">
-									<div class="ticketUpperArea">
-										<div class="movieName">Deadpool 2</div>
-										<div class="category">Adult</div>
-									</div>
-
-									<div class="cinema">
-										Regal Hudson Valley Mall 12
-									</div>
-
-									<div class="ticketBottomArea">
-										<div class="date">
-											<span>Date</span>
-											<span>Thu. May 17</span>
+								<% for (ticket of tickets) { %>
+									<div class="ticket">
+										<div class="ticketUpperArea">
+											<div class="movieName"><%= movieBriefInfo.name %></div>
+											<div class="category"><%= ticket.ticketCategory %></div>
 										</div>
-	
-										<div class="time">
-											<span>Time</span>
-											<span>7:00 PM</span>
+
+										<div class="cinema">
+											<%= movieBriefInfo.cinema %>
 										</div>
-	
-										<div class="seat">
-											<span>Seat</span>
-											<span>A14</span>
+
+										<div class="ticketBottomArea">
+											<div class="date">
+												<span>Date</span>
+												<span><%= ticket.date %></span>
+											</div>
+		
+											<div class="time">
+												<span>Time</span>
+												<span><%= ticket.time %></span>
+											</div>
+		
+											<div class="seat">
+												<span>Seat</span>
+												<span><%= ticket.seat %></span>
+											</div>
+											
+											<div class="price">
+												<span>Price</span>
+												<span><%= ticket.price %></span>
+											</div>
 										</div>
 										
-										<div class="price">
-											<span>Price</span>
-											<span>$12.99</span>
-										</div>
 									</div>
-									
-								</div>
-								<div class="ticket">
+								<% } %>
+								<!-- <div class="ticket">
 									<div class="ticketUpperArea">
 										<div class="movieName">Deadpool 2</div>
 										<div class="category">Senior</div>
@@ -237,13 +239,13 @@
 										</div>
 									</div>
 									
-								</div>
+								</div> -->
 							</div>
 							<div id="subTotal">
 								<div>Subtotal</div>
-								<div><h2>$25.43</h2></div>
+								<div><h2><%= subtotal %></h2></div>
 							</div>
-							<button type="submit" class="btn btn-primary nextButton">Next</button>
+							<button type="button" class="btn btn-primary nextButton">Next</button>
 						</div>
 					</div>
 				</form>

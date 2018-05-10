@@ -378,7 +378,7 @@
 								<div>Seats</div>
 								<div><h2>-</h2></div>
 							</div>
-							<button type="submit" class="btn btn-primary nextButton" disabled>Next</button>
+							<button type="button" class="btn btn-primary nextButton" disabled>Next</button>
 						</div>
 					</div>
 				</form>
@@ -417,13 +417,13 @@
 
 	<script>
 		let selectedSeats = [];
+		let ticketsAmount = <%= totalTicketsAmount %>;
 
 		$("#seatingMap .nonOccupied img").click(function() {
 			let currentImg = $(this).attr("src");
 
 			let nonOccupiedImg = "../images/seat-nonOccupied.png"
 			let selectedImg = "../images/seat-selected.png";
-			let ticketsAmount = <%= totalTicketsAmount %>;
 
 			let selectedSeat = $(this).parent().attr("row") + $(this).parent().attr("column");
 			
@@ -459,7 +459,7 @@
 		}
 
 		function updateNextButton() {
-			if (selectedSeats.length == 0)
+			if (selectedSeats.length < ticketsAmount)
 				$(".nextButton").prop('disabled', true);
 			else
 				$(".nextButton").prop('disabled', false);
@@ -476,7 +476,7 @@
 					}
 				)
 			}).done(function (msg) {
-				document.location.href = "/booking/seats";
+				document.location.href = "/booking/confirmOrder";
 			});
 		});
 

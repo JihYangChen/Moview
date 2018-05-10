@@ -58,7 +58,31 @@ router.post('/booking/selectSeats', async function(req, res, next) {
 });
 
 router.get('/booking/confirmOrder', function(req, res, next) {
-  res.render('booking/confirmOrder');
+  let tickets = [
+    {
+      date: "Thu. May 17",
+      time: "7:00PM",
+      seat: "A14", 
+      price: "$12.99",
+      ticketCategory: "Adult"
+    }, 
+    {
+      date: "Thu. May 17",
+      time: "7:00PM",
+      seat: "A15", 
+      price: "$11.49",
+      ticketCategory: "Senior"
+    }, 
+    {
+      date: "Thu. May 17",
+      time: "7:00PM",
+      seat: "A16", 
+      price: "$9.99",
+      ticketCategory: "Child"
+    }
+  ]
+  console.log('JSON -> ' + JSON.stringify({tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, subtotal: req.session.order.subtotal}));
+  res.render('booking/confirmOrder', {tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, subtotal: req.session.order.subtotal});
 });
 
 router.get('/booking/payment', function(req, res, next) {

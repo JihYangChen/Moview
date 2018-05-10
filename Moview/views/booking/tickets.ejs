@@ -135,7 +135,7 @@
 							<img src="<%= movie.coverUrl %>">
 							<div id="movieName"><%= movie.name %></div>
 							<div>Regal Hudson Valley Mall 12</div>
-							<div><%= movie.name %></div>
+							<div><%= movie.time %></div>
 						</div>
 						<div class="col-md-6 animate-box ticketAmount">
 							<table>
@@ -186,7 +186,7 @@
 								<div>Subtotal</div>
 								<div><h2>$0</h2></div>
 							</div>
-							<button type="submit" class="btn btn-primary nextButton" disabled>Next</button>
+							<button type="button" class="btn btn-primary nextButton" disabled>Next</button>
 						</div>
 					</div>
 				</form>
@@ -268,7 +268,14 @@
 					{ 
 						adultAmount: adultAmount, 
 						seniorAmount: seniorAmount, 
-						childAmount: childAmount
+						childAmount: childAmount,
+						movieBriefInfo: {
+							name: "<%= movie.name %>",
+							cinema: "Regal Hudson Valley Mall 12",
+							time: "<%= movie.time %>", 
+							coverUrl: "<%= movie.coverUrl %>"
+						},
+						subtotal: (12.99 * adultAmount) + (11.49 * seniorAmount) + (9.99 * childAmount)
 					}
 				)
 			}).done(function (msg) {
