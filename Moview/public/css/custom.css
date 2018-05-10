@@ -194,11 +194,15 @@
 }
 
 #seatingMap img {
-    cursor: pointer;
     width: 100%;
 }
 
-#seatingMap img:hover {
+#seatingMap .occupied {
+    cursor: default;
+}
+
+#seatingMap .nonOccupied:hover {
+    cursor: pointer;
     -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));
     filter: drop-shadow(1px 2px 2px #b4b1b1)
 }

@@ -6,15 +6,7 @@ var BookingController = require('../controller/BookingController');
 /* GET home page. */
 router.get('/', async function(req, res, next) {
   let movieController = new MovieController(await req.movieManager);
-  let cinemaManager = await req.cinemaManager;
-
-  // for test purpose.
-  // DeadPool = 5aed48e6f36d2837eae61fcf, Avengers: Infinity war = 5aeec50bf36d2837eae67e72
-
-  // let result = movieController.getMovieInfo("5aed48e6f36d2837eae61fcf");
   let result = movieController.getIndexMovies();
-  // let result = cinemaManager.getShowingById('5af11bf5f36d2837eae7806c');
-  // let result = bookingController.selectShowing('5af11bf5f36d2837eae7806c');
 
   res.render('index', {inTheaterMovies: result[0], comingSoonMovies: result[1]});
 });
@@ -36,12 +28,33 @@ router.get('/booking/tickets/:showingId', async function(req, res, next) {
 
 router.post('/booking/setTicketsAmount', async function(req, res, next) {
   req.session.order = req.body;
-  console.log('123')
+  req.session.order.totalTicketsAmount = parseInt(req.body.adultAmount) + parseInt(req.body.seniorAmount) + parseInt(req.body.childAmount);
   res.send('OK');
 });
 
 router.get('/booking/seats', async function(req, res, next) {
-  res.render('booking/seats');
+  let seatInfo = {
+    isNotOccupiedSeats : 
+                        [
+                          { row: "A", column: "5" },
+                          { row: "A", column: "6" },
+                          { row: "A", column: "7" },
+                          { row: "A", column: "8" },
+                          { row: "J", column: "10" },
+                          { row: "J", column: "9" },
+                          { row: "J", column: "4" },
+                          { row: "J", column: "7" }
+                        ], 
+    totalTicketsAmount : req.session.order.totalTicketsAmount
+  };
+  res.render('booking/seats', seatInfo);
+});
+
+router.post('/booking/selectSeats', async function(req, res, next) {
+  console.log('selectedSeats ->' + JSON.stringify(req.body));
+  // req.session.order = req.body;
+  // req.session.order.totalTicketsAmount = parseInt(req.body.adultAmount) + parseInt(req.body.seniorAmount) + parseInt(req.body.childAmount);
+  res.send('OK');
 });
 
 router.get('/booking/confirmOrder', function(req, res, next) {
