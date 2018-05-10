@@ -7,9 +7,10 @@ var ticketSchema = new Schema({
     date: String,
     time: String,
     price: String,
-    seat: {type: Schema.Types.ObjectId, required: true, ref: 'Seat'}
+    seat: {type: Schema.Types.ObjectId, required: false, ref: 'Seat'}
 }, {
-    collection: 'Ticket'
+    collection: 'Ticket',
+    versionKey: false
 });
 
 module.exports = mongoose.model('Ticket', ticketSchema);

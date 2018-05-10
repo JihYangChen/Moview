@@ -8,7 +8,8 @@ var orderSchema = new Schema({
     showing: {type: Schema.Types.ObjectId, required: true, ref: 'Showing'},
     ticketList: [{type: Schema.Types.ObjectId, required: true, ref: 'Ticket'}]
 }, {
-    collection: 'Order'
+    collection: 'Order',
+    versionKey: false
 });
 
 module.exports = mongoose.model('Order', orderSchema);

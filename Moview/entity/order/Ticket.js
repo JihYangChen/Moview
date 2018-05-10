@@ -8,12 +8,15 @@ const TicketPrice = {
 
 class Ticket {
 
-    // props = {}
+    // props = {id, ticketCategory, date, time, price, seat}
     constructor(ticketCategory, showingInfo, ticketObject) {
         if (ticketObject === undefined) {
             // create ticket
+            for (var prop in showingInfo) {
+                this[prop] = showingInfo[prop];
+            }
             this.ticketCategory = ticketCategory;
-            this.showingInfo = showingInfo;
+            this.price = TicketPrice[ticketCategory];
         } else {
             // create ticket by object
             for (var prop in ticketObject) {
@@ -27,7 +30,6 @@ class AdultTicket extends Ticket {
 
     constructor(showingInfo, ticketObject) {
         super('Adult', showingInfo, ticketObject);
-        this.price = TicketPrice['Adult'];
     }
 }
 
@@ -35,7 +37,6 @@ class SeniorTicket extends Ticket {
 
     constructor(showingInfo, ticketObject) {
         super('Senior', showingInfo, ticketObject);
-        this.price = TicketPrice['Senior'];
     }
 }
 
@@ -43,7 +44,6 @@ class ChildTicket extends Ticket {
 
     constructor(showingInfo, ticketObject) {
         super('Child', showingInfo, ticketObject);
-        this.price = TicketPrice['Child'];
     }
 }
 

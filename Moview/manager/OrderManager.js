@@ -1,10 +1,10 @@
+import { Mongoose } from 'mongoose';
+
 var mongoose = require('mongoose');
 var OrderModel = require('../mongoDB/model/order/OrderModel');
 var TicketModel = require('../mongoDB/model/order/TicketModel');
-var SeatModel = require('../mongoDB/model/cinema/SeatModel');
 var Order = require('../entity/order/Order');
 require('../mongoDB/model/cinema/ShowingSeatModel');
-// var Showing = require('../entity/cinema/Showing');
 
 class OrderManager {
 
@@ -17,10 +17,18 @@ class OrderManager {
         this.generateOrderList();
     }
 
+    // database operation
+
     generateOrderList = async () => {
         const orderObjects = await OrderModel.find();
         for (var orderObject of orderObjects) {
-            const populatedOrderObject = await OrderModel.findById(orderObject._id)
+            this.pullOrderById(orderObject._id);
+        }
+        console.log('finish to load orders from database');
+    }
+
+    pullOrderById = async orderId => {
+        const populatedOrderObject = await OrderModel.findById(orderId)
                                                          .populate({
                                                              path: 'showing',
                                                              populate: [{
@@ -54,9 +62,53 @@ class OrderManager {
                                                              }]
                                                          })
                                                          .exec();
-            this.orderList.push(new Order('', '', populatedOrderObject));
+        this.orderList.push(new Order('', '', populatedOrderObject));
+    }
+
+    saveOrder = async order => {
+        var ticketObjects = order.getTicketObjects();
+        var ticketIds = await this.insertTickets(ticketObjects);
+        var orderObject = order.getOrderObject();
+        orderObject.ticketList = ticketIds;
+        return this.insertOrder(orderObject);
+    }
+
+    insertOrder = async orderObject => {
+        const orderModel = new OrderModel(orderObject);
+        const newOrder = await orderModel.save();
+        console.log('> order has been inserted successfully');
+        return newOrder._id;
+    }
+
+    insertTickets = async ticketObjects => {
+        var ticketIds = [];
+        for (var ticketObject of ticketObjects) {
+            const ticketModel = new TicketModel(ticketObject);
+            const newTicket = await ticketModel.save();
+            ticketIds.push(newTicket._id);
         }
-        console.log('finish to load orders from database');
+        console.log('> tickets have been inserted successfully');
+        return ticketIds;
+    }
+
+    updateTickets = async ticketObjects => {
+        for (var ticketObject of ticketObjects) {
+            await TicketModel.findByIdAndUpdate(ticketObject._id, ticketObject).exec();
+        }
+        console.log('> tickets have been updated successfully');
+    }
+
+    // public 
+
+    addOrder = orderId => {
+        this.pullOrderById(orderId);
+    }
+
+    getOrderById = orderId => {
+        let order = this.orderList.filter(order => {
+            return order._id == orderId;
+        });
+        return order.length > 0 ? order[0] : null;
     }
 }
 

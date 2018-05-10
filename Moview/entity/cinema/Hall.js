@@ -9,6 +9,7 @@ class Hall {
         }
     }
 
+    // no use so far
     getSeats = () => {
         return this.seatList;
     }

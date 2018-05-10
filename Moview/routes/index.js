@@ -7,7 +7,7 @@ var order = require('../entity/order/Order');
 /* GET home page. */
 router.get('/', async function(req, res, next) {
   let movieController = new MovieController(await req.movieManager);
-  let bookingController = new BookingController(await req.cinemaManager);
+  let bookingController = new BookingController(await req.cinemaManager, await req.orderManager);
   let cinemaManager = await req.cinemaManager;
   let orderManager = await req.orderManager;
 
@@ -23,7 +23,12 @@ router.get('/', async function(req, res, next) {
   //   Senior: "0",
   //   Child: "1",
   //  });
-  console.log("good -> ", orderManager.orderList[0].ticketList);
+  // let reault = bookingController.determineBookingInfo('5af11bf5f36d2837eae7806c', {
+  //                                                                                   Adult: "2",
+  //                                                                                   Senior: "1",
+  //                                                                                   Child: "1",
+  //                                                                                 });
+  console.log("good -> ", bookingController.selectSeats('5af45d79ef5d0b5d6b78781b', ["A1", "A2", "A3", "A4"]));
   res.render('index', { title: 'Express' });
 });
 

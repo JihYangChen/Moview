@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var ShowingModel = require('../mongoDB/model/cinema/ShowingModel');
 var Showing = require('../entity/cinema/Showing');
+var ShowingSeatModel = require('../mongoDB/model/cinema/ShowingSeatModel');
 
 class CinemaManager {
 
@@ -40,6 +41,13 @@ class CinemaManager {
         }
         console.log('finish to load showings from database');
     }
+
+    updateShowingSeats = async showingSeatObjects => {
+        for (var showingSeatObject of showingSeatObjects) {
+            await ShowingSeatModel.findByIdAndUpdate(showingSeatObject._id, showingSeatObject).exec();
+        }
+        console.log('> showingSeats have been updated successfully');
+    } 
 
     getShowings = (dateString, movieId) => {
         return this.showingList.filter(showing => {

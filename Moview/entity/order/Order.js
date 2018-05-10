@@ -8,6 +8,7 @@ class Order {
     constructor(showing, bookingInfo, orderObject) {
         if (orderObject === undefined) {
             // creater order
+            this.status = 'initialized';
             this.showing = showing;
             this.ticketList = this.generateTicketList(bookingInfo);
         } else {
@@ -15,8 +16,8 @@ class Order {
             for (var prop in orderObject) {
                 if (prop == 'showing') {
                     this[prop] = new Showing(orderObject[prop]);
-                } else if (prop == 'ticket') {
-                    this[prop] = new TicketSimpleFactory().createTicket('', '', orderObject[prop]);
+                } else if (prop == 'ticketList') {
+                    this[prop] = orderObject[prop].map(ticketObject => new TicketSimpleFactory().createTicket(ticketObject.ticketCategory, '', ticketObject));
                 } else {
                     this[prop] = orderObject[prop]
                 }
@@ -34,28 +35,76 @@ class Order {
         for (var key of Object.keys(bookingInfo)) {
             if (bookingInfo[key] > 0) {
                 for (var i = 0; i < bookingInfo[key]; i++) {
-                    ticketList.push(new TicketSimpleFactory().createTicket(key, this.showing));
+                    ticketList.push(new TicketSimpleFactory().createTicket(key, this.getShowingTimeInfo()));
                 }
             }
         }
-        // if (bookingInfo["Adult"] > 0) {
-        //     for (var i = 0; i < bookingInfo["Adult"]; i++) {
-        //         ticketList.push(new TicketFactory.AdultTicketFactory(this.showing).createTicket());
-        //     }
-        // }
-        // if (bookingInfo["Senior"] > 0) {
-        //     for (var i = 0; i < bookingInfo["Senior"]; i++) {
-        //         ticketList.push(new TicketFactory.SeniorTicketFactory(this.showing).createTicket());
-        //     }
-        // }
-        // if (bookingInfo["Child"] > 0) {
-        //     for (var i = 0; i < bookingInfo["Child"]; i++) {
-        //         ticketList.push(new TicketFactory.ChildTicketFactory(this.showing).createTicket());
-        //     }
-        // }
         return ticketList;
     }
-    
+
+    // for create ticket
+    // note: seat is not included when this func being called
+    getShowingTimeInfo = () => {
+        return {
+            date: this.showing.getDate(),
+            time: this.showing.getSpecificTime()
+        }
+    }
+
+    // public 
+
+    // for insert order to db
+    getOrderObject = () => {
+        return {
+            status: this.status,
+            showing: this.showing._id
+        }
+    }
+
+    // for insert ticket to db
+    // note: seat is not included when this func being called
+    getTicketObjects = () => {
+        return this.ticketList.map(ticket => {
+            let returnObject = {
+                _id: ticket._id,
+                date: ticket.date,
+                time: ticket.time,
+                price: ticket.price,
+                ticketCategory: ticket.ticketCategory
+            };
+            if (ticket.seat !== undefined) {
+                returnObject.seat = ticket.seat;
+            }
+            return returnObject;
+        });
+    }
+
+    // set seats to tickets
+    setSeats = seats => {
+        for (const index of this.ticketList.keys()) {
+            console.log('before -> ', seats[index]);
+            console.log('before getName -> ', seats[index].getName());
+            console.log('ticket -> ', this.ticketList[index]);
+            console.log('ticket -> ', this.ticketList[index].seat);
+            this.ticketList[index].seat = seats[index];
+            // console.log('after -> ', this.ticketList[index].seat.getName());
+        }
+    }
+
+    getConfirmDisplayInfos = () => {
+        return {
+            ticketList: this.ticketList.map(ticket => {
+                // console.log('ticket seat -> ', ticket.seat.getName());
+                return {
+                    date: ticket.date,
+                    time: ticket.time,
+                    seat: ticket.seat.getName(), // ??
+                    price: ticket.price,
+                    ticketCategory: ticket.ticketCategory
+                }
+            })
+        }
+    }
 }
 
 module.exports = Order;

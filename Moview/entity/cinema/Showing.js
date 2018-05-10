@@ -52,16 +52,55 @@ class Showing {
         return this.movie.name;
     }
 
+    // for front-end
+    getNotOccupiedSeats = () => {
+        return this.showingSeatList.filter(showingSeat => {
+            return !showingSeat.isOccupied
+        }).map(showingSeat => {
+            return {
+                row: showingSeat.seat.row,
+                column: showingSeat.seat.column
+            }
+        });
+    }
+
+    // no use so far
     getSeats = () => {
         return this.hall.getSeats();
     }
 
-    // no use so far
     getShowingSeatBySeatName = name => {
         let showingSeat = this.showingSeatList.filter(showingSeat => {
             return showingSeat.seat.getName() == name;
         });
         return showingSeat.length > 0 ? showingSeat[0] : null;
+    }
+
+    getSeatsBySeatNames = seatNames => {
+        var showingSeats = [];
+        for (var name of seatNames) {
+            showingSeats.push(this.getShowingSeatBySeatName(name));
+        }
+        return showingSeats.map(showingSeat => {
+            return showingSeat.seat;
+        });
+    }
+
+    setSeatsOccupied = seatNames => {
+        for (var name of seatNames) {
+            let showingSeat = this.getShowingSeatBySeatName(name);
+            showingSeat.isOccupied = true;
+        }
+    }
+
+    getShowingSeatObjects = seatNames => {
+        var showingSeats = [];
+        for (var name of seatNames) {
+            showingSeats.push(this.getShowingSeatBySeatName(name));
+        }
+        return showingSeats.map(showingSeat => {
+            return showingSeat.getShowingSeatObject();
+        });
     }
 }
 

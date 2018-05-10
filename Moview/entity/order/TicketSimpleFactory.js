@@ -2,13 +2,13 @@ var TicketFactory = require('./TicketFactory');
 
 class TicketSimpleFactory {
 
-    createTicket = (ticketCategory, showing, ticketObject) => {
+    createTicket = (ticketCategory, showingInfo, ticketObject) => {
         if (ticketCategory == 'Adult') {
-            return new TicketFactory.AdultTicketFactory(this.showing, ticketObject).createTicket();
+            return new TicketFactory.AdultTicketFactory(showingInfo, ticketObject).createTicket();
         } else if (ticketCategory == 'Senior') {
-            return new TicketFactory.SeniorTicketFactory(this.showing, ticketObject).createTicket();
+            return new TicketFactory.SeniorTicketFactory(showingInfo, ticketObject).createTicket();
         } else if (ticketCategory == 'Child') {
-            return new TicketFactory.ChildTicketFactory(this.showing, ticketObject).createTicket()
+            return new TicketFactory.ChildTicketFactory(showingInfo, ticketObject).createTicket()
         }
         return null
     }
