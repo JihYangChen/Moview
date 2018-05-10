@@ -44,31 +44,31 @@
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700,900' rel='stylesheet' type='text/css'>
 	
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="../css/animate.css">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="../css/icomoon.css">
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="../css/bootstrap.css">
 	<!-- Superfish -->
-	<link rel="stylesheet" href="css/superfish.css">
+	<link rel="stylesheet" href="../css/superfish.css">
 
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="../css/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<!-- owlcarousel -->
-	<link rel="stylesheet" href="owlcarousel/assets/owl.carousel.min.css">
-	<link rel="stylesheet" href="owlcarousel/assets/owl.theme.default.min.css">
+	<link rel="stylesheet" href="../owlcarousel/assets/owl.carousel.min.css">
+	<link rel="stylesheet" href="../owlcarousel/assets/owl.theme.default.min.css">
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
-	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="../css/custom.css">
 
 	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="../js/modernizr-2.6.2.min.js"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
+	<script src="../js/respond.min.js"></script>
 	<![endif]-->
 
 
@@ -84,10 +84,9 @@
 			<div class="container">
 				<form action="#">
 					<div class="row movieInfo">
-						<h1 class="col-md-12 movie-title animate-box">Deadpool 2</h1>
+						<h1 class="col-md-12 movie-title animate-box"><%= movie.name %></h1>
 						<div class="col-md-4 animate-box movieImgDiv">
-								<!-- <img src="https://ia.media-imdb.com/images/M/MV5BM2E5MWYwYTktMmIxZC00MWVkLTk4YjctNGU1OGVjMDIwNzM2XkEyXkFqcGdeQXVyNTAwODk1NzY@._V1_SY1000_CR0,0,704,1000_AL_.jpg"> -->
-							<img src="https://ia.media-imdb.com/images/M/MV5BNzczMjUwMzk0M15BMl5BanBnXkFtZTgwNjY4OTQ3NDM@._V1_SY1000_SX675_AL_.jpg">
+							<img src="<%= movie.coverUrl %>">
 						</div>
 						<div class="col-md-8 animate-box">
 							<div class="reviewRatingArea">
@@ -100,7 +99,12 @@
 								<table>
 									<tr>
 										<td>Directors:</td>
-										<td><a>David Leitch</a></td>
+										<td>
+											<% for (var i=0; i < movie.directors.length; i++) { %>
+												<a><%= movie.directors[i] %></a>
+												<%= (i == movie.directors.length-1) ?  '' : ',' %>
+											<% } %>
+										</td>
 									</tr>
 									<tr>
 										<td>Writers:</td>
@@ -108,19 +112,36 @@
 									</tr>
 									<tr>
 										<td>Stars:</td>
-										<td><a>Josh Brolin</a>, <a>Morena Baccarin</a>, <a>Zazie Beetz</a>, <a>Josh Brolin</a>, <a>Morena Baccarin</a>, <a>Zazie Beetz</a>, <a>Josh Brolin</a>, <a>Morena Baccarin</a>, <a>Zazie Beetz</a></td>
+										<td>
+											<% for (var i=0; i < movie.casts.length; i++) { %>
+												<a><%= movie.casts[i] %></a>
+												<%= (i == movie.casts.length-1) ?  '' : ',' %>
+											<% } %>
+										</td>
 									</tr>
-									<tr>
-										<td>Runtime:</td>
-										<td>90 min</td>
-									</tr>
-									<tr>
-										<td>In Theaters:</td>
-										<td>Apr 27, 2018</td>
-									</tr>
+
+									<% if (typeof movie.runtime != "undefined") { %>
+										<tr>
+											<td>Runtime:</td>
+											<td><%= movie.runtime %> min</td>
+										</tr>
+									<% } %>
+									
+									<% if (typeof movie.releaseDate != "undefined") { %>
+										<tr>
+											<td>In Theaters:</td>
+											<td><%= movie.releaseDate %></td>
+										</tr>
+									<% } %>
+
 									<tr>
 										<td>Category:</td>
-										<td><a>Action</a>, <a>Adventure</a>, <a>Comedy</a></td>
+										<td>
+											<% for (var i=0; i < movie.categories.length; i++) { %>
+												<a><%= movie.categories[i] %></a>
+												<%= (i == movie.categories.length-1) ?  '' : ',' %>
+											<% } %>
+										</td>
 									</tr>
 
 								</table>
@@ -130,7 +151,7 @@
 								<div class="infoAreaTitle">Storyline</div>
 								<hr>
 								<p>
-									After surviving a near fatal bovine attack, a disfigured cafeteria chef (Wade Wilson) struggles to fulfill his dream of becoming Mayberry's hottest bartender while also learning to cope with his lost sense of taste. Searching to regain his spice for life, as well as a flux capacitor, Wade must battle ninjas, the Yakuza, and a pack of sexually aggressive canines, as he journeys around the world to discover the importance of family, friendship, and flavor - finding a new taste for adventure and earning the coveted coffee mug title of World's Best Lover.
+									<%= movie.storyline %>
 								</p>
 								<span class="seeDetailBtn"><a>See full storyline >></a></span>
 							</div>
@@ -151,36 +172,11 @@
 					</div>
 				</div>
 				<div class="owl-carousel owl-theme imgsCarouselDiv">
-					<div class="item carouselImgDiv">
-						<img src="https://ia.media-imdb.com/images/M/MV5BNmRiYzhmNWMtYzc1OC00OThmLThiYzQtZDYyNjNjZjBlNjgyXkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SY1000_SX1500_AL_.jpg">
-					</div>
-					<div class="item carouselImgDiv">
-						<img src="https://ia.media-imdb.com/images/M/MV5BMTJjMDRkOTUtNTIxOS00NjY4LTg0NWItNmU1ZGVhNDc2OTU4XkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SX1777_CR0,0,1777,744_AL_.jpg">
-					</div>
-					<div class="item carouselImgDiv">
-						<img src="https://ia.media-imdb.com/images/M/MV5BNWUzZjAxZjMtNDdmNy00NTFiLTlkNGEtNjllZjFiNzk3ZjYyXkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SX1777_CR0,0,1777,743_AL_.jpg">
-					</div>
-					<div class="item carouselImgDiv">
-						<img src="https://ia.media-imdb.com/images/M/MV5BOGNiMjYwYzMtMTE5Ni00MGZkLTk0ZTQtMDA4NTNiNTVjMTRiXkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SY1000_SX1500_AL_.jpg">
-					</div>
-					<div class="item carouselImgDiv">
-						<img src="https://ia.media-imdb.com/images/M/MV5BMzRjNjFhMzQtZTdmYi00NGYyLTlkMTctZTU4YjA4ODRjMjgyXkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SX1777_CR0,0,1777,736_AL_.jpg">
-					</div>
-					<div class="item carouselImgDiv">
-						<img src="https://ia.media-imdb.com/images/M/MV5BMzRjNjFhMzQtZTdmYi00NGYyLTlkMTctZTU4YjA4ODRjMjgyXkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SX1777_CR0,0,1777,736_AL_.jpg">
-					</div>
-					<div class="item carouselImgDiv">
-						<img src="https://ia.media-imdb.com/images/M/MV5BYjhmZjQ1OTItY2MyMy00Y2ZhLTkxNTUtMzA1MWU4NWJjMWNlXkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SX1777_CR0,0,1777,744_AL_.jpg">
-					</div>
-					<div class="item carouselImgDiv">
-						<img src="https://ia.media-imdb.com/images/M/MV5BYjhmZjQ1OTItY2MyMy00Y2ZhLTkxNTUtMzA1MWU4NWJjMWNlXkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SX1777_CR0,0,1777,744_AL_.jpg">
-					</div>
-					<div class="item carouselImgDiv">
-						<img src="https://ia.media-imdb.com/images/M/MV5BNzhkODY0ZWUtYjY5YS00MTVlLWIxZWQtNTJlNDZmMmZjY2Q3XkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SY1000_SX1500_AL_.jpg">
-					</div>
-					<div class="item carouselImgDiv">
-						<img src="https://ia.media-imdb.com/images/M/MV5BZjI3NTNkMmYtMTZkYS00YzEzLTk0MGItYmNmNmRlMjAwM2FiXkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SY1000_SX1500_AL_.jpg">
-					</div>
+					<% for (photoUrl of movie.gallery) { %>
+						<div class="item carouselImgDiv">
+							<img src="<%= photoUrl %>">
+						</div>
+					<% } %>	
 				</div>
 			</div>
 		</div>
@@ -195,15 +191,11 @@
 					</div>
 				</div>
 				<div class="owl-carousel owl-theme videosCarouselDiv">
-					<div class="item videoDiv">
-						<iframe src="https://www.imdb.com/videoembed/vi1315682329" width="70%" height="450px" allowfullscreen ></iframe>
-					</div>
-					<div class="item videoDiv">
-						<iframe src="https://www.imdb.com/videoembed/vi2755901465" width="70%" height="450px" allowfullscreen ></iframe>
-					</div>
-					<div class="item videoDiv">
-						<iframe src="https://www.imdb.com/videoembed/vi2265036825" width="70%" height="450px" allowfullscreen ></iframe>
-					</div>
+					<% for (trailerUrl of movie.trailers) { %>
+						<div class="item videoDiv">
+							<iframe src="<%= trailerUrl %>" width="70%" height="450px" allowfullscreen ></iframe>
+						</div>
+					<% } %>	
 				</div>
 			</div>
 		</div>
@@ -443,27 +435,27 @@
 	<!-- END fh5co-wrapper -->
 
 	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
+	<script src="../js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="../js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
 	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="../js/jquery.waypoints.min.js"></script>
 	<!-- Stellar -->
-	<script src="js/jquery.stellar.min.js"></script>
+	<script src="../js/jquery.stellar.min.js"></script>
 	<!-- Superfish -->
-	<script src="js/hoverIntent.js"></script>
-	<script src="js/superfish.js"></script>
+	<script src="../js/hoverIntent.js"></script>
+	<script src="../js/superfish.js"></script>
 	<!-- Google Map -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
-	<script src="js/google_map.js"></script>
+	<script src="../js/google_map.js"></script>
 
 	<!-- Main JS (Do not remove) -->
-	<script src="js/main.js"></script>
+	<script src="../js/main.js"></script>
 
 	<!-- owlcarousel -->
-	<script src="owlcarousel/owl.carousel.min.js"></script>
+	<script src="../owlcarousel/owl.carousel.min.js"></script>
 
 	<script>
 		$('.imgsCarouselDiv').owlCarousel({

@@ -43,8 +43,8 @@ class Showing {
     getBookingProcessDisplayInfo = () => {
         return {
             time: this.getTime(),
-            movieName: this.movie.name,
-            coverUrl: this.movie.coverUrl
+            name: this.movie.name,
+            coverUrl: this.movie.movieDescription.coverUrl
         }
     }
 

@@ -22,6 +22,21 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// session
+var session = require('express-session');
+app.set('trust proxy', 1);
+app.use( session({
+  secret : 'a4f5Df'
+}) );
+
+// Routes setting
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 var init = () => {
   movieManager = new MovieManager();  
   cinemaManager = new CinemaManager();
