@@ -2,21 +2,28 @@ var express = require('express');
 var router = express.Router();
 var MovieController = require('../controller/MovieController');
 var BookingController = require('../controller/BookingController');
+var order = require('../entity/order/Order');
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
   let movieController = new MovieController(await req.movieManager);
   let bookingController = new BookingController(await req.cinemaManager);
   let cinemaManager = await req.cinemaManager;
+  let orderManager = await req.orderManager;
 
   // for test purpose.
   // DeadPool = 5aed48e6f36d2837eae61fcf, Avengers: Infinity war = 5aeec50bf36d2837eae67e72
 
-  let result = movieController.getMovieInfo("5aed48e6f36d2837eae61fcf");
+  // let result = movieController.getMovieInfo("5aed48e6f36d2837eae61fcf");
   // let result = movieController.getIndexMovies();
   // let result = cinemaManager.getShowingById('5af11bf5f36d2837eae7806c');
   // let result = bookingController.selectShowing('5af11bf5f36d2837eae7806c');
-  console.log("good -> ", result.getDetailMovieInfo());
+  // let result = new order('', {
+  //   Adult: "3",
+  //   Senior: "0",
+  //   Child: "1",
+  //  });
+  console.log("good -> ", orderManager.orderList[0].ticketList);
   res.render('index', { title: 'Express' });
 });
 

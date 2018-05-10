@@ -9,8 +9,10 @@ var mongoose = require('mongoose');
 // managers
 var MovieManager = require('./manager/MovieManager');
 var CinemaManager = require('./manager/CinemaManager');
+var OrderManager = require('./manager/OrderManager');
 var movieManager;
 var cinemaManager;
+var orderManager;
 
 var index = require('./routes/index');
 
@@ -23,6 +25,7 @@ app.set('view engine', 'ejs');
 var init = () => {
   movieManager = new MovieManager();  
   cinemaManager = new CinemaManager();
+  orderManager = new OrderManager();
 }
 
 mongoose.connect('mongodb://moviewuser:moviewpassword@ds113200.mlab.com:13200/moview');
@@ -45,6 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', (req, res, next) => {
   req.movieManager = movieManager;
   req.cinemaManager = cinemaManager;
+  req.orderManager = orderManager;
   next();
 }, index);
 
