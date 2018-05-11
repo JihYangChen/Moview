@@ -38,7 +38,7 @@ class MovieManager {
 
     getMovieById = (movieId) => {
         let movie = this.movieList.filter(movie => {
-            return movie._id == movieId;
+            return JSON.stringify(movie._id) == JSON.stringify(movieId);
         });
         return movie.length > 0 ? movie[0] : null;
     }

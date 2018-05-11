@@ -49,6 +49,15 @@ class CinemaManager {
         console.log('> showingSeats have been updated successfully');
     } 
 
+    replaceShowingInstance = showing => {
+        var originalShowing = this.getShowingById(showing._id);
+        var index = this.showingList.indexOf(originalShowing);
+        if (index > -1) {
+            this.showingList.splice(index, 1);
+        }
+        this.showingList.push(showing);
+    }
+
     getShowings = (dateString, movieId) => {
         return this.showingList.filter(showing => {
             return showing.getDate() == dateString && showing.movie._id == movieId;
@@ -57,7 +66,7 @@ class CinemaManager {
 
     getShowingById = showingId => {
         let showing = this.showingList.filter(showing => {
-            return showing._id == showingId;
+            return JSON.stringify(showing._id) == JSON.stringify(showingId);
         });
         return showing.length > 0 ? showing[0] : null;
     }

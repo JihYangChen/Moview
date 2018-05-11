@@ -22,7 +22,7 @@ class OrderManager {
     generateOrderList = async () => {
         const orderObjects = await OrderModel.find();
         for (var orderObject of orderObjects) {
-            this.pullOrderById(orderObject._id);
+            await this.pullOrderById(orderObject._id);
         }
         console.log('finish to load orders from database');
     }
@@ -98,15 +98,28 @@ class OrderManager {
         console.log('> tickets have been updated successfully');
     }
 
+    /***********************************
+     * 
+     *  please be very careful !!!
+     * 
+     ***********************************/
+    removeAllTickets = async () => {
+        TicketModel.remove({ date: { $ne: "Thu. May 17" } }).exec()
+    }
+
+    removeAllOrders = async () => {
+        OrderModel.remove({ _id: { $ne: "5af47af19833fc4d6276de6a" } }).exec()
+    }
+
     // public 
 
-    addOrder = orderId => {
-        this.pullOrderById(orderId);
+    addOrder = async orderId => {
+        await this.pullOrderById(orderId);
     }
 
     getOrderById = orderId => {
         let order = this.orderList.filter(order => {
-            return order._id == orderId;
+            return JSON.stringify(order._id) == JSON.stringify(orderId);
         });
         return order.length > 0 ? order[0] : null;
     }
