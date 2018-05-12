@@ -5,12 +5,12 @@ var Movie = require('../entity/Movie');
 class MovieManager {
 
     constructor() {
-        this.init();
+
     }
     
-    init = () => {
+    init = async () => {
         this.movieList = [];
-        this.generateMovieList();
+        await this.generateMovieList();
     }
 
     generateMovieList = async () => {

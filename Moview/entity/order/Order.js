@@ -15,7 +15,7 @@ class Order {
             // create order by object
             for (var prop in orderObject) {
                 if (prop == 'showing') {
-                    this[prop] = new Showing(orderObject[prop]);
+                    this[prop] = showing == null ? new Showing(orderObject[prop]) : showing;
                 } else if (prop == 'ticketList') {
                     this[prop] = orderObject[prop].map(ticketObject => new TicketSimpleFactory().createTicket(ticketObject.ticketCategory, '', ticketObject));
                 } else {
@@ -44,7 +44,8 @@ class Order {
 
     // for create ticket
     // note: seat is not included when this func being called
-    getShowingTimeInfo = () => {
+    getShowingTimeInfo = () => {console.log('before----------');
+
         return {
             date: this.showing.getDate(),
             time: this.showing.getSpecificTime()

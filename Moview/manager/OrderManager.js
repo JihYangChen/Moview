@@ -8,26 +8,26 @@ require('../mongoDB/model/cinema/ShowingSeatModel');
 
 class OrderManager {
 
-    constructor() {
-        this.init();
+    constructor(showings) {
+        this.init(showings);
     }
     
-    init = () => {
+    init = showings => {
         this.orderList = [];
-        this.generateOrderList();
+        this.generateOrderList(showings);
     }
 
     // database operation
 
-    generateOrderList = async () => {
+    generateOrderList = async showings => {
         const orderObjects = await OrderModel.find();
         for (var orderObject of orderObjects) {
-            await this.pullOrderById(orderObject._id);
+            await this.pullOrderById(orderObject._id, showings);
         }
         console.log('finish to load orders from database');
     }
 
-    pullOrderById = async orderId => {
+    pullOrderById = async (orderId, showings) => {
         const populatedOrderObject = await OrderModel.findById(orderId)
                                                          .populate({
                                                              path: 'showing',
@@ -62,7 +62,14 @@ class OrderManager {
                                                              }]
                                                          })
                                                          .exec();
-        this.orderList.push(new Order('', '', populatedOrderObject));
+        this.orderList.push(new Order(showings == null ? null : this.getShowing(showings, populatedOrderObject.showing._id), '', populatedOrderObject));
+    }
+
+    getShowing = (showings, targetShowingId) => {
+        let showingsArray = showings.filter(showing => {
+            return JSON.stringify(showing._id) == JSON.stringify(targetShowingId);
+        });
+        return showingsArray.length > 0 ? showingsArray[0] : null;
     }
 
     saveOrder = async order => {
@@ -114,7 +121,7 @@ class OrderManager {
     // public 
 
     addOrder = async orderId => {
-        await this.pullOrderById(orderId);
+        await this.pullOrderById(orderId, null);
     }
 
     getOrderById = orderId => {

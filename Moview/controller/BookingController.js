@@ -18,7 +18,7 @@ class BookingController {
         var orderId = await this.orderManager.saveOrder(order);
         await this.orderManager.addOrder(orderId);
         // make sure showing to be a same instance
-        var showing = this.orderManager.getOrderById(orderId).showing;
+        showing = this.orderManager.getOrderById(orderId).showing;
         this.cinemaManager.replaceShowingInstance(showing);
         return {
             orderId: orderId,

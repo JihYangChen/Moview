@@ -6,15 +6,15 @@ var ShowingSeatModel = require('../mongoDB/model/cinema/ShowingSeatModel');
 class CinemaManager {
 
     constructor() {
-        this.init();
+
     }
 
-    init = () => {
+    init = async (movies) => {
         this.showingList = [];
-        this.generateShowingList();
+        await this.generateShowingList(movies);
     }
 
-    generateShowingList = async () => {
+    generateShowingList = async (movies) => {
         const showingObjects = await ShowingModel.find();
         for (var showingObject of showingObjects) {
             const populatedShowingObject = await ShowingModel.findById(showingObject._id)
@@ -36,10 +36,17 @@ class CinemaManager {
                                                                      path: 'seat'
                                                                  }
                                                              })
-                                                             .exec();
-            this.showingList.push(new Showing(populatedShowingObject));
+                                                             .exec();                                                             
+            this.showingList.push(new Showing(this.getMovie(movies, populatedShowingObject.movie._id), populatedShowingObject));
         }
         console.log('finish to load showings from database');
+    }
+
+    getMovie = (movies, targetMovieId) => {
+        let moviesArray = movies.filter(movie => {
+            return JSON.stringify(movie._id) == JSON.stringify(targetMovieId);
+        });
+        return moviesArray.length > 0 ? moviesArray[0] : null;
     }
 
     updateShowingSeats = async showingSeatObjects => {
