@@ -10,6 +10,7 @@ var MovieManager = require('../manager/MovieManager');
     
 let movieManager = new MovieManager();
 var expectResult;
+var movieList;
 
 describe('Movie entity', () => {
     it('should create description correctly', () => {
@@ -70,12 +71,12 @@ describe('Movie entity', () => {
         expect(movie.name).to.equal('DeadPool 2');
         expect(movie.movieDescription._id).to.equal('descriptionId001');
     });
-})
+});
 
-describe('Get movies', function () {
+describe('MovieManager - Get movies', function () {
 
     before(() => {
-        expectResult = [{
+        let movie = new Movie({
             _id: 'id001',
             name: 'DeadPool 2',
             movieDescription:
@@ -94,7 +95,8 @@ describe('Get movies', function () {
                 releaseDate: '1000000000',
                 inTheater: true
             }
-        }, {
+        });
+        let movie2 = new Movie({
             _id: 'id002',
             name: 'Avengers: Infinity War',
             movieDescription:
@@ -114,7 +116,8 @@ describe('Get movies', function () {
                 runtime: '149',
                 inTheater: false
             }
-        }]
+        });
+        movieList = [movie, movie2];
     });
   
     it('should return all movies', (done) => {
@@ -122,7 +125,7 @@ describe('Get movies', function () {
         var mockMovie = sinon.mock(Movie);
         mockMovie
         .expects('find')
-        .yields(null, expectResult);
+        .yields(null, movieList);
 
         Movie.find((error, result) => {
             mockMovie.verify();
@@ -166,7 +169,7 @@ describe('Get movies', function () {
 
     it('should load data from database and generate a movieList at a begining', () => {
         var stub = sinon.stub(movieManager, "generateMovieList").callsFake(() => {
-            movieManager.movieList = expectResult;
+            movieManager.movieList = movieList;
         });
         movieManager.generateMovieList();
         let generatedMovieList = movieManager.movieList;
@@ -180,7 +183,7 @@ describe('Get movies', function () {
     });
 
     it('should return a movie by id', done => {
-        movieManager.movieList = expectResult;
+        movieManager.movieList = movieList;
         let result = movieManager.getMovieById('id001');
         expect(result._id).to.equal('id001');
         expect(result.name).to.equal('DeadPool 2');
@@ -200,7 +203,7 @@ describe('Get movies', function () {
     });
 
     it('should return in theater movies', done => {
-        movieManager.movieList = expectResult;
+        movieManager.movieList = movieList;
         let comingSoonMovies = movieManager.getInTheaterMovies();
         expect(comingSoonMovies).to.be.an('array');
         expect(comingSoonMovies).to.have.lengthOf(1);
@@ -212,7 +215,7 @@ describe('Get movies', function () {
     });
 
     it('should return coming soon movies', done => {
-        movieManager.movieList = expectResult;
+        movieManager.movieList = movieList;
         let comingSoonMovies = movieManager.getComingSoonMovies();
         expect(comingSoonMovies).to.be.an('array');
         expect(comingSoonMovies).to.have.lengthOf(1);

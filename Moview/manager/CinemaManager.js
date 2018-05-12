@@ -65,6 +65,7 @@ class CinemaManager {
         this.showingList.push(showing);
     }
 
+    // no use so far
     getShowings = (dateString, movieId) => {
         return this.showingList.filter(showing => {
             return showing.getDate() == dateString && showing.movie._id == movieId;

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www --exec babel-node",
-    "test": "mocha --require babel-core/register --require babel-polyfill"
+    "test": "mocha --require babel-core/register --require babel-polyfill --recursive ./test/"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",

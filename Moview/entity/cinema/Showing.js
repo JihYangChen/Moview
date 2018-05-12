@@ -48,6 +48,7 @@ class Showing {
         }
     }
 
+    // no use so far
     getMovieName = () => {
         return this.movie.name;
     }
