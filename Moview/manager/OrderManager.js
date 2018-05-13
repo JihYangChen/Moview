@@ -8,8 +8,8 @@ require('../mongoDB/model/cinema/ShowingSeatModel');
 
 class OrderManager {
 
-    constructor(showings) {
-        this.init(showings);
+    constructor() {
+
     }
     
     init = showings => {

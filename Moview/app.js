@@ -42,7 +42,8 @@ var init = async () => {
   await movieManager.init();  
   cinemaManager = new CinemaManager();
   await cinemaManager.init(movieManager.movieList);
-  orderManager = new OrderManager(cinemaManager.showingList);
+  orderManager = new OrderManager();
+  orderManager.init(cinemaManager.showingList);
 }
 
 mongoose.connect('mongodb://moviewuser:moviewpassword@ds113200.mlab.com:13200/moview');
