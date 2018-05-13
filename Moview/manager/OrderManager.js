@@ -1,5 +1,3 @@
-import { Mongoose } from 'mongoose';
-
 var mongoose = require('mongoose');
 var OrderModel = require('../mongoDB/model/order/OrderModel');
 var TicketModel = require('../mongoDB/model/order/TicketModel');

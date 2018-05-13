@@ -33,6 +33,7 @@ class BookingController {
 
         // local update
         showing.setSeatsOccupied(seatNames);
+        this.cinemaManager.replaceShowingInstance(showing); // make sure same instance
         let seats = showing.getSeatsBySeatNames(seatNames);
         order.setSeats(seats);
         // remote update

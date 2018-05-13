@@ -102,6 +102,7 @@ describe('CinemaManager', () => {
         expect(generatedShowingList[0].hall._id).to.equal('hall001');
         expect(generatedShowingList[0].showingSeatList[0]._id).to.equal('showingSeat001');
         expect(generatedShowingList[0].showingSeatList[1]._id).to.equal('showingSeat002');
+        stub.restore();
     });
 
     it('should update showingSeats correctly', () => {
@@ -138,6 +139,7 @@ describe('CinemaManager', () => {
         expect(updatedShowingSeats[1].seat.row).to.equal('B');
         expect(updatedShowingSeats[1].seat.column).to.equal('2');
         expect(updatedShowingSeats[1].isOccupied).to.be.true;
+        stub.restore();
     });
     
     it('should replace showing instance correctly', () => {
