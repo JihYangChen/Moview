@@ -56,6 +56,19 @@ class CinemaManager {
         console.log('> showingSeats have been updated successfully');
     } 
 
+    /***********************************
+     * 
+     *  please be very careful !!!
+     * 
+     ***********************************/
+    updateAllIsOccupiedFalse() {
+        ShowingSeatModel.update({ isOccupied: true }, { isOccupied: false }, { multi: true }, () => {
+            console.log('> all occupied seats have been set to non-occupied');
+        });
+    }
+
+    // public 
+
     replaceShowingInstance = showing => {
         var originalShowing = this.getShowingById(showing._id);
         var index = this.showingList.indexOf(originalShowing);
