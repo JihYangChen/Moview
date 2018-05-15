@@ -5,9 +5,8 @@ var expect = require('chai').expect;
 var CinemaManager = require('../manager/CinemaManager');
 var Showing = require('../entity/cinema/Showing');
 var Movie = require('../entity/Movie');
-let cinemaManager = new CinemaManager();
+let cinemaManager = new CinemaManager(null);
 var showing;
-var movies;
 
 describe('CinemaManager', () => {
     beforeEach(() => {
@@ -66,35 +65,13 @@ describe('CinemaManager', () => {
             }]
         };
         showing = new Showing(null, showingObject);
-        let movie = new Movie({ 
-            _id: 'movie001',
-            name: 'movie',
-            movieDescription: {
-                _id: 'description001'
-            }
-        });
-        let movie2 = new Movie({ 
-            _id: 'movie002',
-            name: 'movie2',
-            movieDescription: {
-                _id: 'description002'
-            }
-        });
-        movies = [movie, movie2];
-    });
-
-    it('should get movie correctly', () => {
-        let testee = cinemaManager.getMovie(movies, 'movie002');
-        expect(testee._id).to.equal('movie002');
-        expect(testee.name).to.equal('movie2');
-        expect(testee.movieDescription._id).to.equal('description002');
     });
 
     it('should generate showingList correctly', () => {
         var stub = sinon.stub(cinemaManager, "generateShowingList").callsFake(() => {
             cinemaManager.showingList = [showing];
         });
-        cinemaManager.generateShowingList(movies);
+        cinemaManager.generateShowingList();
         let generatedShowingList = cinemaManager.showingList;
         expect(generatedShowingList[0]._id).to.equal('showing001');
         expect(generatedShowingList[0].time).to.equal('1525752000');

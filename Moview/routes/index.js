@@ -22,6 +22,21 @@ router.get('/movieDetail/:movieId', async function(req, res, next) {
 router.get('/booking/tickets/:showingId', async function(req, res, next) {
   let bookingController = new BookingController(await req.cinemaManager, await req.orderManager);
   let result = bookingController.selectShowing('5af11bf5f36d2837eae7806c');
+
+  let orderManager = await req.orderManager;
+  let cinemaManager = await req.cinemaManager;
+  // orderManager.removeAllTickets();
+  // orderManager.removeAllOrders();
+  // cinemaManager.updateAllIsOccupiedFalse();
+  var order = orderManager.getOrderById('5af47af19833fc4d6276de6a');
+  var order_showing = order.showing;
+  var cine_showing = cinemaManager.getShowingById('5af11bf5f36d2837eae7806c');
+  console.log('showingseat -> ', order_showing.getShowingSeatBySeatName('A1'));
+  console.log('cine showingseat -> ', cine_showing.getShowingSeatBySeatName('A1'));
+  // console.log('oreder.showing -> ', order_showing);
+  // console.log('showing -> ', cine_showing);
+  console.log('equality -> ', order_showing === cine_showing);
+
   // let result = bookingController.selectShowing(req.params.showingId);
 
   // let result = movieController.getMovieInfo("5aed48e6f36d2837eae61fcf");

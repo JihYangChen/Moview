@@ -40,10 +40,10 @@ app.use(function(req, res, next) {
 var init = async () => {
   movieManager = new MovieManager();
   await movieManager.init();  
-  cinemaManager = new CinemaManager();
-  await cinemaManager.init(movieManager.movieList);
-  orderManager = new OrderManager();
-  orderManager.init(cinemaManager.showingList);
+  cinemaManager = new CinemaManager(movieManager);
+  await cinemaManager.init();
+  orderManager = new OrderManager(cinemaManager);
+  orderManager.init();
 }
 
 mongoose.connect('mongodb://moviewuser:moviewpassword@ds113200.mlab.com:13200/moview');

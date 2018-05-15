@@ -6,26 +6,26 @@ require('../mongoDB/model/cinema/ShowingSeatModel');
 
 class OrderManager {
 
-    constructor() {
-
+    constructor(cinemaManager) {
+        this.cinemaManager = cinemaManager;
     }
     
-    init = showings => {
+    init = () => {
         this.orderList = [];
-        this.generateOrderList(showings);
+        this.generateOrderList();
     }
 
     // database operation
 
-    generateOrderList = async showings => {
+    generateOrderList = async () => {
         const orderObjects = await OrderModel.find();
         for (var orderObject of orderObjects) {
-            await this.pullOrderById(orderObject._id, showings);
+            await this.pullOrderById(orderObject._id);
         }
         console.log('finish to load orders from database');
     }
 
-    pullOrderById = async (orderId, showings) => {
+    pullOrderById = async (orderId) => {
         const populatedOrderObject = await OrderModel.findById(orderId)
                                                          .populate({
                                                              path: 'showing',
@@ -60,14 +60,7 @@ class OrderManager {
                                                              }]
                                                          })
                                                          .exec();
-        this.orderList.push(new Order(showings == null ? null : this.getShowing(showings, populatedOrderObject.showing._id), '', populatedOrderObject));
-    }
-
-    getShowing = (showings, targetShowingId) => {
-        let showingsArray = showings.filter(showing => {
-            return JSON.stringify(showing._id) == JSON.stringify(targetShowingId);
-        });
-        return showingsArray.length > 0 ? showingsArray[0] : null;
+        this.orderList.push(new Order(this.cinemaManager.getShowingById(populatedOrderObject.showing._id), '', populatedOrderObject));
     }
 
     saveOrder = async order => {
@@ -119,7 +112,7 @@ class OrderManager {
     // public 
 
     addOrder = async orderId => {
-        await this.pullOrderById(orderId, null);
+        await this.pullOrderById(orderId);
     }
 
     getOrderById = orderId => {

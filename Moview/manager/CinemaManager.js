@@ -5,16 +5,16 @@ var ShowingSeatModel = require('../mongoDB/model/cinema/ShowingSeatModel');
 
 class CinemaManager {
 
-    constructor() {
-
+    constructor(movieManager) {
+        this.movieManager = movieManager;
     }
 
-    init = async (movies) => {
+    init = async () => {
         this.showingList = [];
-        await this.generateShowingList(movies);
+        await this.generateShowingList();
     }
 
-    generateShowingList = async (movies) => {
+    generateShowingList = async () => {
         const showingObjects = await ShowingModel.find();
         for (var showingObject of showingObjects) {
             const populatedShowingObject = await ShowingModel.findById(showingObject._id)
@@ -37,16 +37,9 @@ class CinemaManager {
                                                                  }
                                                              })
                                                              .exec();                                                             
-            this.showingList.push(new Showing(this.getMovie(movies, populatedShowingObject.movie._id), populatedShowingObject));
+            this.showingList.push(new Showing(this.movieManager.getMovieById(populatedShowingObject.movie._id), populatedShowingObject));
         }
         console.log('finish to load showings from database');
-    }
-
-    getMovie = (movies, targetMovieId) => {
-        let moviesArray = movies.filter(movie => {
-            return JSON.stringify(movie._id) == JSON.stringify(targetMovieId);
-        });
-        return moviesArray.length > 0 ? moviesArray[0] : null;
     }
 
     updateShowingSeats = async showingSeatObjects => {
@@ -68,15 +61,6 @@ class CinemaManager {
     }
 
     // public 
-
-    replaceShowingInstance = showing => {
-        var originalShowing = this.getShowingById(showing._id);
-        var index = this.showingList.indexOf(originalShowing);
-        if (index > -1) {
-            this.showingList.splice(index, 1);
-        }
-        this.showingList.push(showing);
-    }
 
     // no use so far
     getShowings = (dateString, movieId) => {

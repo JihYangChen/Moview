@@ -7,7 +7,7 @@ var Order = require('../entity/order/Order');
 var Showing = require('../entity/cinema/Showing');
 var order;
 var showingObject;
-let orderManager = new OrderManager();
+let orderManager = new OrderManager(null);
 
 describe('OrderManager', () => {
     beforeEach(() => {
@@ -84,14 +84,6 @@ describe('OrderManager', () => {
         }
         order = new Order(null, '', orderObject);
         orderManager.orderList = [order];
-    });
-
-    it('should get showing correctly', () => {
-        let showing = orderManager.getShowing([new Showing(null, showingObject)], 'showing001');
-        expect(showing._id).to.equal('showing001');
-        let nullShowing = orderManager.getShowing([new Showing(null, showingObject)], 'showing');
-        expect(nullShowing).to.be.a('null');
-
     });
 
     it('should get order by id correctly', () => {
