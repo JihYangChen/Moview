@@ -37,10 +37,13 @@ app.use(function(req, res, next) {
   next();
 });
 
-var init = () => {
-  movieManager = new MovieManager();  
+var init = async () => {
+  movieManager = new MovieManager();
+  await movieManager.init();  
   cinemaManager = new CinemaManager();
+  await cinemaManager.init(movieManager.movieList);
   orderManager = new OrderManager();
+  orderManager.init(cinemaManager.showingList);
 }
 
 mongoose.connect('mongodb://moviewuser:moviewpassword@ds113200.mlab.com:13200/moview');

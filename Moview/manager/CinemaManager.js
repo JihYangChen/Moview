@@ -6,15 +6,15 @@ var ShowingSeatModel = require('../mongoDB/model/cinema/ShowingSeatModel');
 class CinemaManager {
 
     constructor() {
-        this.init();
+
     }
 
-    init = () => {
+    init = async (movies) => {
         this.showingList = [];
-        this.generateShowingList();
+        await this.generateShowingList(movies);
     }
 
-    generateShowingList = async () => {
+    generateShowingList = async (movies) => {
         const showingObjects = await ShowingModel.find();
         for (var showingObject of showingObjects) {
             const populatedShowingObject = await ShowingModel.findById(showingObject._id)
@@ -36,10 +36,17 @@ class CinemaManager {
                                                                      path: 'seat'
                                                                  }
                                                              })
-                                                             .exec();
-            this.showingList.push(new Showing(populatedShowingObject));
+                                                             .exec();                                                             
+            this.showingList.push(new Showing(this.getMovie(movies, populatedShowingObject.movie._id), populatedShowingObject));
         }
         console.log('finish to load showings from database');
+    }
+
+    getMovie = (movies, targetMovieId) => {
+        let moviesArray = movies.filter(movie => {
+            return JSON.stringify(movie._id) == JSON.stringify(targetMovieId);
+        });
+        return moviesArray.length > 0 ? moviesArray[0] : null;
     }
 
     updateShowingSeats = async showingSeatObjects => {
@@ -49,6 +56,29 @@ class CinemaManager {
         console.log('> showingSeats have been updated successfully');
     } 
 
+    /***********************************
+     * 
+     *  please be very careful !!!
+     * 
+     ***********************************/
+    updateAllIsOccupiedFalse() {
+        ShowingSeatModel.update({ isOccupied: true }, { isOccupied: false }, { multi: true }, () => {
+            console.log('> all occupied seats have been set to non-occupied');
+        });
+    }
+
+    // public 
+
+    replaceShowingInstance = showing => {
+        var originalShowing = this.getShowingById(showing._id);
+        var index = this.showingList.indexOf(originalShowing);
+        if (index > -1) {
+            this.showingList.splice(index, 1);
+        }
+        this.showingList.push(showing);
+    }
+
+    // no use so far
     getShowings = (dateString, movieId) => {
         return this.showingList.filter(showing => {
             return showing.getDate() == dateString && showing.movie._id == movieId;
@@ -57,7 +87,7 @@ class CinemaManager {
 
     getShowingById = showingId => {
         let showing = this.showingList.filter(showing => {
-            return showing._id == showingId;
+            return JSON.stringify(showing._id) == JSON.stringify(showingId);
         });
         return showing.length > 0 ? showing[0] : null;
     }

@@ -16,7 +16,10 @@ class BookingController {
         var showing = this.cinemaManager.getShowingById(showingId);
         var order = this.createOrder(showing, bookingInfo);
         var orderId = await this.orderManager.saveOrder(order);
-        this.orderManager.addOrder(orderId);
+        await this.orderManager.addOrder(orderId);
+        // make sure showing to be a same instance
+        showing = this.orderManager.getOrderById(orderId).showing;
+        this.cinemaManager.replaceShowingInstance(showing);
         return {
             orderId: orderId,
             seats: showing.getNotOccupiedSeats()
@@ -30,6 +33,7 @@ class BookingController {
 
         // local update
         showing.setSeatsOccupied(seatNames);
+        this.cinemaManager.replaceShowingInstance(showing); // make sure same instance
         let seats = showing.getSeatsBySeatNames(seatNames);
         order.setSeats(seats);
         // remote update

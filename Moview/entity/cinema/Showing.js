@@ -6,10 +6,10 @@ var ShowingSeat = require('./ShowingSeat');
 class Showing {
 
     // props = {id, time, movie, hall, showingSeatList}
-    constructor (showingObject) {
+    constructor (movie, showingObject) {
         for (var prop in showingObject) {
             if (prop == 'movie') {
-                this[prop] = new Movie(showingObject[prop]);
+                this[prop] = movie == null ? new Movie(showingObject[prop]) : movie;
             } else if (prop == 'hall') {
                 this[prop] = new Hall(showingObject[prop]);
             } else if (prop == 'showingSeatList') {
@@ -48,6 +48,7 @@ class Showing {
         }
     }
 
+    // no use so far
     getMovieName = () => {
         return this.movie.name;
     }

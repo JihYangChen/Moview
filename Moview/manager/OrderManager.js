@@ -1,5 +1,3 @@
-import { Mongoose } from 'mongoose';
-
 var mongoose = require('mongoose');
 var OrderModel = require('../mongoDB/model/order/OrderModel');
 var TicketModel = require('../mongoDB/model/order/TicketModel');
@@ -9,25 +7,25 @@ require('../mongoDB/model/cinema/ShowingSeatModel');
 class OrderManager {
 
     constructor() {
-        this.init();
+
     }
     
-    init = () => {
+    init = showings => {
         this.orderList = [];
-        this.generateOrderList();
+        this.generateOrderList(showings);
     }
 
     // database operation
 
-    generateOrderList = async () => {
+    generateOrderList = async showings => {
         const orderObjects = await OrderModel.find();
         for (var orderObject of orderObjects) {
-            this.pullOrderById(orderObject._id);
+            await this.pullOrderById(orderObject._id, showings);
         }
         console.log('finish to load orders from database');
     }
 
-    pullOrderById = async orderId => {
+    pullOrderById = async (orderId, showings) => {
         const populatedOrderObject = await OrderModel.findById(orderId)
                                                          .populate({
                                                              path: 'showing',
@@ -62,7 +60,14 @@ class OrderManager {
                                                              }]
                                                          })
                                                          .exec();
-        this.orderList.push(new Order('', '', populatedOrderObject));
+        this.orderList.push(new Order(showings == null ? null : this.getShowing(showings, populatedOrderObject.showing._id), '', populatedOrderObject));
+    }
+
+    getShowing = (showings, targetShowingId) => {
+        let showingsArray = showings.filter(showing => {
+            return JSON.stringify(showing._id) == JSON.stringify(targetShowingId);
+        });
+        return showingsArray.length > 0 ? showingsArray[0] : null;
     }
 
     saveOrder = async order => {
@@ -98,15 +103,28 @@ class OrderManager {
         console.log('> tickets have been updated successfully');
     }
 
+    /***********************************
+     * 
+     *  please be very careful !!!
+     * 
+     ***********************************/
+    removeAllTickets = async () => {
+        TicketModel.remove({ date: { $ne: "Thu. May 17" } }).exec()
+    }
+
+    removeAllOrders = async () => {
+        OrderModel.remove({ _id: { $ne: "5af47af19833fc4d6276de6a" } }).exec()
+    }
+
     // public 
 
-    addOrder = orderId => {
-        this.pullOrderById(orderId);
+    addOrder = async orderId => {
+        await this.pullOrderById(orderId, null);
     }
 
     getOrderById = orderId => {
         let order = this.orderList.filter(order => {
-            return order._id == orderId;
+            return JSON.stringify(order._id) == JSON.stringify(orderId);
         });
         return order.length > 0 ? order[0] : null;
     }
