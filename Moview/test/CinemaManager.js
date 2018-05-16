@@ -119,28 +119,28 @@ describe('CinemaManager', () => {
         stub.restore();
     });
     
-    it('should replace showing instance correctly', () => {
-        cinemaManager.showingList = [showing];
-        var replacedShowing = new Showing(null, { 
-            _id: 'showing001',
-            time: '100',
-            movie: {
-                _id: 'replacedMovieId',
-            },
-            hall: {
-                _id: 'replacedHallId'
-            },
-            showingSeatList: [{
-                _id: 'replacedShowingSeatId'
-            }]
-        });
-        cinemaManager.replaceShowingInstance(replacedShowing);
-        expect(cinemaManager.showingList[0]._id).to.equal('showing001');
-        expect(cinemaManager.showingList[0].time).to.equal('100');
-        expect(cinemaManager.showingList[0].movie._id).to.equal('replacedMovieId');
-        expect(cinemaManager.showingList[0].hall._id).to.equal('replacedHallId');
-        expect(cinemaManager.showingList[0].showingSeatList[0]._id).to.equal('replacedShowingSeatId');
-    });
+    // it('should replace showing instance correctly', () => {
+    //     cinemaManager.showingList = [showing];
+    //     var replacedShowing = new Showing(null, { 
+    //         _id: 'showing001',
+    //         time: '100',
+    //         movie: {
+    //             _id: 'replacedMovieId',
+    //         },
+    //         hall: {
+    //             _id: 'replacedHallId'
+    //         },
+    //         showingSeatList: [{
+    //             _id: 'replacedShowingSeatId'
+    //         }]
+    //     });
+    //     cinemaManager.replaceShowingInstance(replacedShowing);
+    //     expect(cinemaManager.showingList[0]._id).to.equal('showing001');
+    //     expect(cinemaManager.showingList[0].time).to.equal('100');
+    //     expect(cinemaManager.showingList[0].movie._id).to.equal('replacedMovieId');
+    //     expect(cinemaManager.showingList[0].hall._id).to.equal('replacedHallId');
+    //     expect(cinemaManager.showingList[0].showingSeatList[0]._id).to.equal('replacedShowingSeatId');
+    // });
 
     it('should get showing by id correctly', () => {
         cinemaManager.showingList = [showing];
