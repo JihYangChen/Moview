@@ -5,6 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
+// require('./config/passport')(passport);
+// var FacebookStrategy = require('passport-facebook').Strategy;
 
 // managers
 var MovieManager = require('./manager/MovieManager');
@@ -15,6 +18,37 @@ var cinemaManager;
 var orderManager;
 
 var index = require('./routes/index');
+var login = require('./routes/login');
+
+// // passport.use(new FacebookStrategy({
+// //   clientID: '1786448471377664',
+// //   clientSecret: '728205b805eca8b47d453d23a0aa42f0',
+// //   callbackURL: "http://localhost:3000/"
+// // },
+// // function(accessToken, refreshToken, profile, cb) {
+// //   User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+// //     return cb(err, user);
+// //   });
+// // }
+// // ));
+
+// passport.use(new FacebookStrategy({
+//   clientID: '1786448471377664',
+//   clientSecret: '728205b805eca8b47d453d23a0aa42f0',
+//   callbackURL: 'http://localhost:3000/auth/facebook/callback'
+// },
+// function(accessToken, refreshToken, profile, cb) {
+//   console.log('profile --------------> ', profile)
+//   return cb(null, profile);
+// }));
+
+// passport.serializeUser(function(user, cb) {
+//   cb(null, user);
+// });
+
+// passport.deserializeUser(function(obj, cb) {
+//   cb(null, obj);
+// });
 
 var app = express();
 
@@ -25,9 +59,12 @@ app.set('view engine', 'ejs');
 // session
 var session = require('express-session');
 app.set('trust proxy', 1);
-app.use( session({
-  secret : 'a4f5Df'
-}) );
+app.use(session({
+    name: 'moview-session',
+    secret: 'a4f5Df', 
+    resave: true, 
+    saveUninitialized: true 
+}));
 
 // Routes setting
 app.use(function(req, res, next) {
@@ -36,6 +73,28 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
+
+require('./config/passport')(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
+// app.get('/auth/facebook',
+//   passport.authenticate('facebook'));
+ 
+// app.get('/auth/facebook/callback',
+//   passport.authenticate('facebook', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     // Successful authentication, redirect home.
+//     console.log('successful!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+//     console.log('user -> ', req.user)
+//     res.redirect('/');
+// });
+
+// app.get('/profile',
+//   require('connect-ensure-login').ensureLoggedIn(),
+//   function(req, res){
+//     res.render('login/profile', { user: req.user });
+// });
 
 var init = async () => {
   movieManager = new MovieManager();
@@ -59,7 +118,7 @@ db.once('open', () => {
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -69,6 +128,7 @@ app.use('/', (req, res, next) => {
   req.orderManager = orderManager;
   next();
 }, index);
+app.use('/', login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
