@@ -1,53 +1,52 @@
-
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var auth = require('./auth');
 var fetch = require('node-fetch');
+var Member = require('../entity/Member');
+var memberManager;
 
 module.exports = passport => {
 
     passport.serializeUser((user, cb) => {
-        cb(null, user);
+        cb(null, user.fbId);
     });
       
-    passport.deserializeUser((user, cb) => {
-        cb(null, user);
-        // User.findById(user.id, function(err, user) {
-        //     done(err, user);
-        // });
+    passport.deserializeUser((id, cb) => {
+        let member = memberManager.getMemberByFbId(id)
+        cb(null, member);
     });
 
     passport.use(new FacebookStrategy({
         clientID: auth.facebookAuth.clientId,
         clientSecret: auth.facebookAuth.clientSecret,
         callbackURL: auth.facebookAuth.callbackURL,
-        profileFields: auth.facebookAuth.profileFields
-    }, async (accessToken, refreshToken, profile, cb) => {
+        profileFields: auth.facebookAuth.profileFields,
+        passReqToCallback: true
+    }, async (req, accessToken, refreshToken, profile, cb) => {
+        memberManager = await req.memberManager;
         let url = "https://graph.facebook.com/" + profile.id + "?fields=picture&access_token=" + accessToken;
-        await fetchProfilePic(url, (err, result) => {
-            profile.profile_pic = result
-            return cb(null, profile)
+        await fetchProfilePic(url, async (err, result) => {
+            // profile.profile_pic = result
+            let member = memberManager.getMemberByFbId(profile.id);
+            console.log('member===', member);
+            console.log('fbid===', profile.id);
+            if (member != null) {
+                return cb(null, member);
+            } else {
+                let email = profile.emails ? profile.emails[0].value : null;
+                let profileObject = {
+                    fbId: profile.id,
+                    name: profile.displayName,
+                    email: email,
+                    profileUrl: result
+                };
+                let newMember = new Member(profileObject);
+                let memberId = await memberManager.insertMember(profileObject);
+                newMember._id = memberId
+                memberManager.addMember(newMember);
+                return cb(null, newMember)
+            }
         })
-        // profile.profile_pic = "https://graph.facebook.com/" + profile.id + "?fields=picture&access_token=" + accessToken;
-        // return cb(null, profile);
-        
-        // process.nextTick(() => {
-        //     User.findOne({ 'facebook.id' : profile.id }, (err, user) => {
-        //         if (err)
-        //             return cb(err);
-
-        //         if (user) {
-        //             return cb(null, user); 
-        //         } else {
-        //             var newUser = new User();
-        //             newUser.save(function(err) {
-        //                 if (err)
-        //                     throw err;
-        //                 return cb(null, newUser);
-        //             });
-        //         }
-        //     });
-        // });
     }));
 
     var fetchProfilePic = async (url, callback) => {

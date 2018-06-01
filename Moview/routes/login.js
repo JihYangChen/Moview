@@ -3,13 +3,16 @@ var router = express.Router();
 var passport = require('passport');
 var LoginController = require('../controller/LoginController');
 
-router.get('/auth/facebook', passport.authenticate('facebook', { 
-    scope : ['public_profile', 'email']
-}));
+router.get('/auth/facebook', function(req, res, next) {
+    let loginController = new LoginController(passport);
+    loginController.login(req, res, next);
+});
+
+// router.get('/auth/facebook', passport.authenticate('facebook', { 
+//     scope : ['public_profile', 'email']
+// }));
 
 router.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), (req, res) => {
-    console.log('successful!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    console.log('user -> ', req.user)
     res.redirect('/');
 });
 

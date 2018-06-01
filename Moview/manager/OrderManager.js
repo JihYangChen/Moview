@@ -10,9 +10,9 @@ class OrderManager {
         this.cinemaManager = cinemaManager;
     }
     
-    init = () => {
+    init = async () => {
         this.orderList = [];
-        this.generateOrderList();
+        await this.generateOrderList();
     }
 
     // database operation

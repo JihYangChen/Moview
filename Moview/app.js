@@ -6,49 +6,19 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
-// require('./config/passport')(passport);
-// var FacebookStrategy = require('passport-facebook').Strategy;
 
 // managers
 var MovieManager = require('./manager/MovieManager');
 var CinemaManager = require('./manager/CinemaManager');
 var OrderManager = require('./manager/OrderManager');
+var MemberManager = require('./manager/MemberManager');
 var movieManager;
 var cinemaManager;
 var orderManager;
+var memberManager;
 
 var index = require('./routes/index');
 var login = require('./routes/login');
-
-// // passport.use(new FacebookStrategy({
-// //   clientID: '1786448471377664',
-// //   clientSecret: '728205b805eca8b47d453d23a0aa42f0',
-// //   callbackURL: "http://localhost:3000/"
-// // },
-// // function(accessToken, refreshToken, profile, cb) {
-// //   User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-// //     return cb(err, user);
-// //   });
-// // }
-// // ));
-
-// passport.use(new FacebookStrategy({
-//   clientID: '1786448471377664',
-//   clientSecret: '728205b805eca8b47d453d23a0aa42f0',
-//   callbackURL: 'http://localhost:3000/auth/facebook/callback'
-// },
-// function(accessToken, refreshToken, profile, cb) {
-//   console.log('profile --------------> ', profile)
-//   return cb(null, profile);
-// }));
-
-// passport.serializeUser(function(user, cb) {
-//   cb(null, user);
-// });
-
-// passport.deserializeUser(function(obj, cb) {
-//   cb(null, obj);
-// });
 
 var app = express();
 
@@ -78,31 +48,15 @@ require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.get('/auth/facebook',
-//   passport.authenticate('facebook'));
- 
-// app.get('/auth/facebook/callback',
-//   passport.authenticate('facebook', { failureRedirect: '/login' }),
-//   function(req, res) {
-//     // Successful authentication, redirect home.
-//     console.log('successful!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-//     console.log('user -> ', req.user)
-//     res.redirect('/');
-// });
-
-// app.get('/profile',
-//   require('connect-ensure-login').ensureLoggedIn(),
-//   function(req, res){
-//     res.render('login/profile', { user: req.user });
-// });
-
 var init = async () => {
   movieManager = new MovieManager();
   await movieManager.init();  
   cinemaManager = new CinemaManager(movieManager);
   await cinemaManager.init();
   orderManager = new OrderManager(cinemaManager);
-  orderManager.init();
+  await orderManager.init();
+  memberManager = new MemberManager();
+  await memberManager.init();
 }
 
 mongoose.connect('mongodb://moviewuser:moviewpassword@ds113200.mlab.com:13200/moview');
@@ -126,9 +80,13 @@ app.use('/', (req, res, next) => {
   req.movieManager = movieManager;
   req.cinemaManager = cinemaManager;
   req.orderManager = orderManager;
+  req.memberManager = memberManager;
   next();
 }, index);
-app.use('/', login);
+app.use('/', (req, res, next) => {
+  req.memberManager = memberManager;
+  next();
+}, login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
