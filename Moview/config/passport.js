@@ -28,8 +28,6 @@ module.exports = passport => {
         await fetchProfilePic(url, async (err, result) => {
             // profile.profile_pic = result
             let member = memberManager.getMemberByFbId(profile.id);
-            console.log('member===', member);
-            console.log('fbid===', profile.id);
             if (member != null) {
                 return cb(null, member);
             } else {

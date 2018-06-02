@@ -1,10 +1,10 @@
 
 class Member {
     
-    // props = {id, fbId, name, email, profileUrl}
-    constructor(memberObject) {
+    // props = {id, fbId, name, email, profileUrl, reviewList}
+    constructor(memberObject, reviewList) {
         for (var prop in memberObject) {
-            this[prop] = memberObject[prop]
+            this[prop] = prop == 'reviewList' ? reviewList : memberObject[prop];
         }
     }
 

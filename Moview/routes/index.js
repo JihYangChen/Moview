@@ -28,6 +28,10 @@ router.get('/booking/tickets/:showingId', async function(req, res, next) {
   // orderManager.removeAllTickets();
   // orderManager.removeAllOrders();
   // cinemaManager.updateAllIsOccupiedFalse();
+  
+  if (req.user) {
+    console.log('1234 -> ', req.user.reviewList[1].getContent());
+  }
 
   // var order = orderManager.getOrderById('5af47af19833fc4d6276de6a');
   // var order_showing = order.showing;
@@ -66,10 +70,10 @@ router.post('/booking/setTicketsAmount', async function(req, res, next) {
   req.session.order = req.body;
   req.session.order.totalTicketsAmount = parseInt(req.body.adultAmount) + parseInt(req.body.seniorAmount) + parseInt(req.body.childAmount);
   let result = await bookingController.determineBookingInfo('5af11bf5f36d2837eae7806c', {
-                                                                                    Adult: req.body.adultAmount,
-                                                                                    Senior: req.body.seniorAmount,
-                                                                                    Child: req.body.childAmount
-                                                                                  });
+      Adult: req.body.adultAmount,
+      Senior: req.body.seniorAmount,
+      Child: req.body.childAmount
+  });
   req.session.order.id = result.orderId;
   req.session.order.isNotOccupiedSeats = result.seats;
 

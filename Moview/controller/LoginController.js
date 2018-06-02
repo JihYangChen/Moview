@@ -6,7 +6,7 @@ class LoginController {
 
     login = (req, res, next) => {
         this.passport.authenticate('facebook', { 
-            scope : ['public_profile', 'email']
+            scope: ['public_profile', 'email']
         })(req, res, next);
     }
 }

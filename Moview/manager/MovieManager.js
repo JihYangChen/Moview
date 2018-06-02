@@ -18,6 +18,12 @@ class MovieManager {
         for (var movieObject of movieObjects) {
             const populatedMovieObject = await MovieModel.findById(movieObject._id)
                                                          .populate('movieDescription')
+                                                         .populate({
+                                                            path: 'reviewList',
+                                                            populate: {
+                                                                path: 'review'
+                                                            }
+                                                         })
                                                          .exec();
             this.movieList.push(new Movie(populatedMovieObject));
         }
@@ -41,6 +47,15 @@ class MovieManager {
             return JSON.stringify(movie._id) == JSON.stringify(movieId);
         });
         return movie.length > 0 ? movie[0] : null;
+    }
+
+    getReviewByReviewId = reviewId => {
+        let review = this.movieList.map(movie => movie.reviewList).reduce((arr, element) => {
+            return arr.concat(element);
+        }, []).filter(review => {
+            return JSON.stringify(review._id) == JSON.stringify(reviewId);
+        });
+        return review.length > 0 ? review[0] : null;
     }
 }
 

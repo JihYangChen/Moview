@@ -55,7 +55,7 @@ var init = async () => {
   await cinemaManager.init();
   orderManager = new OrderManager(cinemaManager);
   await orderManager.init();
-  memberManager = new MemberManager();
+  memberManager = new MemberManager(movieManager);
   await memberManager.init();
 }
 

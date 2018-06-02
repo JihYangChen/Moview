@@ -1,11 +1,18 @@
 var MovieDescription = require('./MovieDescription');
+var Review = require('./Review');
 
 class Movie {
     
-    // props = {id, name, movieDescription}
+    // props = {id, name, movieDescription, reviewList}
     constructor(movieObject) {
         for (var prop in movieObject) {
-            this[prop] = prop == 'movieDescription' ? new MovieDescription(movieObject[prop]) : movieObject[prop]
+            if (prop == 'movieDescription') {
+                this[prop] = new MovieDescription(movieObject[prop])
+            } else if (prop == 'reviewList') {
+                this[prop] = movieObject[prop].map(reviewObject => new Review(reviewObject));
+            } else {
+                this[prop] = movieObject[prop]
+            }
         }
     }
 

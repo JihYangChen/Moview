@@ -1,11 +1,12 @@
 var mongoose = require('mongoose');
 var MemberModel = require('../mongoDB/model/MemberModel');
 var Member = require('../entity/Member');
+var Review = require('../entity/Review');
 
 class MemberManager {
 
-    constructor() {
-
+    constructor(movieManager) {
+        this.movieManager = movieManager;
     }
     
     init = async () => {
@@ -14,9 +15,20 @@ class MemberManager {
     }
 
     generateMemberList = async () => {
-        const memberObjects = await MemberModel.find();
+        const memberObjects = await MemberModel.find()
+                                               .populate({
+                                                    path: 'reviewList',
+                                                    populate: {
+                                                        path: 'review'
+                                                    }
+                                                });
         for (var memberObject of memberObjects) {
-            this.memberList.push(new Member(memberObject));
+            let reviewList = memberObject.reviewList.map(reviewObject => {
+                let review = this.movieManager.getReviewByReviewId(reviewObject._id);
+                // ideally, review should not be null since all reviews are already gen in movieManager.
+                return review != null ? review : new Review(reviewObject);
+            })
+            this.memberList.push(new Member(memberObject, reviewList));
         }
         console.log('finish to load members from database');
     }
