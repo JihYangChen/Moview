@@ -576,6 +576,19 @@ figure {
   transition: 0.3s;
 }
 
+.program.program-schedule-grey {
+  margin-bottom: 2em;
+  padding: 40px;
+  background: #eeebeb;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
 .program.program-schedule img {
   width: 40px !important;
 }
