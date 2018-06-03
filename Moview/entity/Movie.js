@@ -33,6 +33,13 @@ class Movie {
     getReviews = () => {
         return this.reviewList;
     }
+
+    addReview = review => {
+        if (this.reviewList == null || this.reviewList.length < 1) {
+            this.reviewList = [];
+        } 
+        this.reviewList.push(review);
+    }
 }
 
 module.exports = Movie;

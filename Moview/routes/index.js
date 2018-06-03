@@ -18,7 +18,12 @@ router.get('/movieDetail/:movieId', async function(req, res, next) {
   let result = movieController.getMovieInfo(req.params.movieId);
 
   let reviewController = new ReviewController(await req.movieManager, req.memberManager);
-  console.log('reviews ->>>>>> ', reviewController.getReviews(req.params.movieId));
+  // write
+  if (req.user) {
+    reviewController.enterReview(req.user._id, req.params.movieId, 'test title', 'test content');
+  }
+  //read
+  // console.log('reviews ->>>>>> ', reviewController.getReviews(req.params.movieId));
 
   res.render('movieDetail', {movie: result});
 });
@@ -33,9 +38,9 @@ router.get('/booking/tickets/:showingId', async function(req, res, next) {
   // orderManager.removeAllOrders();
   // cinemaManager.updateAllIsOccupiedFalse();
 
-  // if (req.user) {
-  //   console.log('1234 -> ', req.user.reviewList[0].getMemberName());
-  // }
+  if (req.user) {
+    console.log('1234 -> ', req.user.getLatestReview());
+  }
 
   // var order = orderManager.getOrderById('5af47af19833fc4d6276de6a');
   // var order_showing = order.showing;

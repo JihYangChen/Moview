@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var MemberModel = require('../mongoDB/model/MemberModel');
+var ReviewModel = require('../mongoDB/model/ReviewModel');
 var Member = require('../entity/Member');
 var Review = require('../entity/Review');
 
@@ -38,6 +39,21 @@ class MemberManager {
         const newMember = await memberModel.save();
         console.log('> new member has been inserted successfully');
         return newMember._id;
+    }
+
+    // insert review to db
+    insertReview = async reviewObject => {
+        const reviewModel = new ReviewModel(reviewObject);
+        const newReview = await reviewModel.save();
+        console.log('> new review has been inserted successfully');
+        return newReview._id;
+    }
+
+    // insert review id to member
+    insertReviewIdToMember = async (memberId, reviewIdList) => {
+        await MemberModel.update({ _id: memberId }, { reviewList: reviewIdList }, { multi: false }, () => {
+            console.log('> review id have been insert to member successfully');
+        });
     }
 
     addMember = member => {

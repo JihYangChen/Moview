@@ -1,6 +1,16 @@
 class DateUtil {
 
     // 18 May 2018
+    static dateMonthYearFormattedString = timestamp => {
+        var date = new Date(timestamp * 1000);
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var year = date.getFullYear();
+        var month = date.getMonth();
+        var dt = date.getDate();
+        return dt + " " + months[month] + " " + year;
+    }
+
+    // Jun 2,2018
     static occidentDateFormattedString = timestamp => {
         var date = new Date(timestamp * 1000);
         var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];

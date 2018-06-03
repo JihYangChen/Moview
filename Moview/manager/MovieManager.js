@@ -30,6 +30,12 @@ class MovieManager {
         console.log('finish to load movies from database');
     }
 
+    insertReviewIdToMovie = async (movieId, reviewIdList) => {
+        await MovieModel.update({ _id: movieId }, { reviewList: reviewIdList }, { multi: false }, () => {
+            console.log('> review id have been insert to movie successfully');
+        });
+    }
+
     getInTheaterMovies = () => {
         return this.movieList.filter(movie => {
             return movie.movieDescription.inTheater == true;

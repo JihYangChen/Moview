@@ -1,3 +1,4 @@
+var DateUtil = require('../util/DateUtil');
 
 class Review {
     
@@ -8,7 +9,7 @@ class Review {
         }
     }
 
-    getDisplayInfo = () => {
+    getObject = () => {
         return {
             _id: this._id,
             title: this.title,
@@ -20,8 +21,20 @@ class Review {
         }
     }
 
+    getDisplayInfo = () => {
+        return {
+            _id: this._id,
+            title: this.title,
+            createTime: DateUtil.dateMonthYearFormattedString(this.createTime),
+            content: this.content,
+            likeAmount: this.likeAmount,
+            dislikeAmount: this.dislikeAmount,
+            memberName: this.memberName
+        }
+    }
+
     // for test purpose
-    
+
     getContent = () => {
         return {
             title: this.title,
