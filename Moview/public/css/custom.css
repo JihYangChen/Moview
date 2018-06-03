@@ -379,3 +379,13 @@
     text-align: left;
     vertical-align: middle;
 }
+
+.modal-dialog .modal-title {
+    display: inline-block;
+}
+
+.modal .close {
+    font-size: 25px;
+    margin-top: 3px;
+    display: inline-block;
+}
