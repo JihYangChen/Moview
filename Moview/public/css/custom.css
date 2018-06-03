@@ -328,7 +328,6 @@
 
 .likeDiv {
     display: inline-block;
-
 }
 
 .reviewMidDiv {
@@ -340,12 +339,13 @@
 }
 
 .reviewContent p {
-    font-size: 18px;
+    font-size: 19px;
 }
 
 .reviewTopDiv {
     justify-content:space-between;
     display: flex;
+    height: 35px;
 }
 
 .likeDiv i:hover {

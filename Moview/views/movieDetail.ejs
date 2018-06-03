@@ -437,85 +437,10 @@
 				</div>
 				<div class="row animate-box">
 					<div class="col-md-12">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="reviewTopDiv">
-									<div>
-										<h3>A great concept with frustrating choices</h3>
-									</div>
-									<div class="likeDiv">
-										<i class="fas fa-thumbs-up"></i> 247
-										<i class="fas fa-thumbs-down"></i> 5
-									</div>
-								</div>
-								
-								<div class="reviewMidDiv">
-									<span><a>Jason Chen</a></span>
-									<span>10 April 2018</span>
-								</div>
-								<div class="reviewContent">
-									<p>
-										Anyone who lives in the world and follows movies has a pretty good idea of the main concept behind a quiet place: there are beings that will kill you if you make a noise. The film does very little to try to explain where these beings come from, all we know is how long they've been there for and that they have change the face of the planet in a pretty radical way.
-We follow the Abbot family, who lives in a remote country house with an elaborate system to keep each other safe, but the main thing is that they have become very skilled at being very quiet.
-The incredible result of that premise is that the film has very little dialogue and instead.
-									</p>
-								</div>
-							</div>
+						<div id="reviewList">
+							
 						</div>
-						<hr>
 
-						<div class="row">
-							<div class="col-md-12">
-								<div class="reviewTopDiv">
-									<div>
-										<h3>A great concept with frustrating choices</h3>
-									</div>
-									<div class="likeDiv">
-										<i class="fas fa-thumbs-up"></i> 247
-										<i class="fas fa-thumbs-down"></i> 5
-									</div>
-								</div>
-								
-								<div class="reviewMidDiv">
-									<span><a>Jason Chen</a></span>
-									<span>10 April 2018</span>
-								</div>
-								<div class="reviewContent">
-									<p>
-										Anyone who lives in the world and follows movies has a pretty good idea of the main concept behind a quiet place: there are beings that will kill you if you make a noise. The film does very little to try to explain where these beings come from, all we know is how long they've been there for and that they have change the face of the planet in a pretty radical way.
-We follow the Abbot family, who lives in a remote country house with an elaborate system to keep each other safe, but the main thing is that they have become very skilled at being very quiet.
-The incredible result of that premise is that the film has very little dialogue and instead.
-									</p>
-								</div>
-							</div>
-						</div>
-						<hr>
-
-						<div class="row">
-							<div class="col-md-12">
-								<div class="reviewTopDiv">
-									<div>
-										<h3>A great concept with frustrating choices</h3>
-									</div>
-									<div class="likeDiv">
-										<i class="fas fa-thumbs-up"></i> 247
-										<i class="fas fa-thumbs-down"></i> 5
-									</div>
-								</div>
-								
-								<div class="reviewMidDiv">
-									<span><a>Jason Chen</a></span>
-									<span>10 April 2018</span>
-								</div>
-								<div class="reviewContent">
-									<p>
-										Anyone who lives in the world and follows movies has a pretty good idea of the main concept behind a quiet place: there are beings that will kill you if you make a noise. The film does very little to try to explain where these beings come from, all we know is how long they've been there for and that they have change the face of the planet in a pretty radical way.
-We follow the Abbot family, who lives in a remote country house with an elaborate system to keep each other safe, but the main thing is that they have become very skilled at being very quiet.
-The incredible result of that premise is that the film has very little dialogue and instead.
-									</p>
-								</div>
-							</div>
-						</div>
 						<nav aria-label="Page navigation" style="float: right;">
 							<ul class="pagination-sm" id="pagination"></ul>
 						</nav>
@@ -575,13 +500,84 @@ The incredible result of that premise is that the film has very little dialogue 
 			center:true
 		})
 
+		let reviews = [
+			{
+				"title": "0A great concept with frustrating choices dsddfsfd",
+				"memberName": "Jason Chen",
+				"createTime": "10 April 2018",
+				"content": "Hello World!!"
+			},
+			{
+				"title": "1A great concept with frustrating choices dsddfsfd",
+				"memberName": "Jason Chen",
+				"createTime": "10 April 2018",
+				"content": "Hello World!!"
+			},
+			{
+				"title": "2A great concept with frustrating choices dsddfsfd",
+				"memberName": "Jason Chen",
+				"createTime": "10 April 2018",
+				"content": "Hello World!!"
+			},
+			{
+				"title": "3A great concept with frustrating choices dsddfsfd",
+				"memberName": "Jason Chen",
+				"createTime": "10 April 2018",
+				"content": "Hello World!!"
+			},
+			{
+				"title": "4A great concept with frustrating choices dsddfsfd",
+				"memberName": "Jason Chen",
+				"createTime": "10 April 2018",
+				"content": "Hello World!!"
+			},
+			{
+				"title": "5Good Movie!!",
+				"memberName": "Kim Hsu",
+				"createTime": "15 April 2018",
+				"content": "This is the best movie i've ever seen."
+			}
+		];
+		
 		$('#pagination').twbsPagination({
-			totalPages: 10,
+			totalPages: Math.ceil(reviews.length / 5),
 			visiblePages: 5,
 			onPageClick: function (event, page) {
-				// alert('page ' + page);
+				let reviewsHTMLString = getReviewsHTMLString(reviews.slice((page-1)*5, page*5));
+				$('#reviewList').html(reviewsHTMLString);
 			}
 		});
+
+		function getReviewsHTMLString(reviews) {
+			let reviewsHTMLString = "";
+
+			for (review of reviews) {
+				reviewsHTMLString += ` \
+						<div class=\"row\"> \
+							<div class=\"col-md-12\"> \
+								<div class=\"reviewTopDiv\"> \
+									<div> \
+										<h3>${review.title}</h3> \
+									</div> \
+									<div class=\"likeDiv\"> \
+										<i class=\"fas fa-thumbs-up\"></i> 247 \
+										<i class=\"fas fa-thumbs-down\"></i> 5 \
+									</div> \
+								</div> \
+								<div class=\"reviewMidDiv\"> \
+									<span><a>${review.memberName}</a></span> \
+									<span>${review.createTime}</span> \
+								</div> \
+								<div class=\"reviewContent\"> \
+									<p> ${review.content} </p> \
+								</div> \
+							</div> \
+						</div> \
+						<hr>` ;
+			}
+
+			return reviewsHTMLString;
+		}
 	</script>
 
 
