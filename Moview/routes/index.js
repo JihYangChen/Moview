@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var MovieController = require('../controller/MovieController');
 var BookingController = require('../controller/BookingController');
+var ReviewController = require('../controller/ReviewController');
 var order = require('../entity/order/Order');
 
 /* GET home page. */
@@ -16,6 +17,9 @@ router.get('/movieDetail/:movieId', async function(req, res, next) {
   let movieController = new MovieController(await req.movieManager);
   let result = movieController.getMovieInfo(req.params.movieId);
 
+  let reviewController = new ReviewController(await req.movieManager, req.memberManager);
+  console.log('reviews ->>>>>> ', reviewController.getReviews(req.params.movieId));
+
   res.render('movieDetail', {movie: result});
 });
 
@@ -28,10 +32,10 @@ router.get('/booking/tickets/:showingId', async function(req, res, next) {
   // orderManager.removeAllTickets();
   // orderManager.removeAllOrders();
   // cinemaManager.updateAllIsOccupiedFalse();
-  
-  if (req.user) {
-    console.log('1234 -> ', req.user.reviewList[1].getContent());
-  }
+
+  // if (req.user) {
+  //   console.log('1234 -> ', req.user.reviewList[0].getMemberName());
+  // }
 
   // var order = orderManager.getOrderById('5af47af19833fc4d6276de6a');
   // var order_showing = order.showing;
@@ -41,26 +45,6 @@ router.get('/booking/tickets/:showingId', async function(req, res, next) {
   // // console.log('oreder.showing -> ', order_showing);
   // // console.log('showing -> ', cine_showing);
   // console.log('equality -> ', order_showing === cine_showing);
-
-  // let result = bookingController.selectShowing(req.params.showingId);
-
-  // let result = movieController.getMovieInfo("5aed48e6f36d2837eae61fcf");
-  // let result = movieController.getIndexMovies();
-  // let result = cinemaManager.getShowingById('5af11bf5f36d2837eae7806c');
-  // let result = bookingController.selectShowing('5af11bf5f36d2837eae7806c');
-  // let result = new order('', {
-  //   Adult: "3",
-  //   Senior: "0",
-  //   Child: "1",
-  //  });
-  //                                                       showingId
-  // let reault = bookingController.determineBookingInfo('5af11bf5f36d2837eae7806c', {
-  //                                                                                   Adult: "2",
-  //                                                                                   Senior: "1",
-  //                                                                                   Child: "1",
-  //                                                                                 });
-  //                                                          orderId
-  // console.log("good -> ", bookingController.selectSeats('5af45d79ef5d0b5d6b78781b', ["A1", "A2", "A3", "A4"]));
 
   res.render('booking/tickets', {movie: result});
 });

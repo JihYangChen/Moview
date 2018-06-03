@@ -29,6 +29,10 @@ class Movie {
         info.name = this.name;
         return info;
     }
+
+    getReviews = () => {
+        return this.reviewList;
+    }
 }
 
 module.exports = Movie;

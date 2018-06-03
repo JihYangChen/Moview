@@ -6,7 +6,8 @@ var reviewSchema = new Schema({
     createTime: String,
     content: String,
     likeAmount: Number,
-    dislikeAmount: Number
+    dislikeAmount: Number,
+    memberName: String
 }, {
     collection: 'Review'
 });
