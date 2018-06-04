@@ -389,3 +389,12 @@
     margin-top: 3px;
     display: inline-block;
 }
+
+#memberBar {
+    margin-left: 30px;
+}
+
+#memberBar img {
+    height: 30px;
+    -webkit-clip-path:circle(50% at 50% 50%);
+}
