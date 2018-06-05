@@ -1,3 +1,4 @@
+var LikeCommand = require('../entity/LikeCommand');
 
 class ReviewController {
 
@@ -26,6 +27,30 @@ class ReviewController {
         this.movieManager.insertReviewIdToMovie(movie._id, movie.getReviews().map(review => {
             return review._id;
         }));
+    }
+
+    likeReview = (reviewId, memberId, isLike, isCancel) => {
+        let review = this.movieManager.getReviewByReviewId(reviewId);
+        let member = this.memberManager.getMemberById(memberId);
+        var command;
+        if (isLike && !isCancel) {
+            command = new LikeCommand.LikeReviewCommand(member, review);
+        } else if (isLike && isCancel) {
+            command = new LikeCommand.CancelLikeReviewCommand(member, review);
+        } else if (!isLike && !isCancel) {
+            command = new LikeCommand.DislikeReviewCommand(member, review);
+        } else if (!isLike && isCancel) {
+            command = new LikeCommand.CancelDislikeReviewCommand(member, review);
+        }
+        command.execute();
+
+        if (isLike) {
+            this.memberManager.updateLikeReviewIdsToMember(memberId, member.likeReviewIds);
+            this.memberManager.updatelikeAmount(reviewId, review.likeAmount);
+        } else {
+            this.memberManager.updateDislikeReviewIdsToMember(memberId, member.dislikeReviewIds);
+            this.memberManager.updateDislikeAmount(reviewId, review.dislikeAmount);
+        }
     }
 }
 

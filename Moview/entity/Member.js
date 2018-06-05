@@ -2,7 +2,7 @@ var Review = require('./Review');
 
 class Member {
     
-    // props = {id, fbId, name, email, profileUrl, reviewList}
+    // props = {id, fbId, name, email, profileUrl, reviewList, likeReviewIds, dislikeReviewIds}
     constructor(memberObject, reviewList) {
         for (var prop in memberObject) {
             this[prop] = prop == 'reviewList' ? reviewList : memberObject[prop];
@@ -13,6 +13,54 @@ class Member {
         return this.reviewList.map(review => {
             return review._id;
         });
+    }
+
+    isLikeReview = reviewId => {
+        if (this.likeReviewIds.length > 0) {
+            return this.likeReviewIds.includes(reviewId);
+        }
+        return false;
+    }
+
+    isDislikeReview = reviewId => {
+        if (this.dislikeReviewIds.length > 0) {
+            return this.dislikeReviewIds.includes(reviewId);
+        }
+        return false;
+    }
+
+    addLikeReview = reviewId => {
+        if (this.likeReviewIds == null) {
+            this.likeReviewIds = [];
+        }
+        this.likeReviewIds.push(reviewId);
+    }
+
+    removeLikeReview = reviewId => {
+        let targetIndex = this.likeReviewIds.indexOf(reviewId);
+        if (targetIndex == -1) { return; }
+        if (targetIndex == this.likeReviewIds.length - 1) {
+            this.likeReviewIds.pop();
+            return;
+        }
+        this.likeReviewIds.splice(targetIndex, targetIndex + 1);
+    }
+
+    addDislikeReview = reviewId => {
+        if (this.dislikeReviewIds == null) {
+            this.dislikeReviewIds = [];
+        }
+        this.dislikeReviewIds.push(reviewId);
+    }
+
+    removeDislikeReview = reviewId => {
+        let targetIndex = this.dislikeReviewIds.indexOf(reviewId);
+        if (targetIndex == -1) { return; }
+        if (targetIndex == this.dislikeReviewIds.length - 1) {
+            this.dislikeReviewIds.pop();
+            return;
+        }
+        this.dislikeReviewIds.splice(targetIndex, targetIndex + 1);
     }
 
     getInfo = () => {

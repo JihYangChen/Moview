@@ -7,7 +7,9 @@ var memberSchema = new Schema({
     name: String,
     email: String,
     profileUrl: String,
-    reviewList: [{type: Schema.Types.ObjectId, required: true, ref: 'Review'}]
+    reviewList: [{type: Schema.Types.ObjectId, required: true, ref: 'Review'}],
+    likeReviewIds: [String],
+    dislikeReviewIds: [String]
 }, {
     collection: 'Member',
     versionKey: false

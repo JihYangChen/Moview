@@ -20,7 +20,9 @@ router.get('/movieDetail/:movieId', async function(req, res, next) {
   let reviewController = new ReviewController(await req.movieManager, req.memberManager);
   // write
   if (req.user) {
-    reviewController.enterReview(req.user._id, req.params.movieId, 'test title', 'test content');
+    //                                    reviewId             memberId
+    reviewController.likeReview("5b1250a0fb6fc07c033d8cbe", req.user._id, false, true);
+    // reviewController.enterReview(req.user._id, req.params.movieId, 'test title', 'test content');
   }
   //read
   // console.log('reviews ->>>>>> ', reviewController.getReviews(req.params.movieId));
