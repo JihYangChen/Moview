@@ -321,3 +321,80 @@
 #successTickets {
     margin-top: 50px;
 }
+
+#writeReviewButton {
+    float: right;
+}
+
+#reviewList {
+    margin-top: 80px;
+}
+
+.reviewTitle {
+    display: inline-block;
+}
+
+.likeDiv {
+    display: inline-block;
+}
+
+.reviewMidDiv {
+    display: block;
+}
+
+.reviewContent {
+    margin-top: 10px;
+}
+
+.reviewContent p {
+    font-size: 19px;
+}
+
+.reviewTopDiv {
+    justify-content:space-between;
+    display: flex;
+    height: 35px;
+}
+
+.likeDiv i:hover {
+    color: #2494ea;
+    cursor: pointer;
+}
+
+.modal {
+    text-align: center;
+    padding: 0!important;
+}
+
+.modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px; /* Adjusts for spacing */
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.modal-dialog .modal-title {
+    display: inline-block;
+}
+
+.modal .close {
+    font-size: 25px;
+    margin-top: 3px;
+    display: inline-block;
+}
+
+#memberBar {
+    margin-left: 30px;
+}
+
+#memberBar img {
+    height: 30px;
+    -webkit-clip-path:circle(50% at 50% 50%);
+}

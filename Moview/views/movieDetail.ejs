@@ -53,7 +53,7 @@
 	<link rel="stylesheet" href="../css/superfish.css">
 
 	<link rel="stylesheet" href="../css/style.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
 	<!-- owlcarousel -->
 	<link rel="stylesheet" href="../owlcarousel/assets/owl.carousel.min.css">
@@ -425,6 +425,61 @@
 			</div>
 		</div>
 
+		<!-- User Reviews -->
+		<div id="fh5co-team-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<div class="heading-section text-center animate-box">
+							<h2>User Reviews</h2>
+						</div>
+					</div>
+				</div>
+				<div class="row animate-box">
+					<div class="col-md-12">
+						<button type="button" id="writeReviewButton" class="btn btn-default" data-toggle="modal" data-target="#exampleModal">
+							<i class="far fa-edit"></i> Write Review
+						</button>
+						<div id="reviewList">
+							
+						</div>
+
+						<nav aria-label="Page navigation" style="float: right;">
+							<ul class="pagination-sm" id="pagination"></ul>
+						</nav>
+					</div>					
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title" id="exampleModalLabel"><i class="far fa-edit"></i> Write Review</h3>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form class="contact-form">
+							<div class="form-group">
+								<input type="name" class="form-control" id="name" placeholder="Title">
+							</div>
+							<div class="form-group">
+								<textarea class="form-control" id="message" rows="7" placeholder="Content"></textarea>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary">Submit</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<% include footer %>
 	
 
@@ -457,6 +512,9 @@
 	<!-- owlcarousel -->
 	<script src="../owlcarousel/owl.carousel.min.js"></script>
 
+	<!-- twbsPagination -->
+	<script src="../js/jquery.twbsPagination.js" type="text/javascript"></script>
+
 	<script>
 		$('.imgsCarouselDiv').owlCarousel({
 			margin:10,
@@ -472,6 +530,100 @@
 			lazyLoad:true,
 			center:true
 		})
+
+		let reviews = [
+			{
+				"title": "0A great concept with frustrating choices dsddfsfd",
+				"memberName": "Jason Chen",
+				"createTime": "10 April 2018",
+				"content": "Hello World!!"
+			},
+			{
+				"title": "0A great concept with frustrating choices dsddfsfd",
+				"memberName": "Jason Chen",
+				"createTime": "10 April 2018",
+				"content": "Hello World!!"
+			},
+			{
+				"title": "0A great concept with frustrating choices dsddfsfd",
+				"memberName": "Jason Chen",
+				"createTime": "10 April 2018",
+				"content": "Hello World!!"
+			},
+			{
+				"title": "1A great concept with frustrating choices dsddfsfd",
+				"memberName": "Jason Chen",
+				"createTime": "10 April 2018",
+				"content": "Hello World!!"
+			},
+			{
+				"title": "2A great concept with frustrating choices dsddfsfd",
+				"memberName": "Jason Chen",
+				"createTime": "10 April 2018",
+				"content": "Hello World!!"
+			},
+			{
+				"title": "3A great concept with frustrating choices dsddfsfd",
+				"memberName": "Jason Chen",
+				"createTime": "10 April 2018",
+				"content": "Hello World!!"
+			},
+			{
+				"title": "4A great concept with frustrating choices dsddfsfd",
+				"memberName": "Jason Chen",
+				"createTime": "10 April 2018",
+				"content": "Hello World!!"
+			},
+			{
+				"title": "5Good Movie!!",
+				"memberName": "Kim Hsu",
+				"createTime": "15 April 2018",
+				"content": "This is the best movie i've ever seen."
+			}
+		];
+
+		$('#pagination').twbsPagination({
+			totalPages: Math.ceil(reviews.length / 5),
+			visiblePages: 5,
+			onPageClick: function (event, page) {
+				let reviewsHTMLString = getReviewsHTMLString(reviews.slice((page-1)*5, page*5));
+				$('#reviewList').html(reviewsHTMLString);
+			}
+		});
+
+		function getReviewsHTMLString(reviews) {
+			let reviewsHTMLString = "";
+			for (review of reviews) {
+				reviewsHTMLString += ` \
+						<div class=\"row\"> \
+							<div class=\"col-md-12\"> \
+								<div class=\"reviewTopDiv\"> \
+									<div> \
+										<h3>${review.title}</h3> \
+									</div> \
+									<div class=\"likeDiv\"> \
+										<i class=\"fas fa-thumbs-up\"></i> 247 \
+										<i class=\"fas fa-thumbs-down\"></i> 5 \
+									</div> \
+								</div> \
+								<div class=\"reviewMidDiv\"> \
+									<span><a>${review.memberName}</a></span> \
+									<span>${review.createTime}</span> \
+								</div> \
+								<div class=\"reviewContent\"> \
+									<p> ${review.content} </p> \
+								</div> \
+							</div> \
+						</div> \
+						<hr>` ;
+			}
+
+			return reviewsHTMLString;
+		}
+
+		// $("#writeReviewButton").click(function() {
+		// 	document.location.href = "/review/writeReview";
+		// });
 	</script>
 
 
