@@ -101,4 +101,9 @@ router.get('/booking/paySuccess', function(req, res, next) {
   res.render('booking/paySuccess', {tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, orderId: req.session.order.id});
 });
 
+router.post('/review/writeReview', function(req, res, next) {
+  // let tickets = req.session.order.tickets;
+  // res.render('booking/paySuccess', {tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, orderId: req.session.order.id});
+});
+
 module.exports = router;
