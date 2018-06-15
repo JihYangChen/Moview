@@ -1,6 +1,7 @@
 var Ticket = require('./Ticket');
 var Showing = require('../cinema/Showing');
 var TicketSimpleFactory = require('./TicketSimpleFactory');
+var STATUS = require('./OrderStatusEnum');
 
 class Order {
     
@@ -8,7 +9,7 @@ class Order {
     constructor(showing, bookingInfo, orderObject) {
         if (orderObject === undefined) {
             // creater order
-            this.status = 'initialized';
+            this.status = STATUS.Initialized;
             this.showing = showing;
             this.ticketList = this.generateTicketList(bookingInfo);
         } else {
@@ -57,7 +58,8 @@ class Order {
     getOrderObject = () => {
         return {
             status: this.status,
-            showing: this.showing._id
+            showing: this.showing._id,
+            memberId: this.memberId
         }
     }
 

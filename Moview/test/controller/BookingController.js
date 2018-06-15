@@ -100,9 +100,10 @@ describe('BookingController', () => {
     });
 
     it('should return order id and seats after determine booking info', () => {
-        var stub = sinon.stub(bookingController, 'determineBookingInfo').withArgs('showing001', {Adult: 1}).callsFake(() => {
+        var stub = sinon.stub(bookingController, 'determineBookingInfo').withArgs('showing001', {Adult: 1}, 'memberId').callsFake(() => {
             var showing = cinemaManager.getShowingById('showing001');
             var order = new Order(showing, {Adult: 1});
+            order.memberId = 'memberId';
             order._id = 'newOrder001';
             orderManager.orderList = [order];
             // showing = orderManager.getOrderById(order._id).showing;
@@ -112,7 +113,7 @@ describe('BookingController', () => {
                 seats: showing.getNotOccupiedSeats()
             }
         });
-        let result = bookingController.determineBookingInfo('showing001', {Adult: 1});
+        let result = bookingController.determineBookingInfo('showing001', {Adult: 1}, 'memberId');
         expect(result.orderId).to.equal('newOrder001');
         expect(result.seats[0].row).to.equal('A');
         expect(result.seats[0].column).to.equal('1');

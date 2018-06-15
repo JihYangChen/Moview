@@ -6,7 +6,8 @@ require('../order/TicketModel');
 var orderSchema = new Schema({
     status: String,
     showing: {type: Schema.Types.ObjectId, required: true, ref: 'Showing'},
-    ticketList: [{type: Schema.Types.ObjectId, required: true, ref: 'Ticket'}]
+    ticketList: [{type: Schema.Types.ObjectId, required: true, ref: 'Ticket'}],
+    memberId: String
 }, {
     collection: 'Order',
     versionKey: false
