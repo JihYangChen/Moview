@@ -41,6 +41,12 @@ class MemberManager {
         return newMember._id;
     }
 
+    updateProfileUrl = async (memberId, profileUrl) => {
+        await MemberModel.update({ _id: memberId }, { profileUrl: profileUrl }, { multi: false }, () => {
+            console.log('> profileUrl has been update to member successfully');
+        });
+    }
+
     // insert review to db
     insertReview = async reviewObject => {
         const reviewModel = new ReviewModel(reviewObject);

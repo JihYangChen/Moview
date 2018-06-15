@@ -1,4 +1,5 @@
 var Order = require('../entity/order/Order');
+var STATUS = require('../entity/order/OrderStatusEnum');
 
 class BookingController {
 
@@ -12,9 +13,10 @@ class BookingController {
         return showing.getBookingProcessDisplayInfo();
     }
 
-    determineBookingInfo = async (showingId, bookingInfo) => {
+    determineBookingInfo = async (showingId, bookingInfo, memberId) => {
         var showing = this.cinemaManager.getShowingById(showingId);
         var order = this.createOrder(showing, bookingInfo);
+        order.memberId = memberId;
         var orderId = await this.orderManager.saveOrder(order);
         await this.orderManager.addOrder(orderId);
         return {
@@ -37,6 +39,19 @@ class BookingController {
         let showingSeatObjects = showing.getShowingSeatObjects(seatNames);
         this.cinemaManager.updateShowingSeats(showingSeatObjects);
         return order.getConfirmDisplayInfos();
+    }
+
+    updateOrderStatusPaid = orderId => {
+        this.orderManager.updateStatus(orderId, STATUS.Paid);
+    }
+
+    getOrdersInfo = memberId => {
+        let orders = this.orderManager.getValidOrdersByMemberId(memberId);
+        // todo, return some display info
+    }
+
+    cancelOrder = orderId => {
+        this.orderManager.updateStatus(orderId, STATUS.Canceled);
     }
 
     // TMP create order here, can move whole method to Member until finish implementation

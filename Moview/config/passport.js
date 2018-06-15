@@ -26,9 +26,12 @@ module.exports = passport => {
         memberManager = await req.memberManager;
         let url = "https://graph.facebook.com/" + profile.id + "?fields=picture&access_token=" + accessToken;
         await fetchProfilePic(url, async (err, result) => {
+            console.log('profile url -> ', result);
             // profile.profile_pic = result
             let member = memberManager.getMemberByFbId(profile.id);
             if (member != null) {
+                member.profileUrl = result;
+                memberManager.updateProfileUrl(member._id, result);
                 return cb(null, member);
             } else {
                 let email = profile.emails ? profile.emails[0].value : null;

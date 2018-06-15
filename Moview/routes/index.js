@@ -41,8 +41,10 @@ router.get('/booking/tickets/:showingId', async function(req, res, next) {
   // cinemaManager.updateAllIsOccupiedFalse();
 
   if (req.user) {
-    console.log('1234 -> ', req.user.getLatestReview());
+    // console.log('1234 -> ', req.user.getLatestReview());
   }
+  // bookingController.getOrdersInfo('5b1173f2bb0ac52bc67b15d8');
+  bookingController.cancelOrder('5b23b911e0966530b9126670');
 
   // var order = orderManager.getOrderById('5af47af19833fc4d6276de6a');
   // var order_showing = order.showing;
@@ -64,7 +66,7 @@ router.post('/booking/setTicketsAmount', async function(req, res, next) {
       Adult: req.body.adultAmount,
       Senior: req.body.seniorAmount,
       Child: req.body.childAmount
-  });
+  }, req.user ? req.user._id : "");
   req.session.order.id = result.orderId;
   req.session.order.isNotOccupiedSeats = result.seats;
 
@@ -96,7 +98,9 @@ router.get('/booking/payment', function(req, res, next) {
   res.render('booking/payment', {subtotal: req.session.order.subtotal});
 });
 
-router.get('/booking/paySuccess', function(req, res, next) {
+router.get('/booking/paySuccess', async function(req, res, next) {
+  let bookingController = new BookingController(await req.cinemaManager, await req.orderManager);
+  bookingController.updateOrderStatusPaid(req.session.order.id);
   let tickets = req.session.order.tickets;
   res.render('booking/paySuccess', {tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, orderId: req.session.order.id});
 });
