@@ -9,9 +9,21 @@ var order = require('../entity/order/Order');
 router.get('/', async function(req, res, next) {
   let movieController = new MovieController(await req.movieManager);
   let result = movieController.getIndexMovies();
-
-  res.render('index', {inTheaterMovies: result[0], comingSoonMovies: result[1]});
+  
+  res.render('index', {inTheaterMovies: result[0], comingSoonMovies: result[1], user: getUserInfo(req)});
 });
+
+function getUserInfo(req) {
+  let user = {};
+  if (req.user) {
+    user = req.user;
+    user.isLogin = true;
+  }
+  else
+    user.isLogin = false;
+  
+  return user;
+}
 
 router.get('/movieDetail/:movieId', async function(req, res, next) {
   let movieController = new MovieController(await req.movieManager);

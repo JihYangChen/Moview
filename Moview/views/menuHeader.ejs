@@ -1,5 +1,6 @@
 <div id="fh5co-header">
     <header id="fh5co-header-section">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
         <div class="container">
             <div class="nav-header">
                 <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
@@ -22,16 +23,16 @@
                         </li>
 
                         <li id="memberBar">
-                            <a href="#" class="fh5co-sub-ddown"><img src="images/profileImg.jpg"> John Doe</a>
-                            <ul class="fh5co-sub-menu">
-                                <li><a href="#">Tickets History</a></li>
-                                <li><a href="#">Logout</a></li>
-                            </ul>
+                            <% if (user.isLogin) { %>
+                                <a href="#" class="fh5co-sub-ddown"><img id="profileImg" src="images/profilepic.jpg">  <%= user.name %></a>
+                                <ul class="fh5co-sub-menu">
+                                    <li><a href="#">Tickets History</a></li>
+                                    <li><a href="#"><i class="fab fa-facebook-square" id="logoutLogo"></i> Logout</a></li>
+                                </ul>
+                            <% } else { %>
+                                <a href="/auth/facebook"><img id="loginButton" src="images/login-FB.png"></a>
+                            <% } %>
                         </li>
-
-                        <!-- <li id="memberBar">
-                            <a href="http://localhost:3000">Login</a>
-                        </li> -->
                     </ul>
                     
                 </nav>

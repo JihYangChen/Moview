@@ -394,7 +394,17 @@
     margin-left: 30px;
 }
 
-#memberBar img {
+#memberBar #profileImg {
     height: 30px;
     -webkit-clip-path:circle(50% at 50% 50%);
+}
+
+#memberBar #loginButton {
+    height: 30px;
+    position: relative;
+    top: -5px;
+}
+
+#logoutLogo {
+    color: #4166b0;
 }
