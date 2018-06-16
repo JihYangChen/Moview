@@ -437,11 +437,11 @@
 				</div>
 				<div class="row animate-box">
 					<div class="col-md-12">
-						<button type="button" id="writeReviewButton" class="btn btn-default" data-toggle="modal" data-target="#exampleModal">
+						<button type="button" id="writeReviewButton" class="btn btn-default" data-toggle="modal" data-target="#reviewModal">
 							<i class="far fa-edit"></i> Write Review
 						</button>
 						<div id="reviewList">
-							
+
 						</div>
 
 						<nav aria-label="Page navigation" style="float: right;">
@@ -453,7 +453,7 @@
 		</div>
 
 		<!-- Modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -465,16 +465,16 @@
 					<div class="modal-body">
 						<form class="contact-form">
 							<div class="form-group">
-								<input type="name" class="form-control" id="name" placeholder="Title">
+								<input id="reviewTitle" type="name" class="form-control" placeholder="Title">
 							</div>
 							<div class="form-group">
-								<textarea class="form-control" id="message" rows="7" placeholder="Content"></textarea>
+								<textarea id="reviewContent" class="form-control" id="message" rows="7" placeholder="Content"></textarea>
 							</div>
 						</form>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-primary">Submit</button>
+						<button id="submitReviewButton" type="button" class="btn btn-primary">Submit</button>
 					</div>
 				</div>
 			</div>
@@ -531,65 +531,22 @@
 			center:true
 		})
 
-		let reviews = [
-			{
-				"title": "0A great concept with frustrating choices dsddfsfd",
-				"memberName": "Jason Chen",
-				"createTime": "10 April 2018",
-				"content": "Hello World!!"
-			},
-			{
-				"title": "0A great concept with frustrating choices dsddfsfd",
-				"memberName": "Jason Chen",
-				"createTime": "10 April 2018",
-				"content": "Hello World!!"
-			},
-			{
-				"title": "0A great concept with frustrating choices dsddfsfd",
-				"memberName": "Jason Chen",
-				"createTime": "10 April 2018",
-				"content": "Hello World!!"
-			},
-			{
-				"title": "1A great concept with frustrating choices dsddfsfd",
-				"memberName": "Jason Chen",
-				"createTime": "10 April 2018",
-				"content": "Hello World!!"
-			},
-			{
-				"title": "2A great concept with frustrating choices dsddfsfd",
-				"memberName": "Jason Chen",
-				"createTime": "10 April 2018",
-				"content": "Hello World!!"
-			},
-			{
-				"title": "3A great concept with frustrating choices dsddfsfd",
-				"memberName": "Jason Chen",
-				"createTime": "10 April 2018",
-				"content": "Hello World!!"
-			},
-			{
-				"title": "4A great concept with frustrating choices dsddfsfd",
-				"memberName": "Jason Chen",
-				"createTime": "10 April 2018",
-				"content": "Hello World!!"
-			},
-			{
-				"title": "5Good Movie!!",
-				"memberName": "Kim Hsu",
-				"createTime": "15 April 2018",
-				"content": "This is the best movie i've ever seen."
-			}
-		];
-
-		$('#pagination').twbsPagination({
-			totalPages: Math.ceil(reviews.length / 5),
-			visiblePages: 5,
-			onPageClick: function (event, page) {
-				let reviewsHTMLString = getReviewsHTMLString(reviews.slice((page-1)*5, page*5));
-				$('#reviewList').html(reviewsHTMLString);
-			}
-		});
+		// Reviews
+		let reviews = <%- JSON.stringify(reviews) %>;
+		
+		if (reviews.length != 0) {
+			$('#pagination').twbsPagination({
+				totalPages: Math.ceil(reviews.length / 5),
+				visiblePages: 5,
+				onPageClick: function (event, page) {
+					let reviewsHTMLString = getReviewsHTMLString(reviews.slice((page-1)*5, page*5));
+					$('#reviewList').html(reviewsHTMLString);
+				}
+			});
+		}
+		else {
+			$('#reviewList').html("<h4>No Review...<h4>");
+		}
 
 		function getReviewsHTMLString(reviews) {
 			let reviewsHTMLString = "";
@@ -602,8 +559,8 @@
 										<h3>${review.title}</h3> \
 									</div> \
 									<div class=\"likeDiv\"> \
-										<i class=\"fas fa-thumbs-up\"></i> 247 \
-										<i class=\"fas fa-thumbs-down\"></i> 5 \
+										<i class=\"fas fa-thumbs-up\"></i> ${review.likeAmount} \
+										<i class=\"fas fa-thumbs-down\"></i> ${review.dislikeAmount} \
 									</div> \
 								</div> \
 								<div class=\"reviewMidDiv\"> \
@@ -621,9 +578,28 @@
 			return reviewsHTMLString;
 		}
 
-		// $("#writeReviewButton").click(function() {
-		// 	document.location.href = "/review/writeReview";
-		// });
+		$('#writeReviewButton').click(function() {
+			if (!<%= user.isLogin %>) {
+				document.location.href = "/auth/facebook";
+			}
+		})
+
+		$("#submitReviewButton").click(function() {
+			$.ajax({
+				method: "POST",
+				contentType:"application/json; charset=utf-8",
+				url: "/enterReview",
+				data: JSON.stringify(
+					{
+						movieId: "<%= movie._id %>", 
+						title: $('#reviewTitle').val(), 
+						content: $('#reviewContent').val(),
+					}
+				)
+			}).done(function (msg) {
+				document.location.reload();
+			});
+		});
 	</script>
 
 

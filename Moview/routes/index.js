@@ -27,7 +27,7 @@ router.get('/', async function(req, res, next) {
 
 router.get('/movieDetail/:movieId', async function(req, res, next) {
   let movieController = new MovieController(await req.movieManager);
-  let result = movieController.getMovieInfo(req.params.movieId);
+  let movie = movieController.getMovieInfo(req.params.movieId);
 
   let reviewController = new ReviewController(await req.movieManager, req.memberManager);
   // write
@@ -36,10 +36,22 @@ router.get('/movieDetail/:movieId', async function(req, res, next) {
     reviewController.likeReview("5b1250a0fb6fc07c033d8cbe", req.user._id, false, true);
     // reviewController.enterReview(req.user._id, req.params.movieId, 'test title', 'test content');
   }
-  //read
-  // console.log('reviews ->>>>>> ', reviewController.getReviews(req.params.movieId));
 
-  res.render('movieDetail', {movie: result, user: getUserInfo(req)});
+  //read
+  let reviews = reviewController.getReviews(req.params.movieId);
+  console.log('reviews ->>>>>> ', reviewController.getReviews(req.params.movieId));
+
+  res.render('movieDetail', {movie: movie, reviews: reviews, user: getUserInfo(req)});
+});
+
+router.post('/enterReview', async function(req, res, next) {
+  if (!req.user)
+    res.redirect('/auth/facebook');
+  
+  let reviewController = new ReviewController(await req.movieManager, req.memberManager);
+  await reviewController.enterReview(req.user._id, req.body.movieId, req.body.title, req.body.content);
+
+  res.send('OK');
 });
 
 router.get('/booking/tickets/:showingId', async function(req, res, next) {
