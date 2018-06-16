@@ -24,13 +24,13 @@
 
                         <li id="memberBar">
                             <% if (user.isLogin) { %>
-                                <a href="#" class="fh5co-sub-ddown"><img id="profileImg" src="images/profilepic.jpg">  <%= user.name %></a>
+                                <a href="#" class="fh5co-sub-ddown"><img id="profileImg" src="<%= user.profileUrl %>">  <%= user.name %></a>
                                 <ul class="fh5co-sub-menu">
                                     <li><a href="#">Tickets History</a></li>
                                     <li><a href="#"><i class="fab fa-facebook-square" id="logoutLogo"></i> Logout</a></li>
                                 </ul>
                             <% } else { %>
-                                <a href="/auth/facebook"><img id="loginButton" src="images/login-FB.png"></a>
+                                <a href="/auth/facebook"><img id="loginButton" src="/images/login-FB.png"></a>
                             <% } %>
                         </li>
                     </ul>

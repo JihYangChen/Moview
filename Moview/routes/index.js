@@ -5,14 +5,6 @@ var BookingController = require('../controller/BookingController');
 var ReviewController = require('../controller/ReviewController');
 var order = require('../entity/order/Order');
 
-/* GET home page. */
-router.get('/', async function(req, res, next) {
-  let movieController = new MovieController(await req.movieManager);
-  let result = movieController.getIndexMovies();
-  
-  res.render('index', {inTheaterMovies: result[0], comingSoonMovies: result[1], user: getUserInfo(req)});
-});
-
 function getUserInfo(req) {
   let user = {};
   if (req.user) {
@@ -24,6 +16,14 @@ function getUserInfo(req) {
   
   return user;
 }
+
+/* GET home page. */
+router.get('/', async function(req, res, next) {
+  let movieController = new MovieController(await req.movieManager);
+  let result = movieController.getIndexMovies();
+  
+  res.render('index', {inTheaterMovies: result[0], comingSoonMovies: result[1], user: getUserInfo(req)});
+});
 
 router.get('/movieDetail/:movieId', async function(req, res, next) {
   let movieController = new MovieController(await req.movieManager);
@@ -39,7 +39,7 @@ router.get('/movieDetail/:movieId', async function(req, res, next) {
   //read
   // console.log('reviews ->>>>>> ', reviewController.getReviews(req.params.movieId));
 
-  res.render('movieDetail', {movie: result});
+  res.render('movieDetail', {movie: result, user: getUserInfo(req)});
 });
 
 router.get('/booking/tickets/:showingId', async function(req, res, next) {
@@ -67,7 +67,7 @@ router.get('/booking/tickets/:showingId', async function(req, res, next) {
   // // console.log('showing -> ', cine_showing);
   // console.log('equality -> ', order_showing === cine_showing);
 
-  res.render('booking/tickets', {movie: result});
+  res.render('booking/tickets', {movie: result, user: getUserInfo(req)});
 });
 
 router.post('/booking/setTicketsAmount', async function(req, res, next) {
@@ -90,7 +90,7 @@ router.get('/booking/seats', async function(req, res, next) {
     isNotOccupiedSeats : req.session.order.isNotOccupiedSeats,
     totalTicketsAmount : req.session.order.totalTicketsAmount
   };
-  res.render('booking/seats', seatInfo);
+  res.render('booking/seats', {seatInfo: seatInfo, user: getUserInfo(req)});
 });
 
 router.post('/booking/selectSeats', async function(req, res, next) {
@@ -103,18 +103,18 @@ router.post('/booking/selectSeats', async function(req, res, next) {
 
 router.get('/booking/confirmOrder', function(req, res, next) {
   let tickets = req.session.order.tickets;
-  res.render('booking/confirmOrder', {tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, subtotal: req.session.order.subtotal});
+  res.render('booking/confirmOrder', {tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, subtotal: req.session.order.subtotal, user: getUserInfo(req)});
 });
 
 router.get('/booking/payment', function(req, res, next) {
-  res.render('booking/payment', {subtotal: req.session.order.subtotal});
+  res.render('booking/payment', {subtotal: req.session.order.subtotal, user: getUserInfo(req)});
 });
 
 router.get('/booking/paySuccess', async function(req, res, next) {
   let bookingController = new BookingController(await req.cinemaManager, await req.orderManager);
   bookingController.updateOrderStatusPaid(req.session.order.id);
   let tickets = req.session.order.tickets;
-  res.render('booking/paySuccess', {tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, orderId: req.session.order.id});
+  res.render('booking/paySuccess', {tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, orderId: req.session.order.id, user: getUserInfo(req)});
 });
 
 router.post('/review/writeReview', function(req, res, next) {
