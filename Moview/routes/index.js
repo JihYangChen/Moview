@@ -3,6 +3,7 @@ var router = express.Router();
 var MovieController = require('../controller/MovieController');
 var BookingController = require('../controller/BookingController');
 var ReviewController = require('../controller/ReviewController');
+var SearchController = require('../controller/SearchController');
 var order = require('../entity/order/Order');
 
 function getUserInfo(req) {
@@ -21,6 +22,9 @@ function getUserInfo(req) {
 router.get('/', async function(req, res, next) {
   let movieController = new MovieController(await req.movieManager);
   let result = movieController.getIndexMovies();
+
+  let searchController = new SearchController(await req.movieManager);
+  console.log('search result=====> ', searchController.searchWith('a'));
   
   res.render('index', {inTheaterMovies: result[0], comingSoonMovies: result[1], user: getUserInfo(req)});
 });
