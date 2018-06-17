@@ -5,7 +5,7 @@ var BookingController = require('../controller/BookingController');
 var ReviewController = require('../controller/ReviewController');
 var order = require('../entity/order/Order');
 
-function getUserInfo(req) {
+let getUserInfo = (req) => {
   let user = {};
   if (req.user) {
     user = req.user;
@@ -15,6 +15,13 @@ function getUserInfo(req) {
     user.isLogin = false;
   
   return user;
+}
+
+let checkLoginRequest = (req, res, next) => {
+  if (!req.user)
+    res.send("User hasn't login");
+  else
+    next();
 }
 
 /* GET home page. */
@@ -44,12 +51,37 @@ router.get('/movieDetail/:movieId', async function(req, res, next) {
   res.render('movieDetail', {movie: movie, reviews: reviews, user: getUserInfo(req)});
 });
 
-router.post('/enterReview', async function(req, res, next) {
-  if (!req.user)
-    res.redirect('/auth/facebook');
-  
+router.post('/review/enterReview', checkLoginRequest, async function(req, res, next) {
   let reviewController = new ReviewController(await req.movieManager, req.memberManager);
   await reviewController.enterReview(req.user._id, req.body.movieId, req.body.title, req.body.content);
+
+  res.send('OK');
+});
+
+router.post('/review/likeReview', checkLoginRequest, async function(req, res, next) {
+  let reviewController = new ReviewController(await req.movieManager, req.memberManager);
+  reviewController.likeReview(req.body.reviewId, req.user._id);
+
+  res.send('OK');
+});
+
+router.post('/review/cancelLikeReview', checkLoginRequest,async function(req, res, next) {
+  let reviewController = new ReviewController(await req.movieManager, req.memberManager);
+  reviewController.cancelLikeReview(req.body.reviewId, req.user._id);
+
+  res.send('OK');
+});
+
+router.post('/review/dislikeReview', checkLoginRequest, async function(req, res, next) {  
+  let reviewController = new ReviewController(await req.movieManager, req.memberManager);
+  reviewController.dislikeReview(req.body.reviewId, req.user._id);
+
+  res.send('OK');
+});
+
+router.post('/review/cancelDislikeReview', checkLoginRequest, async function(req, res, next) {
+  let reviewController = new ReviewController(await req.movieManager, req.memberManager);
+  reviewController.cancelDislikeReview(req.body.reviewId, req.user._id);
 
   res.send('OK');
 });
@@ -127,11 +159,6 @@ router.get('/booking/paySuccess', async function(req, res, next) {
   bookingController.updateOrderStatusPaid(req.session.order.id);
   let tickets = req.session.order.tickets;
   res.render('booking/paySuccess', {tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, orderId: req.session.order.id, user: getUserInfo(req)});
-});
-
-router.post('/review/writeReview', function(req, res, next) {
-  // let tickets = req.session.order.tickets;
-  // res.render('booking/paySuccess', {tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, orderId: req.session.order.id});
 });
 
 module.exports = router;

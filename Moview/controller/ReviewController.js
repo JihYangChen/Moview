@@ -29,28 +29,55 @@ class ReviewController {
         }));
     }
 
-    likeReview = (reviewId, memberId, isLike, isCancel) => {
+    likeReview = (reviewId, memberId) => {
+        let review = this.movieManager.getReviewByReviewId(reviewId);
+        console.log('reviewId ->', reviewId)
+        console.log('review ->', reviewId)
+        let member = this.memberManager.getMemberById(memberId);
+        var command;
+
+        command = new LikeCommand.LikeReviewCommand(member, review);
+        command.execute();
+
+        this.memberManager.updateLikeReviewIdsToMember(memberId, member.likeReviewIds);
+        this.memberManager.updatelikeAmount(reviewId, review.likeAmount);
+    }
+
+    cancelLikeReview = (reviewId, memberId) => {
         let review = this.movieManager.getReviewByReviewId(reviewId);
         let member = this.memberManager.getMemberById(memberId);
         var command;
-        if (isLike && !isCancel) {
-            command = new LikeCommand.LikeReviewCommand(member, review);
-        } else if (isLike && isCancel) {
-            command = new LikeCommand.CancelLikeReviewCommand(member, review);
-        } else if (!isLike && !isCancel) {
-            command = new LikeCommand.DislikeReviewCommand(member, review);
-        } else if (!isLike && isCancel) {
-            command = new LikeCommand.CancelDislikeReviewCommand(member, review);
-        }
+       
+        command = new LikeCommand.CancelLikeReviewCommand(member, review);
         command.execute();
 
-        if (isLike) {
-            this.memberManager.updateLikeReviewIdsToMember(memberId, member.likeReviewIds);
-            this.memberManager.updatelikeAmount(reviewId, review.likeAmount);
-        } else {
-            this.memberManager.updateDislikeReviewIdsToMember(memberId, member.dislikeReviewIds);
-            this.memberManager.updateDislikeAmount(reviewId, review.dislikeAmount);
-        }
+        this.memberManager.updateLikeReviewIdsToMember(memberId, member.likeReviewIds);
+        this.memberManager.updatelikeAmount(reviewId, review.likeAmount);
+        
+    }
+
+    dislikeReview = (reviewId, memberId) => {
+        let review = this.movieManager.getReviewByReviewId(reviewId);
+        let member = this.memberManager.getMemberById(memberId);
+        var command;
+        
+        command = new LikeCommand.DislikeReviewCommand(member, review);
+        command.execute();
+
+        this.memberManager.updateDislikeReviewIdsToMember(memberId, member.dislikeReviewIds);
+        this.memberManager.updateDislikeAmount(reviewId, review.dislikeAmount);
+    }
+
+    cancelDislikeReview = (reviewId, memberId) => {
+        let review = this.movieManager.getReviewByReviewId(reviewId);
+        let member = this.memberManager.getMemberById(memberId);
+        var command;
+        
+        command = new LikeCommand.CancelDislikeReviewCommand(member, review);
+        command.execute();
+
+        this.memberManager.updateDislikeReviewIdsToMember(memberId, member.dislikeReviewIds);
+        this.memberManager.updateDislikeAmount(reviewId, review.dislikeAmount);
     }
 }
 

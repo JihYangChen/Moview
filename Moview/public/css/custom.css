@@ -357,8 +357,11 @@
 }
 
 .likeDiv i:hover {
-    color: #2494ea;
     cursor: pointer;
+}
+
+.likeDiv .active {
+    color: #2494ea;
 }
 
 .modal {

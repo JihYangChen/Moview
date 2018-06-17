@@ -531,6 +531,15 @@
 			center:true
 		})
 
+
+		let checkIsLogin = () => {
+			if (!<%= user.isLogin %>) {
+				document.location.href = "/auth/facebook";
+				return false;
+			}
+			return true;
+		}
+
 		// Reviews
 		let reviews = <%- JSON.stringify(reviews) %>;
 		
@@ -559,8 +568,8 @@
 										<h3>${review.title}</h3> \
 									</div> \
 									<div class=\"likeDiv\"> \
-										<i class=\"fas fa-thumbs-up\"></i> ${review.likeAmount} \
-										<i class=\"fas fa-thumbs-down\"></i> ${review.dislikeAmount} \
+										<i data-reviewid="${review._id}" class=\"fas fa-thumbs-up likeReviewButton\"></i> <span class=\"likeAmount\">${review.likeAmount}</span> \
+										<i data-reviewid="${review._id}" class=\"fas fa-thumbs-down dislikeReviewButton\"></i> <span class=\"dislikeAmount\">${review.dislikeAmount}</span> \
 									</div> \
 								</div> \
 								<div class=\"reviewMidDiv\"> \
@@ -579,16 +588,14 @@
 		}
 
 		$('#writeReviewButton').click(function() {
-			if (!<%= user.isLogin %>) {
-				document.location.href = "/auth/facebook";
-			}
+			checkIsLogin();
 		})
 
 		$("#submitReviewButton").click(function() {
 			$.ajax({
 				method: "POST",
 				contentType:"application/json; charset=utf-8",
-				url: "/enterReview",
+				url: "/review/enterReview",
 				data: JSON.stringify(
 					{
 						movieId: "<%= movie._id %>", 
@@ -600,6 +607,55 @@
 				document.location.reload();
 			});
 		});
+
+		let likeReviewHttpRequest = (url) => {
+			$.ajax({
+				method: "POST",
+				contentType:"application/json; charset=utf-8",
+				url: url,
+				data: JSON.stringify(
+					{
+						reviewId: "'" + $(this).data("reviewid") + "'",
+					}
+				)
+			}).done(function (msg) {
+				if (msg === "User hasn't login")
+					document.location.href = "/auth/facebook";
+			});
+		}
+		
+		$(".likeReviewButton").click(function() {
+			if (!checkIsLogin())
+				return;
+			let likeAmount = parseInt($(this).next().text());
+			if (!$(this).hasClass("active")) {
+				likeReviewHttpRequest("/review/likeReview");
+				$(this).addClass("active");
+				$(this).next().text(likeAmount + 1);
+			}
+			else {
+				likeReviewHttpRequest("/review/cancelLikeReview");
+				$(this).removeClass("active");
+				$(this).next().text(likeAmount - 1);
+			}
+		});
+
+		$(".dislikeReviewButton").click(function() {
+			if (!checkIsLogin())
+				return;
+			let dislikeAmount = parseInt($(this).next().text());
+			if (!$(this).hasClass("active")) {
+				likeReviewHttpRequest("/review/dislikeReview");
+				$(this).addClass("active");
+				$(this).next().text(dislikeAmount + 1);
+			}
+			else {
+				likeReviewHttpRequest("/review/cancelDislikeReview");
+				$(this).removeClass("active");
+				$(this).next().text(dislikeAmount - 1);
+			}
+		});
+
 	</script>
 
 

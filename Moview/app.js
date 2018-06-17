@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var cors = require('cors');
 
 // managers
 var MovieManager = require('./manager/MovieManager');
@@ -36,13 +37,8 @@ app.use(session({
     saveUninitialized: true 
 }));
 
-// Routes setting
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
+// CORS configuration
+app.use(cors())
 
 require('./config/passport')(passport);
 app.use(passport.initialize());
