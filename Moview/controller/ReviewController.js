@@ -10,9 +10,25 @@ class ReviewController {
     getReviews = movieId => {
         let movie = this.movieManager.getMovieById(movieId);
         let reviewList = movie.getReviews();
-        return reviewList.map(review => {
+        let members = this.memberManager.getAllMembers();
+        let reviewDisplayInfoList = reviewList.map(review => {
             return review.getDisplayInfo();
-        })
+        });
+
+        for (let review of reviewDisplayInfoList) {
+            review.likeReviewMemberIds = members.filter(member => {
+                                            return member.isLikeReview(String(review._id));
+                                        }).map(member => {
+                                            return member._id;
+                                        });
+            review.dislikeReviewMemberIds = members.filter(member => {
+                                                return member.isDislikeReview(String(review._id));
+                                            }).map(member => {
+                                                return member._id;
+                                            });
+        }
+        
+        return reviewDisplayInfoList;
     }
 
     enterReview = async (memberId, movieId, reviewTitle, reviewContent) => {
@@ -31,8 +47,6 @@ class ReviewController {
 
     likeReview = (reviewId, memberId) => {
         let review = this.movieManager.getReviewByReviewId(reviewId);
-        console.log('reviewId ->', reviewId)
-        console.log('review ->', reviewId)
         let member = this.memberManager.getMemberById(memberId);
         var command;
 

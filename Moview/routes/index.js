@@ -46,7 +46,6 @@ router.get('/movieDetail/:movieId', async function(req, res, next) {
 
   //read
   let reviews = reviewController.getReviews(req.params.movieId);
-  console.log('reviews ->>>>>> ', reviewController.getReviews(req.params.movieId));
 
   res.render('movieDetail', {movie: movie, reviews: reviews, user: getUserInfo(req)});
 });

@@ -560,6 +560,13 @@
 		function getReviewsHTMLString(reviews) {
 			let reviewsHTMLString = "";
 			for (review of reviews) {
+				let likeReviewActiveStr = "";
+				let dislikeReviewActiveStr = "";
+				if (<%= user.isLogin %> && review.likeReviewMemberIds.includes("<%= user._id %>"))
+					likeReviewActiveStr = "active";
+				if (<%= user.isLogin %> && review.dislikeReviewMemberIds.includes("<%= user._id %>"))
+					dislikeReviewActiveStr = "active";
+
 				reviewsHTMLString += ` \
 						<div class=\"row\"> \
 							<div class=\"col-md-12\"> \
@@ -568,8 +575,8 @@
 										<h3>${review.title}</h3> \
 									</div> \
 									<div class=\"likeDiv\"> \
-										<i data-reviewid="${review._id}" class=\"fas fa-thumbs-up likeReviewButton\"></i> <span class=\"likeAmount\">${review.likeAmount}</span> \
-										<i data-reviewid="${review._id}" class=\"fas fa-thumbs-down dislikeReviewButton\"></i> <span class=\"dislikeAmount\">${review.dislikeAmount}</span> \
+										<i data-reviewid="${review._id}" class=\"fas fa-thumbs-up likeReviewButton ${likeReviewActiveStr}\"></i> <span class=\"likeAmount\">${review.likeAmount}</span> \
+										<i data-reviewid="${review._id}" class=\"fas fa-thumbs-down dislikeReviewButton ${dislikeReviewActiveStr}\"></i> <span class=\"dislikeAmount\">${review.dislikeAmount}</span> \
 									</div> \
 								</div> \
 								<div class=\"reviewMidDiv\"> \
@@ -608,14 +615,14 @@
 			});
 		});
 
-		let likeReviewHttpRequest = (url) => {
+		let likeReviewHttpRequest = (url, reviewId) => {
 			$.ajax({
 				method: "POST",
 				contentType:"application/json; charset=utf-8",
 				url: url,
 				data: JSON.stringify(
 					{
-						reviewId: "'" + $(this).data("reviewid") + "'",
+						reviewId: reviewId,
 					}
 				)
 			}).done(function (msg) {
@@ -624,33 +631,33 @@
 			});
 		}
 		
-		$(".likeReviewButton").click(function() {
+		$(document).on("click", ".likeReviewButton", function() {
 			if (!checkIsLogin())
 				return;
 			let likeAmount = parseInt($(this).next().text());
 			if (!$(this).hasClass("active")) {
-				likeReviewHttpRequest("/review/likeReview");
+				likeReviewHttpRequest("/review/likeReview", $(this).data("reviewid"));
 				$(this).addClass("active");
 				$(this).next().text(likeAmount + 1);
 			}
 			else {
-				likeReviewHttpRequest("/review/cancelLikeReview");
+				likeReviewHttpRequest("/review/cancelLikeReview", $(this).data("reviewid"));
 				$(this).removeClass("active");
 				$(this).next().text(likeAmount - 1);
 			}
 		});
 
-		$(".dislikeReviewButton").click(function() {
+		$(document).on("click", ".dislikeReviewButton", function() {
 			if (!checkIsLogin())
 				return;
 			let dislikeAmount = parseInt($(this).next().text());
 			if (!$(this).hasClass("active")) {
-				likeReviewHttpRequest("/review/dislikeReview");
+				likeReviewHttpRequest("/review/dislikeReview", $(this).data("reviewid"));
 				$(this).addClass("active");
 				$(this).next().text(dislikeAmount + 1);
 			}
 			else {
-				likeReviewHttpRequest("/review/cancelDislikeReview");
+				likeReviewHttpRequest("/review/cancelDislikeReview", $(this).data("reviewid"));
 				$(this).removeClass("active");
 				$(this).next().text(dislikeAmount - 1);
 			}

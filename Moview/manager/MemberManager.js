@@ -90,6 +90,8 @@ class MemberManager {
         this.memberList.push(member);
     }
 
+    getAllMembers = () => this.memberList;
+
     getMemberById = (memberId) => {
         let member = this.memberList.filter(member => {
             return JSON.stringify(member._id) == JSON.stringify(memberId);
