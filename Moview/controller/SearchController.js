@@ -5,6 +5,8 @@ class SearchController {
     constructor(movieManager) {
         this.search = new JsSearch.Search('_id');
         this.search.addIndex('name');
+        this.search.addIndex(['movieDescription', 'casts']);
+        this.search.addIndex(['movieDescription', 'categories']);
         this.search.addDocuments(movieManager.movieList);
     }
 

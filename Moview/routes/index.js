@@ -24,7 +24,7 @@ router.get('/', async function(req, res, next) {
   let result = movieController.getIndexMovies();
 
   let searchController = new SearchController(await req.movieManager);
-  console.log('search result=====> ', searchController.searchWith('a'));
+  console.log('search result=====> ', searchController.searchWith('	Comedy'));
   
   res.render('index', {inTheaterMovies: result[0], comingSoonMovies: result[1], user: getUserInfo(req)});
 });
