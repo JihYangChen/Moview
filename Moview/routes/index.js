@@ -160,4 +160,25 @@ router.get('/booking/paySuccess', async function(req, res, next) {
   res.render('booking/paySuccess', {tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, orderId: req.session.order.id, user: getUserInfo(req)});
 });
 
+router.get('/search', function(req, res, next) {
+  let searchResult = 
+  {
+    "results": [
+      {
+        "title": "Beast",
+        "url": "/optional/url/on/click",
+        "image": "https://ia.media-imdb.com/images/M/MV5BMWJhNTM1MWYtZTllNy00MDRhLTlmZGQtMWY5MmQwN2FjOGU2XkEyXkFqcGdeQXVyODAzODU1NDQ@._V1_SY1000_SX675_AL_.jpg",
+        "description": "Apr 27,2018"
+      },
+      {
+        "title": "Rampage",
+        "url": "/optional/url/on/click",
+        "image": "https://ia.media-imdb.com/images/M/MV5BOTkzNTg5NjI5MV5BMl5BanBnXkFtZTgwMzM4NjkxNDM@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
+        "description": "Apr 27,2018"
+      }
+    ]
+  };
+  res.send(searchResult);
+});
+
 module.exports = router;

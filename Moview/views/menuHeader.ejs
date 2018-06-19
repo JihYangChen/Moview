@@ -1,10 +1,22 @@
 <div id="fh5co-header">
     <header id="fh5co-header-section">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="/css/semantic.css"> -->
+        <link rel="stylesheet" href="/css/search.css">
         <div class="container">
             <div class="nav-header">
                 <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
                 <h1 id="fh5co-logo"><a href="http://localhost:3000">Mo<span>view</span></a></h1>
+
+                <div id="searchBox" class="ui search">
+                    <div class="ui icon input">
+                        <input class="prompt" type="text" placeholder="Search movies...">
+                        <i id="searchIcon" class="fas fa-search"></i>
+                        <!-- <i class="search icon"></i> -->
+                    </div>
+                    <div class="results"></div>
+                </div>
+
                 <!-- START #fh5co-menu-wrap -->
                 <nav id="fh5co-menu-wrap" role="navigation">
                     <ul class="sf-menu" id="fh5co-primary-menu">
@@ -38,5 +50,19 @@
                 </nav>
             </div>
         </div>
+
+        <script src="/js/jquery.min.js"></script>
+        <!-- Live Search -->
+        <script src="/js/semantic.js"></script>
+        <script src="/js/search.js"></script>
+        <script>
+            $('.ui.search')
+            .search({
+                apiSettings: {
+                    url : '/search'
+                }
+            });
+        </script>
+
     </header>		
 </div>
