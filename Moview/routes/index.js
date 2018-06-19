@@ -29,9 +29,6 @@ let checkLoginRequest = (req, res, next) => {
 router.get('/', async function(req, res, next) {
   let movieController = new MovieController(await req.movieManager);
   let result = movieController.getIndexMovies();
-
-  let searchController = new SearchController(await req.movieManager);
-  console.log('search result=====> ', searchController.searchWith('	Comedy'));
   
   res.render('index', {inTheaterMovies: result[0], comingSoonMovies: result[1], user: getUserInfo(req)});
 });
@@ -41,14 +38,6 @@ router.get('/movieDetail/:movieId', async function(req, res, next) {
   let movie = movieController.getMovieInfo(req.params.movieId);
 
   let reviewController = new ReviewController(await req.movieManager, req.memberManager);
-  // write
-  if (req.user) {
-    //                                    reviewId             memberId
-    reviewController.likeReview("5b1250a0fb6fc07c033d8cbe", req.user._id, false, true);
-    // reviewController.enterReview(req.user._id, req.params.movieId, 'test title', 'test content');
-  }
-
-  //read
   let reviews = reviewController.getReviews(req.params.movieId);
 
   res.render('movieDetail', {movie: movie, reviews: reviews, user: getUserInfo(req)});
@@ -105,15 +94,6 @@ router.get('/booking/tickets/:showingId', async function(req, res, next) {
   // bookingController.getOrdersInfo('5b1173f2bb0ac52bc67b15d8');
   bookingController.cancelOrder('5b23b911e0966530b9126670');
 
-  // var order = orderManager.getOrderById('5af47af19833fc4d6276de6a');
-  // var order_showing = order.showing;
-  // var cine_showing = cinemaManager.getShowingById('5af11bf5f36d2837eae7806c');
-  // console.log('showingseat -> ', order_showing.getShowingSeatBySeatName('A1'));
-  // console.log('cine showingseat -> ', cine_showing.getShowingSeatBySeatName('A1'));
-  // // console.log('oreder.showing -> ', order_showing);
-  // // console.log('showing -> ', cine_showing);
-  // console.log('equality -> ', order_showing === cine_showing);
-
   res.render('booking/tickets', {movie: result, user: getUserInfo(req)});
 });
 
@@ -164,25 +144,19 @@ router.get('/booking/paySuccess', async function(req, res, next) {
   res.render('booking/paySuccess', {tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, orderId: req.session.order.id, user: getUserInfo(req)});
 });
 
-router.get('/search', function(req, res, next) {
-  let searchResult = 
-  {
-    "results": [
-      {
-        "title": "Beast",
-        "url": "/optional/url/on/click",
-        "image": "https://ia.media-imdb.com/images/M/MV5BMWJhNTM1MWYtZTllNy00MDRhLTlmZGQtMWY5MmQwN2FjOGU2XkEyXkFqcGdeQXVyODAzODU1NDQ@._V1_SY1000_SX675_AL_.jpg",
-        "description": "Apr 27,2018"
-      },
-      {
-        "title": "Rampage",
-        "url": "/optional/url/on/click",
-        "image": "https://ia.media-imdb.com/images/M/MV5BOTkzNTg5NjI5MV5BMl5BanBnXkFtZTgwMzM4NjkxNDM@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
-        "description": "Apr 27,2018"
-      }
-    ]
-  };
-  res.send(searchResult);
+router.get('/search/:keyword', async function(req, res, next) {
+  let searchController = new SearchController(await req.movieManager);
+  let searchResult = searchController.searchWith(req.params.keyword)
+                    .map(movie => {
+                          return {
+                            "title": movie.name,
+                            "url": "/movieDetail/" + movie._id,
+                            "image": movie.coverUrl,
+                            "description": movie.releaseDate
+                          }
+                    });
+
+  res.send({"results": searchResult});
 });
 
 module.exports = router;

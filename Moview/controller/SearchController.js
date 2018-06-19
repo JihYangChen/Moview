@@ -11,8 +11,8 @@ class SearchController {
     }
 
     searchWith = keyWord => {
-        let result = this.search.search(keyWord);
-        return result;
+        let movieResultList = this.search.search(keyWord);
+        return movieResultList.map(movie => movie.getIndexDisplayInfo());
     }
 }
 
