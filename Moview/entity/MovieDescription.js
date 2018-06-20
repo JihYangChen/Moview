@@ -14,6 +14,7 @@ class MovieDescription {
             coverUrl: this.coverUrl,
             posterUrl: this.posterUrl,
             runtime: this.runtime,
+            categories: this.categories,
             releaseDate: this.getReleaseDate()
         }
     }

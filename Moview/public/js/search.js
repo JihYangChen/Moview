@@ -1422,11 +1422,11 @@ $.fn.search.settings = {
                 ;
               }
               html += '<div class="content">';
-              if(result[fields.price] !== undefined) {
-                html += '<div class="price">' + result[fields.price] + '</div>';
-              }
               if(result[fields.title] !== undefined) {
                 html += '<div class="title">' + result[fields.title] + '</div>';
+              }
+              if(result[fields.price] !== undefined) {
+                html += '<div class="price">' + result[fields.price] + '</div>';
               }
               if(result[fields.description] !== undefined) {
                 html += '<div class="description">' + result[fields.description] + '</div>';
@@ -1474,11 +1474,11 @@ $.fn.search.settings = {
             ;
           }
           html += '<div class="content">';
-          if(result[fields.price] !== undefined) {
-            html += '<div class="price">' + result[fields.price] + '</div>';
-          }
           if(result[fields.title] !== undefined) {
             html += '<div class="title">' + result[fields.title] + '</div>';
+          }
+          if(result[fields.price] !== undefined) {
+            html += '<div class="price">' + result[fields.price] + '</div>';
           }
           if(result[fields.description] !== undefined) {
             html += '<div class="description">' + result[fields.description] + '</div>';

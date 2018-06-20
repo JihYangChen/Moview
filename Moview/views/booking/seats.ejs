@@ -135,7 +135,7 @@
 							<table>
 								<% 
 									function isOccupied(seat) { 
-										let result = isNotOccupiedSeats.filter(isNotOccupiedSeat => (isNotOccupiedSeat.row == seat.row && isNotOccupiedSeat.column == seat.column));
+										let result = seatInfo.isNotOccupiedSeats.filter(isNotOccupiedSeat => (isNotOccupiedSeat.row == seat.row && isNotOccupiedSeat.column == seat.column));
 										return result.length == 0
 									} 
 								%>
@@ -417,7 +417,7 @@
 
 	<script>
 		let selectedSeats = [];
-		let ticketsAmount = <%= totalTicketsAmount %>;
+		let ticketsAmount = <%= seatInfo.totalTicketsAmount %>;
 
 		$("#seatingMap .nonOccupied img").click(function() {
 			let currentImg = $(this).attr("src");

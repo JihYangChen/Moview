@@ -152,7 +152,8 @@ router.get('/search/:keyword', async function(req, res, next) {
                             "title": movie.name,
                             "url": "/movieDetail/" + movie._id,
                             "image": movie.coverUrl,
-                            "description": movie.releaseDate
+                            "description": movie.releaseDate,
+                            "price": movie.categories
                           }
                     });
 
