@@ -82,18 +82,6 @@ router.get('/booking/tickets/:showingId', async function(req, res, next) {
   let bookingController = new BookingController(await req.cinemaManager, await req.orderManager);
   let result = bookingController.selectShowing('5af11bf5f36d2837eae7806c');
 
-  let orderManager = await req.orderManager;
-  let cinemaManager = await req.cinemaManager;
-  // orderManager.removeAllTickets();
-  // orderManager.removeAllOrders();
-  // cinemaManager.updateAllIsOccupiedFalse();
-
-  if (req.user) {
-    // console.log('1234 -> ', req.user.getLatestReview());
-  }
-  // bookingController.getOrdersInfo('5b1173f2bb0ac52bc67b15d8');
-  bookingController.cancelOrder('5b23b911e0966530b9126670');
-
   res.render('booking/tickets', {movie: result, user: getUserInfo(req)});
 });
 
@@ -117,6 +105,7 @@ router.get('/booking/seats', async function(req, res, next) {
     isNotOccupiedSeats : req.session.order.isNotOccupiedSeats,
     totalTicketsAmount : req.session.order.totalTicketsAmount
   };
+
   res.render('booking/seats', {seatInfo: seatInfo, user: getUserInfo(req)});
 });
 
@@ -130,6 +119,7 @@ router.post('/booking/selectSeats', async function(req, res, next) {
 
 router.get('/booking/confirmOrder', function(req, res, next) {
   let tickets = req.session.order.tickets;
+
   res.render('booking/confirmOrder', {tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, subtotal: req.session.order.subtotal, user: getUserInfo(req)});
 });
 
@@ -141,7 +131,47 @@ router.get('/booking/paySuccess', async function(req, res, next) {
   let bookingController = new BookingController(await req.cinemaManager, await req.orderManager);
   bookingController.updateOrderStatusPaid(req.session.order.id);
   let tickets = req.session.order.tickets;
+
   res.render('booking/paySuccess', {tickets: tickets, movieBriefInfo: req.session.order.movieBriefInfo, orderId: req.session.order.id, user: getUserInfo(req)});
+});
+
+router.get('/booking/orderHistory', async function(req, res, next) {
+  let bookingController = new BookingController(await req.cinemaManager, await req.orderManager);
+  let ordersInfo = bookingController.getOrdersInfo(getUserInfo(req)._id);
+
+  res.render('booking/orderHistory', {ordersInfo: ordersInfo, user: getUserInfo(req)});
+});
+
+router.get('/booking/cancelOrder/:orderId', async function(req, res, next) {
+  let bookingController = new BookingController(await req.cinemaManager, await req.orderManager);
+  let orderDetailInfo = bookingController.getOrderDetailInfo(req.params.orderId);
+
+  res.render('booking/cancelOrder', {orderInfo: orderDetailInfo, user: getUserInfo(req)});
+});
+
+router.post('/booking/cancelOrder', async function(req, res, next) {
+  let bookingController = new BookingController(await req.cinemaManager, await req.orderManager);
+  bookingController.cancelOrder(req.body.orderId);
+
+  res.send('OK');
+});
+
+router.get('/booking/cancelOrderSuccess/:orderId', async function(req, res, next) {
+  let bookingController = new BookingController(await req.cinemaManager, await req.orderManager);
+  let orderDetailInfo = bookingController.getOrderDetailInfo(req.params.orderId);
+
+  res.render('booking/cancelOrderSuccess', {orderInfo: orderDetailInfo, user: getUserInfo(req)});
+});
+
+// For development testing process
+router.get('/booking/cancelAllOrder', async function(req, res, next) {
+  let orderManager = await req.orderManager;
+  let cinemaManager = await req.cinemaManager;
+  orderManager.removeAllTickets();
+  orderManager.removeAllOrders();
+  cinemaManager.updateAllIsOccupiedFalse();
+  
+  res.send('OK');
 });
 
 router.get('/search/:keyword', async function(req, res, next) {

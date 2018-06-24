@@ -98,6 +98,8 @@ class OrderManager {
     }
 
     updateStatus = async (orderId, status) => {
+        let order = this.getOrderById(orderId);
+        order.status = status;
         await OrderModel.update({ _id: orderId }, { status: status }, { multi: false }, () => {
             console.log('> order status has been update to ' + status + ' successfully');
         });
@@ -129,10 +131,11 @@ class OrderManager {
         return order.length > 0 ? order[0] : null;
     }
 
-    getValidOrdersByMemberId = memberId => {
+    getOrdersByMemberId = memberId => {
         let orders = this.orderList.filter(order => {
-            return  order.status != STATUS.Canceled && JSON.stringify(order.memberId) == JSON.stringify(memberId);
+            return  JSON.stringify(order.memberId) == JSON.stringify(memberId);
         });
+        orders.reverse();
         return orders.length > 0 ? orders : []
     }
 }

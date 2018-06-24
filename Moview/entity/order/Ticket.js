@@ -1,9 +1,9 @@
 var Seat = require('../cinema/Seat');
 
 const TicketPrice = {
-    Adult: "$12.99",
-    Senior: "$11.49",
-    Child: "$9.99"
+    Adult: "12.99",
+    Senior: "11.49",
+    Child: "9.99"
 }
 
 class Ticket {

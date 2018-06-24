@@ -224,11 +224,13 @@
 }
 
 .ticket {
+    position: relative;
     padding: 15px 20px;
     border: 0.5px solid rgb(199, 198, 198);
     border-radius: 10px;
     margin-top: 15px;
     box-shadow: 2px 1px 6px #888888;
+    /* z-index: 1; */
 }
 
 .ticket:first-of-type {
@@ -237,6 +239,19 @@
 
 .ticket:hover {
     box-shadow: 3px 2px 20px #888888;
+}
+
+.cancelled {
+    width: 94%;
+    position: absolute;
+    /* background-color: green; */
+    text-align: center;
+    top: 14px;
+    /* left: 500px; */
+}
+
+.cancelled img {
+    width: 260px;
 }
 
 .ticket .ticketUpperArea {
@@ -445,7 +460,7 @@
     color: rgba(110, 106, 106, 0.87);
 }
 
-#searchBox .prompt:hover {
+#searchBox .prompt:focus {
     background-color: rgb(238, 232, 232);
     border: 0.5px solid rgb(41, 39, 39);
     color: rgba(41, 39, 39, 0.87);
@@ -454,4 +469,55 @@
 #searchBox #searchIcon {
     position: relative;
     left: -40px;
+}
+
+#orderTable {
+    text-align: center;
+}
+
+#orderTable table {
+    margin-top: 15px;
+    width: 100%;
+    text-align: center;
+    color: black;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+#orderTable table thead tr {
+    height: 40px;
+    font-weight: 600;
+    border-top: none;
+    border-bottom: 0.2px solid rgb(199, 198, 198);
+}
+
+#orderTable table tr {
+    border-top: 0.2px solid rgb(199, 198, 198);
+    border-bottom: 0.2px solid rgb(199, 198, 198);
+    height: 90px;
+}
+
+#orderTable table img {
+    height: 70px;
+    border-radius: 10%;
+}
+
+#orderTable table .cancelOrderButton {
+    color: #ec4343;
+}
+
+#orderTable table .cancelOrderButton:hover {
+    color: #a50808;
+}
+
+#orderTable table td:last-child {
+    width: 60px;
+}
+
+#orderTable table tr:last-child {
+    border-bottom: none;
+}
+
+#orderTable table select {
+    width: 50%;
 }

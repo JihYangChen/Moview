@@ -27,7 +27,8 @@ class ReviewController {
                                                 return member._id;
                                             });
         }
-        
+        reviewDisplayInfoList.reverse();
+
         return reviewDisplayInfoList;
     }
 

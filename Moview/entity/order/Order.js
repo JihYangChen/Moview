@@ -52,6 +52,13 @@ class Order {
         }
     }
 
+    getSubtotal = () => {
+        let subtotal = 0;
+        for (let ticket of this.ticketList) 
+            subtotal += parseFloat(ticket.price);
+        return subtotal;
+    }
+
     // public 
 
     // for insert order to db
@@ -88,8 +95,27 @@ class Order {
         }
     }
 
-    getConfirmDisplayInfos = () => {
+    getOrderInfo = () => {
         return {
+            _id: this._id,
+            movieId: this.showing.getBookingProcessDisplayInfo().movieId,
+            movieName: this.showing.getBookingProcessDisplayInfo().name,
+            showingDate: this.showing.getDate(),
+            showingTime: this.showing.getSpecificTime(),
+            status: this.status,
+            ticketAmount: this.ticketList.length,
+            subtotal: this.getSubtotal()
+        }
+    }
+
+    getOrderDetailInfos = () => {
+        return {
+            _id: this._id,
+            movieName: this.showing.getBookingProcessDisplayInfo().name,
+            movieCoverUrl: this.showing.getBookingProcessDisplayInfo().coverUrl,
+            showingCinema: "Regal Hudson Valley Mall 12",
+            showingTime: this.showing.getTime(),
+            subtotal: this.getSubtotal(),
             ticketList: this.ticketList.map(ticket => {
                 return {
                     date: ticket.date,
@@ -101,6 +127,7 @@ class Order {
             })
         }
     }
+    
 }
 
 module.exports = Order;

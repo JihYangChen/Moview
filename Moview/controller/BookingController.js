@@ -38,7 +38,7 @@ class BookingController {
         this.orderManager.updateTickets(order.getTicketObjects());
         let showingSeatObjects = showing.getShowingSeatObjects(seatNames);
         this.cinemaManager.updateShowingSeats(showingSeatObjects);
-        return order.getConfirmDisplayInfos();
+        return order.getOrderDetailInfos();
     }
 
     updateOrderStatusPaid = orderId => {
@@ -46,8 +46,13 @@ class BookingController {
     }
 
     getOrdersInfo = memberId => {
-        let orders = this.orderManager.getValidOrdersByMemberId(memberId);
-        // todo, return some display info
+        return this.orderManager.getOrdersByMemberId(memberId).map((order) => {
+            return order.getOrderInfo();
+        });
+    }
+
+    getOrderDetailInfo = orderId => {
+        return this.orderManager.getOrderById(orderId).getOrderDetailInfos();
     }
 
     cancelOrder = orderId => {

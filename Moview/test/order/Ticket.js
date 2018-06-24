@@ -21,15 +21,15 @@ describe('Order entity', () => {
         expect(adultTicket.ticketCategory).to.equal('Adult');
         expect(adultTicket.time).to.equal('13:40');
         expect(adultTicket.date).to.equal('Tue. May 08');
-        expect(adultTicket.price).to.equal('$12.99');
+        expect(adultTicket.price).to.equal('12.99');
         expect(seniorTicket.ticketCategory).to.equal('Senior');
         expect(seniorTicket.time).to.equal('13:40');
         expect(seniorTicket.date).to.equal('Tue. May 09');
-        expect(seniorTicket.price).to.equal('$11.49');
+        expect(seniorTicket.price).to.equal('11.49');
         expect(childTicket.ticketCategory).to.equal('Child');
         expect(childTicket.time).to.equal('13:40');
         expect(childTicket.date).to.equal('Tue. May 10');
-        expect(childTicket.price).to.equal('$9.99');
+        expect(childTicket.price).to.equal('9.99');
     });
 
     it('should create Ticket by object correctly', () => {
@@ -38,7 +38,7 @@ describe('Order entity', () => {
             ticketCategory: 'Adult',
             date: 'Tue. May 08',
             time: '13:20',
-            price: '$12.99',
+            price: '12.99',
             seat: {
                 _id: 'seat001',
                 row: 'A',
@@ -50,7 +50,7 @@ describe('Order entity', () => {
             ticketCategory: 'Senior',
             date: 'Tue. May 08',
             time: '13:20',
-            price: '$11.49',
+            price: '11.49',
             seat: {
                 _id: 'seat002',
                 row: 'A',
@@ -62,7 +62,7 @@ describe('Order entity', () => {
             ticketCategory: 'Child',
             date: 'Tue. May 08',
             time: '13:20',
-            price: '$9.99',
+            price: '9.99',
             seat: {
                 _id: 'seat003',
                 row: 'A',
@@ -76,16 +76,16 @@ describe('Order entity', () => {
         expect(adultTicket.ticketCategory).to.equal('Adult');
         expect(adultTicket.time).to.equal('13:20');
         expect(adultTicket.date).to.equal('Tue. May 08');
-        expect(adultTicket.price).to.equal('$12.99');
+        expect(adultTicket.price).to.equal('12.99');
         expect(seniorTicket._id).to.equal('ticket002');
         expect(seniorTicket.ticketCategory).to.equal('Senior');
         expect(seniorTicket.time).to.equal('13:20');
         expect(seniorTicket.date).to.equal('Tue. May 08');
-        expect(seniorTicket.price).to.equal('$11.49');
+        expect(seniorTicket.price).to.equal('11.49');
         expect(childTicket._id).to.equal('ticket003');
         expect(childTicket.ticketCategory).to.equal('Child');
         expect(childTicket.time).to.equal('13:20');
         expect(childTicket.date).to.equal('Tue. May 08');
-        expect(childTicket.price).to.equal('$9.99');
+        expect(childTicket.price).to.equal('9.99');
     });
 });

@@ -129,7 +129,7 @@ describe('BookingController', () => {
             // cinemaManager.replaceShowingInstance(showing);
             let seats = showing.getSeatsBySeatNames(['A1']);
             order.setSeats(seats);
-            return order.getConfirmDisplayInfos();
+            return order.getOrderDetailInfos();
         });
         expect(orderManager.orderList[0].showing.showingSeatList[0].isOccupied).to.be.false;
         expect(cinemaManager.showingList[0].showingSeatList[0].isOccupied).to.be.false;

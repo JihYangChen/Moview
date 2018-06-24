@@ -53,11 +53,13 @@
 	<link rel="stylesheet" href="../../css/superfish.css">
 
 	<link rel="stylesheet" href="../../css/style.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!-- bs-wizard -->
 	<link rel="stylesheet" href="../../css/bs-wizard.css">
+	<!-- payment -->
+	<link rel="stylesheet" href="../../css/payment.css">
 
 	<link rel="stylesheet" href="../../css/custom.css">
 
@@ -75,114 +77,74 @@
 		<div id="fh5co-page">
 		<% include ../menuHeader %>
 		<!-- end:fh5co-header -->
-		
-		<div id="fh5co-contact" class="fh5co-lightgray-section topStageBar" >
-			<div class="container">
-				<div class="row"> 
-						<div class="row bs-wizard" style="border-bottom:0;">
-							<div class="col-xs-2 col-md-offset-1 bs-wizard-step complete">
-								<div class="text-center bs-wizard-stepnum">Step 1</div>
-								<div class="progress"><div class="progress-bar"></div></div>
-								<a href="#" class="bs-wizard-dot"></a>
-								<div class="bs-wizard-info text-center">Buy Tickets</div>
-							</div>
-							
-							<div class="col-xs-2 bs-wizard-step complete"><!-- complete -->
-								<div class="text-center bs-wizard-stepnum">Step 2</div>
-								<div class="progress"><div class="progress-bar"></div></div>
-								<a href="#" class="bs-wizard-dot"></a>
-								<div class="bs-wizard-info text-center">Select Seats</div>
-							</div>
-							
-							<div class="col-xs-2 bs-wizard-step complete"><!-- complete -->
-								<div class="text-center bs-wizard-stepnum">Step 3</div>
-								<div class="progress"><div class="progress-bar"></div></div>
-								<a href="#" class="bs-wizard-dot"></a>
-								<div class="bs-wizard-info text-center">Confirm Order</div>
-							</div>
-							
-							<div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
-								<div class="text-center bs-wizard-stepnum">Step 4</div>
-								<div class="progress"><div class="progress-bar"></div></div>
-								<a href="#" class="bs-wizard-dot"></a>
-								<div class="bs-wizard-info text-center">Pay for Order</div>
-							</div>
-
-							<div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
-								<div class="text-center bs-wizard-stepnum">Step 5</div>
-								<div class="progress"><div class="progress-bar"></div></div>
-								<a href="#" class="bs-wizard-dot"></a>
-								<div class="bs-wizard-info text-center">Success</div>
-							</div>
-						</div>
-				</div>
-			</div>
-		</div>
 
 		<div id="fh5co-contact">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
 						<div class="heading-section text-center animate-box">
-							<h2>Confirm Order</h2>
+							<h2>Order Has Been Cancelled</h2>
 						</div>
 					</div>
 				</div>
-				<form action="#">
-					<div class="row">
-						<div class="col-md-2 animate-box movieSummary"></div>
-						<div class="col-md-4 animate-box movieSummary">
-							<img src="<%= movieBriefInfo.coverUrl %>">
-							<div id="movieName"><%= movieBriefInfo.name %></div>
-							<div><%= movieBriefInfo.cinema %></div>
-							<div><%= movieBriefInfo.time %></div>
-						</div>
-						<div class="col-md-6 animate-box">
-							<div id="tickets">
-								<% for (ticket of tickets) { %>
-									<div class="ticket">
-										<div class="ticketUpperArea">
-											<div class="movieName"><%= movieBriefInfo.name %></div>
-											<div class="category"><%= ticket.ticketCategory %></div>
-										</div>
-
-										<div class="cinema">
-											<%= movieBriefInfo.cinema %>
-										</div>
-
-										<div class="ticketBottomArea">
-											<div class="date">
-												<span>Date</span>
-												<span><%= ticket.date %></span>
-											</div>
-		
-											<div class="time">
-												<span>Time</span>
-												<span><%= ticket.time %></span>
-											</div>
-		
-											<div class="seat">
-												<span>Seat</span>
-												<span><%= ticket.seat %></span>
-											</div>
-											
-											<div class="price">
-												<span>Price</span>
-												<span>$<%= ticket.price %></span>
-											</div>
-										</div>
-										
-									</div>
-								<% } %>
-							</div>
-							<div id="subTotal">
-								<div>Subtotal</div>
-								<div><h2>$<%= subtotal %></h2></div>
-							</div>
-							<button type="button" class="btn btn-primary nextButton">Next</button>
-						</div>
+				<div class="row">
+					<div class="col-md-2 col-md-offset-4 animate-box" id="statusIcon">
+						<i class="fas fa-check-circle"></i>
 					</div>
-				</form>
+					<div class="col-md-6 animate-box" id="orderMessage">
+						<span>Your Order No.</span>
+						<span><%= orderInfo._id %></span>
+					</div>
+				</div>
+				<div class="row" id="successTickets">
+					<div id="tickets" class="col-md-6 col-md-offset-3 animate-box">
+						<% for (ticket of orderInfo.ticketList) { %>
+							<div class="ticket">
+								<div class="ticketUpperArea">
+									<div class="movieName"><%= orderInfo.movieName %></div>
+									<div class="category"><%= ticket.ticketCategory %></div>
+								</div>
+
+								<div class="cinema">
+									<%= orderInfo.showingCinema %>
+								</div>
+
+								<div class="ticketBottomArea">
+									<div class="date">
+										<span>Date</span>
+										<span><%= ticket.date %></span>
+									</div>
+
+									<div class="time">
+										<span>Time</span>
+										<span><%= ticket.time %></span>
+									</div>
+
+									<div class="seat">
+										<span>Seat</span>
+										<span><%= ticket.seat %></span>
+									</div>
+									
+									<div class="price">
+										<span>Price</span>
+										<span>$<%= ticket.price %></span>
+									</div>
+								</div>
+								
+								<div class="cancelled">
+									<img src="/images/Cancelled.png" alt="">
+								</div>
+							</div>
+						<% } %>
+					</div>
+				</div>
+
+				<div class="row animate-box" id="successTickets">
+					<div class="col-xs-2 col-md-offset-5">
+						<button class="subscribe btn btn-success btn-lg btn-block nextButton" type="button">Done</button>
+					</div>
+				</div>
+				
 			</div>
 		</div>
 		<!-- END fh5co-contact -->
@@ -218,9 +180,10 @@
 
 	<script>
 		$(".nextButton").click(function() {
-			document.location.href = "/booking/payment";
+			document.location.href = "/booking/orderHistory";
 		});
 	</script>
+
 
 	</body>
 </html>
