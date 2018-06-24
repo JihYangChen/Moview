@@ -4,7 +4,7 @@ require('sinon-mongoose');
 var expect = require('chai').expect;
 var TicketSimpleFactory= require('../../entity/order/TicketSimpleFactory');
 
-describe('Order entity', () => {
+describe('Ticket entity', () => {
     it('should create Ticket correctly', () => {
         let adultTicket = new TicketSimpleFactory().createTicket('Adult', {
             date: 'Tue. May 08',

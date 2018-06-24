@@ -20,6 +20,11 @@ router.get('/login', (req, res, next) => {
     res.render('login/login')
 });
 
+router.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+});
+
 router.get('/profile', require('connect-ensure-login').ensureLoggedIn(), (req, res) => {
     res.render('login/profile', { user: req.user });
 });
