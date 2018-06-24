@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var MovieModel = require('../mongoDB/model/MovieModel');
 var MovieDescriptionModel = require('../mongoDB/model/MovieDescriptionModel');
 var Movie = require('../entity/Movie');
+var fetch = require('node-fetch');
 
 class MovieManager {
 
@@ -31,6 +32,52 @@ class MovieManager {
         console.log('finish to load movies from database');
     }
 
+    /***********************************
+     * 
+     *  please be very careful !!!
+     * 
+     ***********************************/
+    updateDatabaseMovies = async () => {
+        await this.fetchData('http://67668600.ngrok.io/MovieInfosComingSoon', async (err, result) => {
+            for (let movieObject of result) {
+                console.log('info => ', movieObject);
+                let object = movieObject;
+                let movieDescObject = {
+                    coverUrl: object.coverUrl,
+                    posterUrl: object.posterUrl,
+                    casts: object.casts,
+                    directors: object.directors,
+                    categories: object.categories,
+                    gallery: object.gallery,
+                    trailers: object.trailers,
+                    storyline: object.storyline,
+                    runtime: object.runtime,
+                    releaseDate: object.releaseDate,
+                    inTheater: object.inTheater,
+                    updateIndex: 1
+                };
+                let movieDescId = await this.insertMovieDescription(movieDescObject);
+                this.insertMovie({
+                    name: object.name,
+                    movieDescription: movieDescId,
+                    updateIndex: 1
+                });
+            }
+        })        
+    }
+
+    removeAllOutOfDateMovies = async () => {
+        MovieModel.remove({ updateIndex: { $ne: 1 } }).exec()
+        MovieDescriptionModel.remove({ updateIndex: { $ne: 1 } }).exec()
+    }
+
+    fetchData = async (url, callback) => {
+        await fetch(url)
+                .then(response => response.json())
+                .then(json => callback(null, json))
+                .catch(error => callback(error, null))
+    }
+
     insertMovieDescription = async movieDescriptionObject => {
         const movieDescriptionModel = new MovieDescriptionModel(movieDescriptionObject);
         const newMovieDesc = await movieDescriptionModel.save();
@@ -43,6 +90,7 @@ class MovieManager {
         const newMovie = await movieModel.save();
         console.log('> movie has been inserted successfully');
     }
+    /**********************************************************/
 
     insertReviewIdToMovie = async (movieId, reviewIdList) => {
         await MovieModel.update({ _id: movieId }, { reviewList: reviewIdList }, { multi: false }, () => {
