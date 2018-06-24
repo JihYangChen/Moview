@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Moview</title>
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700,900' rel='stylesheet' type='text/css'>
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="../../css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="../../css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="../../css/bootstrap.css">
+	<!-- Superfish -->
+	<link rel="stylesheet" href="../../css/superfish.css">
+
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- bs-wizard -->
+	<link rel="stylesheet" href="../../css/bs-wizard.css">
+
+	<link rel="stylesheet" href="../../css/custom.css">
+	<script src="../../js/modernizr-2.6.2.min.js"></script>
+
+
+	</head>
+	<body>
+        <h3 style="color: red">這很危險不要亂按！</h1>
+		<button type="button" class="update">bomb!</button>
+
+	<script src="../../js/jquery.min.js"></script>
+
+	<script>
+		$(".update").click(function() {
+			$.ajax({
+				method: "POST",
+				contentType:"application/json; charset=utf-8",
+				url: "/routine/updateDb"
+			});
+		});
+	</script>
+
+
+	</body>
+</html>
+

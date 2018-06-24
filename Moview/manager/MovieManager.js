@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var MovieModel = require('../mongoDB/model/MovieModel');
+var MovieDescriptionModel = require('../mongoDB/model/MovieDescriptionModel');
 var Movie = require('../entity/Movie');
 
 class MovieManager {
@@ -28,6 +29,19 @@ class MovieManager {
             this.movieList.push(new Movie(populatedMovieObject));
         }
         console.log('finish to load movies from database');
+    }
+
+    insertMovieDescription = async movieDescriptionObject => {
+        const movieDescriptionModel = new MovieDescriptionModel(movieDescriptionObject);
+        const newMovieDesc = await movieDescriptionModel.save();
+        console.log('> movie description has been inserted successfully');
+        return newMovieDesc._id;
+    }
+
+    insertMovie = async movieObject => {
+        const movieModel = new MovieModel(movieObject);
+        const newMovie = await movieModel.save();
+        console.log('> movie has been inserted successfully');
     }
 
     insertReviewIdToMovie = async (movieId, reviewIdList) => {

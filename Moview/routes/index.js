@@ -81,7 +81,6 @@ router.post('/review/cancelDislikeReview', checkLoginRequest, async function(req
 router.get('/booking/tickets/:showingId', async function(req, res, next) {
   let bookingController = new BookingController(await req.cinemaManager, await req.orderManager);
   let result = bookingController.selectShowing('5af11bf5f36d2837eae7806c');
-
   res.render('booking/tickets', {movie: result, user: getUserInfo(req)});
 });
 
@@ -188,6 +187,16 @@ router.get('/search/:keyword', async function(req, res, next) {
                     });
 
   res.send({"results": searchResult});
+});
+
+router.get('/routine', async function(req, res, next) {
+  res.render('routine');
+});
+
+router.post('/routine/updateDb', async function(req, res, next) {
+  let movieController = new MovieController(await req.movieManager);
+  movieController.updateDatabaseMovies();
+  res.send('OK');
 });
 
 module.exports = router;
