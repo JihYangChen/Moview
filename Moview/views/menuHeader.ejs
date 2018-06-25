@@ -20,17 +20,17 @@
                 <!-- START #fh5co-menu-wrap -->
                 <nav id="fh5co-menu-wrap" role="navigation">
                     <ul class="sf-menu" id="fh5co-primary-menu">
-                        <li class="active">
+                        <li <% if (activeNav == "Home") { %> class="active" <% } %>>
                             <a href="http://localhost:3000">Home</a>
                         </li>
-                        <li>
+                        <li <% if (activeNav == "Movies") { %> class="active" <% } %>>
                             <a href="#" class="fh5co-sub-ddown">Movies</a>
                              <ul class="fh5co-sub-menu">
                                  <li><a href="/#InTheater">In Theaters</a></li>
                                 <li><a href="/#ComingSoon">Coming Soon</a></li>
                             </ul>
                         </li>
-                        <li>
+                        <li <% if (activeNav == "Order") { %> class="active" <% } %>>
                             <a href="#" class="fh5co-sub-ddown">Order</a>
                             <ul class="fh5co-sub-menu">
                                 <li><a href="/booking/orderHistory">Order History</a></li>

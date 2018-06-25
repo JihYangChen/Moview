@@ -73,6 +73,7 @@
 	<body>
 		<div id="fh5co-wrapper">
 		<div id="fh5co-page">
+		<% let activeNav = "Order" %>
 		<% include ../menuHeader %>
 		<!-- end:fh5co-header -->
 
@@ -109,7 +110,13 @@
 											<td><a href="/movieDetail/<%= order.movieId %>"><%= order.movieName %></a></td>
 											<td><%= order.showingDate %></td>
 											<td><%= order.showingTime %></td>
-											<td><%= order.status %></td>
+											<% let statusColor = "orange";
+												if (order.status == 'canceled') 
+													statusColor = "red";
+												else if (order.status == 'paid') 
+													statusColor = "green";
+											%>
+											<td style="color:<%= statusColor %>"><%= order.status %></td>
 											<td><%= order.ticketAmount %></td>
 											<td>$<%= order.subtotal %></td>
 											<td>
